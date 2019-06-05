@@ -447,7 +447,7 @@ include "setting.php";
                 </div> <!-- modal header -->
 
                 <div class="modal-body" style="padding: 50px;">
-                        <form name="frm_study_apply" class="form_write" method="post" action="apply_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind?>">
+                        <form name="frm_study_apply" class="form_write" method="post" action="apply_study_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind?>">
                             <label>
                             Starter
                             <input type="text" name="apply_starter" value="<?php echo "$item_id" ?> (<?php echo "$item_name"?>)" readonly>

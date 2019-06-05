@@ -517,7 +517,7 @@ if($kind=="develop"){
                 </div> <!-- modal header -->
 
                 <div class="modal-body" style="padding: 50px;">
-                        <form name="frm_contest_apply" class="form_write" method="post" action="apply_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind?>">
+                        <form name="frm_contest_apply" class="form_write" method="post" action="apply_contest_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind?>">
                             <label>
                             Starter
                             <input type="text" name="apply_starter" value="<?php echo "$item_id" ?> (<?php echo "$item_name"?>)" readonly>
@@ -540,6 +540,13 @@ if($kind=="develop"){
                             
                             <span id="study_write_double_result" class="fail"></span>
                             
+                            <div>
+                                <label>
+                                    맡을 파트
+                            	<input type="text" name="apply_part" maxlength="100">
+                                </label>
+                            </div>
+
                             <div>
                                 <label>
                                     짧은 포트폴리오
