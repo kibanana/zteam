@@ -153,28 +153,28 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
                         <div class="skill_bottom_content text-center">
-                            <div class="col-md-3 col-sm-12">
+                            <div class="col-md-3 col-sm-6" style="margin-bottom: 50px;">
                                 <div class="skill_bottom_item">
                                     <h4 class="statistic-counter">50</h4>
                                     <div class="separator_small"></div>
                                     <h6><em>가입자 수</em></h6>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12">
+                            <div class="col-md-3 col-sm-6" style="margin-bottom: 50px;">
                                 <div class="skill_bottom_item">
                                     <h4 class="statistic-counter">50</h4>
                                     <div class="separator_small"></div>
                                     <h6><em>총 모집글</em></h6>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="skill_bottom_item">
                                     <h4 class="statistic-counter">45</h4>
                                     <div class="separator_small"></div>
                                     <h6><em>총 신청수</em></h6>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-sm-12">
+                            <div class="col-md-3 col-sm-6">
                                 <div class="skill_bottom_item">
                                     <h4 class="statistic-counter">95</h4>
                                     <div class="separator_small"></div>

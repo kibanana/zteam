@@ -29,8 +29,12 @@ include "setting.php";
             <ul>
                 <li class="dropdown">
                     <a href="note_recv.php">
-                    	<i class="fa fa-envelope-o" aria-hidden="true"></i>
-                        <span class="badge"><?php echo $sql_badge_cal ?></span>
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <?php
+                            if(isset($userid)){
+                                //echo "<span class="badge">$sql_badge_cal</span>";
+                            }
+                        ?>
                     </a>
                 </li>
                 

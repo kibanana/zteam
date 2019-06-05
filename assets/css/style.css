@@ -296,6 +296,15 @@ ul{
     height: 100%;
 }
 
+.overlay_footer{
+    background-color: rgba(51,51,51,0.15);
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height: 100%;
+}
+
 
 
 .no-padding {
@@ -1214,7 +1223,7 @@ Brand Section style
 Subscribe Section style
 =====================*/
 .subscribe{
-    background: url(../images/background/subscribe.jpg) no-repeat center center;
+    background: url(../images/footer_bg.jpg) no-repeat center center;
     background-size: cover;
     position: relative;
 }

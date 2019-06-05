@@ -15,7 +15,7 @@ function footer_note_write_chk() {
 
 <!--Subscribe section-->
 <section id="subscribe" class="subscribe roomy-100 fix">
-    <div class="overlay"></div>
+    <div class="overlay_footer"></div>
     <div class="container">
         <div class="row">
             <div class="main_subscribe text-center">

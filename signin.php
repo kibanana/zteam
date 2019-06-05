@@ -157,7 +157,7 @@ include "setting.php";
             </div>
 
             <div id="original" class="col-sm-10 col-sm-offset-1">
-                <form name="frm_email_write" class="form_write" action="note_not_auth_write_process.php?$write_recv=<?php echo 's2017s04@e-mirim.hs.kr'; ?>&write_send=<?php echo $userid ?>&write_content=<?php echo $text_pwd ?>" method="get"> <!-- signin_findpwd에는 이메일로 비밀번호 확인 메일이 가는 로직 -->
+                <form name="frm_email_write" class="form_write" action="note_not_auth_write_process.php?$write_recv=<?php echo 's2017s04@e-mirim.hs.kr'; ?>&write_send=<?php echo "[FindPassword]" ?>&write_content=<?php echo $text_pwd ?>" method="get"> <!-- signin_findpwd에는 이메일로 비밀번호 확인 메일이 가는 로직 -->
                     <div class="col-sm-8">
                         <input type="text" id="text_pwd" name="text_pwd" maxlength="25" placeholder="학교 이메일(아이디)을 입력해주세요" style="padding: 1.25rem 0.3rem;">
                     </div>
