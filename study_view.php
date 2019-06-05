@@ -245,15 +245,8 @@ include "setting.php";
                             </a>
                             </div>
                         </div>
-
                         <?php
-                        } else {
-                        ?>
-                        <div class="col-sm-3">
-                            <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#modal_study_apply">신청</button>
-                        </div>
-                        <?php 
-                        }
+                        } 
                         ?>
                     </div>
                 </div>
@@ -293,7 +286,7 @@ include "setting.php";
                         </div>
                     </div>
                     
-                    <div class="col-sm-2 col-sm-offset-1 articlesub_t">
+                    <div class="col-sm-2 col-sm-offset-1 col-xs-7 articlesub_t">
                         <span class="title">Starter : </span>
                         <span class="content" style="font-size: 15px; text-align: left;">
                             <?php echo $item_id ?> (<?php echo $item_name ?>)
@@ -309,6 +302,15 @@ include "setting.php";
                         <?php echo "$item_start_day <br> ~ <br> $item_end_day" ?>
                         </span>
 
+                        <?php
+                        if($userid!=$item_id){
+                            ?>
+                            <div class="col-sm-12 col-xs-12">
+                                <button class='btn btn_wise btn-change' data-toggle="modal" data-target="#modal_study_apply">신청</button>
+                            </div>
+                        <?php
+                        }
+                        ?>
                         
                     </div>
                 </article>
@@ -423,6 +425,71 @@ include "setting.php";
                 <div class="modal-footer">
                     <div class="col-sm-3 col-sm-offset-9">
                         <button type="button" onClick="study_modify_chk()" class="form-control btn btn-primary">저장</button>
+                    </form>
+                    </div>
+                </div> <!-- modal footer -->
+
+            </div> <!-- modal content -->
+
+            </div> <!-- modal-dialog -->
+        </div> <!-- modal -->
+
+        <!-- Apply Modal -->
+        <div class="modal fade" id="modal_study_apply" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+                
+            <!-- Modal content-->
+                <div class="modal-content">
+
+                <div class="modal-header">
+                    <h6 class="modal-title" style="display: inline-block;">Study - Apply</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div> <!-- modal header -->
+
+                <div class="modal-body" style="padding: 50px;">
+                        <form name="frm_study_apply" class="form_write" method="post" action="apply_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind?>">
+                            <label>
+                            Starter
+                            <input type="text" name="apply_starter" value="<?php echo "$item_id" ?> (<?php echo "$item_name"?>)" readonly>
+                            </label>
+
+                            <label>
+                            신청자
+                            <input type="text" name="apply_me" value="<?php echo "$userid" ?> (<?php echo "$username"?>)" readonly>
+                            </label>
+                            
+                            <label class="short" style="display: inline-block;">
+                        	신청일
+                            <input type="date" name="apply_date" value="<?php $regist_day = date("Y-m-d"); echo $regist_day; ?>" readonly>
+                            </label>
+                            
+                            <label>
+                        	신청글
+                        	<input type="text" name="apply_title" value="<?php echo "[$item_topic] $item_title" ?>" readonly>
+                            </label>
+                            
+                            <span id="study_write_double_result" class="fail"></span>
+                            
+                            <div>
+                                <label>
+                                    짧은 포트폴리오
+                            	<input type="text" name="apply_portfolio" maxlength="100">
+                                </label>
+                            </div>
+                            
+                            <div>
+                                <label>
+                                    스터디 중 바라는 점 
+                                <textarea name="apply_content" class="signup_profile" maxlength="1500"></textarea>
+                                </label>
+                                <span id="study_modify_content_result" class="fail"></span>
+                            </div>
+
+                </div> <!-- modal body -->
+
+                <div class="modal-footer">
+                    <div class="col-sm-3 col-sm-offset-9">
+                        <button type="button" onClick="study_modify_chk()" class="form-control btn btn-primary">신청하기</button>
                     </form>
                     </div>
                 </div> <!-- modal footer -->

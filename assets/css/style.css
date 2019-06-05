@@ -365,6 +365,10 @@ Button
     padding: 0.8rem 2rem;
 }
 
+.btn_wise {
+    width: 100%;
+}
+
 .btn:hover{
     color:#fff;
     border:1px solid;

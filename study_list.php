@@ -217,7 +217,7 @@ include "setting.php";
                     $diff_date = (strtotime($item_apply_e) - strtotime($timenow)) / 86400;
                     
                     if($item_apply_e < $timenow) {
-                        if(abs($diff_date) < 10) {
+                        if(abs($diff_date) < 10) { // 신청 마감일과 현재 날짜가 10일 이상 차이나면 아예 안보임
                             echo "
                             <div class='col-sm-6 m-top-10'>
                                 <div class='not_list'>
