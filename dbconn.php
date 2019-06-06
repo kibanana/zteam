@@ -30,4 +30,8 @@ $db['default'] = array(
     'failover' => array(),
     'save_queries' => TRUE
 );
+
+$conn = new mysqli($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
+
+mysqli_set_charset($conn, 'utf8');
 ?>
