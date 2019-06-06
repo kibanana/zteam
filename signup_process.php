@@ -36,6 +36,7 @@ include "setting.php";
     if(!$sql_signup){ echo "
     <script>
     alert('회원가입에 실패했습니다');
+    location.href='signup.php'
     </script>
     ";
     echo exit;
