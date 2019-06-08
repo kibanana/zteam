@@ -213,7 +213,9 @@ $member = mysqli_fetch_array($sql);
                                         <i class="icofont icofont-letter"></i>
                                     </div>
                                 </div>
-                                <span class="title">개인 정보 관리</span><br>                                 
+                                <span class="title"><form method="post" action="member_del.php">
+                                    <input type="submit" value="회원 탈퇴" />
+                                </form></span><br>                                 
                                 <span class="content">
                                     <form method="post" action="member_update.php">
             <p><a href="index.php">홈으로</a></p>
