@@ -4,6 +4,11 @@ session_start();
 include "auth.php";
 include "dbconn.php";
 include "setting.php";
+
+$sql = mysqli_query($conn, "select * from member where id='$userid'");
+$member = mysqli_fetch_array($sql);
+
+
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -208,8 +213,43 @@ include "setting.php";
                                         <i class="icofont icofont-letter"></i>
                                     </div>
                                 </div>
-                                <span class="title">신청 관리</span>
-                                <span class="content">내가 한 신청, 받은 신청 관리</span>
+                                <span class="title">개인 정보 관리</span><br>                                 
+                                <span class="content">
+                                    <form method="post" action="member_update.php">
+            <p><a href="index.php">홈으로</a></p>
+                <fieldset>
+                    <legend>정보 수정</legend>
+                        <table>
+                            <tr>
+                                <td>아이디</td>
+                                <td><input type="text" size="35" name="userid" value="<?php echo $_SESSION['userid'];?>" disabled></td>
+                            </tr>
+                            <tr>
+                                <td>비밀번호</td>
+                                <td><input type="password" size="35" name="pwd" placeholder="비밀번호" value="<?php echo $member['pwd'];?>"></td>
+                            </tr>
+                            <tr>
+                                <td>이름</td>
+                                <td><input type="text" size="35" name="name" placeholder="이름" value="<?php echo $member['name']; ?>"></td>
+                            </tr>
+                            <tr>
+                                <td>학번</td>
+                                <td><input type="text" size="35" name="s_num" placeholder="학번" value="<?php echo $member['s_num']; ?>"></td>
+                            </tr>
+                            <tr>
+                                <td>흥미있는 기술 / 공부 주제</td>
+                                <td><input type="text" size="35" name="interest1" placeholder="흥미1" value="<?php echo $member['interest1']; ?>"></td>
+                                <td><input type="text" size="35" name="interest2" placeholder="흥미2" value="<?php echo $member['interest2']; ?>"></td>
+                                <td><input type="text" size="35" name="interest3" placeholder="흥미3" value="<?php echo $member['interest3']; ?>"></td>               
+                            </tr>
+                                <td>자기소개</td>
+                                <td><input type="text" size="35" name="profile" placeholder="자기소개" value="<?php echo $member['profile']; ?>"></td>
+                            </tr>
+                        </table>
+                    <input type="submit" value="정보변경" />
+            </fieldset>
+<form>
+</span>
                             </li>
                         </div>
 
