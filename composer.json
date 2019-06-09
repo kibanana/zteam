@@ -6,9 +6,5 @@
             "name": "kyw017763",
             "email": "kyw017763@gmail.com"
         }
-    ],
-
-    "require": {
-    "php": "^5.5.12"
-    }
+    ]
 }
