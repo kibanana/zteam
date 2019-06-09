@@ -8,6 +8,10 @@ include "setting.php";
     $result_signup_chk = mysqli_query($conn, $sql);
     $row = mysqli_fetch_array($result_signup_chk);
 
+    $secession_sql = "SELECT * FROM secession WHERE secession_id='$signup_email' AND date(secession_date) >= date(subdate(now(), INTERVAL 30 DAY)) and date(secession_date) <= date(now())";
+    $result_secession = mysqli_query($conn, $secession_sql);
+    $secession_row = mysqli_fetch_array($result_secession);
+
     if(!(preg_match("/[A-Za-z0-9]{8}@e-mirim.hs.kr/", $signup_email))) {
         echo "
         <script>
@@ -15,6 +19,7 @@ include "setting.php";
         location.href='signup.php'
         </script>
         ";
+        exit;
     } else if(!(preg_match("/(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,15}$/", $signup_pwd))) {
         echo "
         <script>
@@ -22,6 +27,7 @@ include "setting.php";
         location.href='signup.php'
         </script>
         ";
+        exit;
     }else if($row) {
         echo "
         <script>
@@ -29,6 +35,15 @@ include "setting.php";
         location.href='signup.php'
         </script>
         ";
+        exit;
+    }else if($secession_row) {
+        echo "
+        <script>
+        alert('탈퇴한지 30일이 지나지 않은 이메일은 재가입이 불가능합니다');
+        location.href='index.php'
+        </script>
+        ";
+        exit;
     }
 
     //위의 if문에서 안걸리면 INSERT

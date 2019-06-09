@@ -12,8 +12,11 @@ $interest2 = $_POST['interest2'];
 $interest3 = $_POST['interest3'];
 $profile = $_POST['profile'];
 
-mysqli_query($conn,"update member set name='".$name."', s_num='".$s_num."',interest1='".$interest1."',interest2='".$interest2."',interest3='".$interest3."',profile='".$profile."' where id='".$_SESSION['userid']."'");
-echo "<script>alert('정보변경이 완료되었습니다'); history.back();</script>";
+mysqli_query($conn,"UPDATE member SET name='".$name."', s_num='".$s_num."',interest1='".$interest1."',interest2='".$interest2."',interest3='".$interest3."',profile='".$profile."' where id='".$_SESSION['userid']."'");
+echo "<script>
+        alert('정보변경이 완료되었습니다');
+        history.back();
+</script>";
 
 mysqli_close($conn);
 ?>

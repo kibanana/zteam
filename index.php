@@ -99,7 +99,7 @@
                                     <div class="separator_small"></div>
                                     <p class="view_content m-top-20">
                                     	입학한지 얼마 되지 않은 신입생 여러분들도 스터디나 공모전을 함께 할 팀을 부담없이 만들 수 있는 공간입니다. <br />
-                                        	즐팀의 가입자는 누구나 모집글을 작성하고 모집글에 신청 및 문의(쪽지)를 할 수 있습니다. </p>
+                                        즐팀의 가입자는 누구나 모집글을 작성하고 모집글에 신청 및 문의(쪽지)를 할 수 있습니다. </p>
                                 </div>
                             </div>
                             
@@ -116,9 +116,9 @@
                                         
                                     <div class="separator_small"></div>
                                     <p class="view_content m-top-20">
-                                                                                    전공 관련 팀만을 만드는 것이 아니므로 과, 동아리 상관없이 교류할 수 있습니다. <br />
-                                                                                    교육과정에 없는 전공 분야도 공부함으로써 전공에 대한 시야가 넓어지며 
-                                                                                    독학을 통해 스스로 성장하는 법을 익힐 수 있습니다.
+                                        전공 관련 팀만을 만드는 것이 아니므로 과, 동아리 상관없이 교류할 수 있습니다. <br />
+                                        교육과정에 없는 전공 분야도 공부함으로써 전공에 대한 시야가 넓어지며 
+                                        독학을 통해 스스로 성장하는 법을 익힐 수 있습니다.
                                     </p>
                                 </div>
                             </div>
@@ -155,35 +155,68 @@
                         <div class="skill_bottom_content text-center">
                             <div class="col-md-3 col-xs-6" style="margin-bottom: 50px;">
                                 <div class="skill_bottom_item">
-                                    <h4 class="statistic-counter">50</h4>
-                                    <div class="separator_small"></div>
-                                    <h6><em>가입자 수                     
                                     <?php
-                                        // $result = mysqli_query($conn, "SHOW TABLES");
-                                        // $row = mysqli_fetch_array($result);
-                                        // echo $row[0];
-                                    ?></em></h6>
-               
-
+                                        $index_sql1 =  mysqli_query($conn, "SELECT * FROM member");
+                                        $index_sql1_num = mysqli_num_rows($index_sql1);
+                                    ?>
+                                    <h4 class="statistic-counter"><?php echo $index_sql1_num ?></h4>
+                                    <div class="separator_small"></div>
+                                    <h6><em>가입자 수</em></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-6" style="margin-bottom: 50px;">
                                 <div class="skill_bottom_item">
-                                    <h4 class="statistic-counter">50</h4>
+                                    <?php
+                                        $index_sql2 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_develop"));
+                                        $index_sql3 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_design"));
+                                        $index_sql4 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_etc"));
+
+                                        $index_sql5 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_develop"));
+                                        $index_sql6 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_design"));
+                                        $index_sql7 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_etc"));
+                                        $index_sql8 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_idea"));
+
+                                        $index_sum_list = $index_sql2 + $index_sql3 + $index_sql4 + $index_sql5 + $index_sql6 + $index_sql7 + $index_sql8;
+                                    ?>
+                                    <h4 class="statistic-counter"><?php echo $index_sum_list ?></h4>
                                     <div class="separator_small"></div>
                                     <h6><em>총 모집글</em></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-6">
                                 <div class="skill_bottom_item">
-                                    <h4 class="statistic-counter">45</h4>
+                                    <?php
+                                        $index_sql9 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_study_develop"));
+                                        $index_sql10 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_study_design"));
+                                        $index_sql11 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_study_etc"));
+
+                                        $index_sql12 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_contest_develop"));
+                                        $index_sql13 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_contest_design"));
+                                        $index_sql14 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_contest_etc"));
+                                        $index_sql15 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_contest_idea"));
+
+                                        $index_sum_apply = $index_sql9 + $index_sql10 + $index_sql11 + $index_sql12 + $index_sql13 + $index_sql14 + $index_sql15;
+                                    ?>
+                                    <h4 class="statistic-counter"><?php echo $index_sum_apply ?></h4>
                                     <div class="separator_small"></div>
                                     <h6><em>총 신청수</em></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-6">
                                 <div class="skill_bottom_item">
-                                    <h4 class="statistic-counter">95</h4>
+                                    <?php
+                                        $index_sql16 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_develop WHERE apply_num >= want_num"));
+                                        $index_sql17 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_design WHERE apply_num >= want_num"));
+                                        $index_sql18 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_etc WHERE apply_num >= want_num"));
+
+                                        $index_sql19 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_develop WHERE apply_num >= want_num"));
+                                        $index_sql20 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_design WHERE apply_num >= want_num"));
+                                        $index_sql21 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_etc WHERE apply_num >= want_num"));
+                                        $index_sql22 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_idea WHERE apply_num >= want_num"));
+
+                                        $index_sum_complete = $index_sql16 + $index_sql17 + $index_sql18 + $index_sql19 + $index_sql20 + $index_sql21 + $index_sql22;
+                                    ?>
+                                    <h4 class="statistic-counter"><?php echo $index_sum_complete ?></h4>
                                     <div class="separator_small"></div>
                                     <h6><em>모임 수</em></h6>
                                 </div>
@@ -210,6 +243,12 @@
                                     </p>
                                 </div>
                             </div>
+
+                            <?php 
+                            // 일곱개의 테이블에서 각각 하나씩만 가져오고 그 중 최근의 것 세 개
+                            
+
+                            ?>
                             
                             <div class="col-md-4 col-sm-12">
                                 <div class="pricing_item sm-m-top-30">

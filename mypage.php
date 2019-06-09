@@ -280,7 +280,7 @@ $member = mysqli_fetch_array($sql);
                                         <input type="password" name="pw2" placeholder="새로운 비밀번호 확인" value="">
                                     </label>
 
-                                    <button type="button" class="form-control btn btn-primary">비밀번호 변경</button>
+                                    <button type="submit" class="form-control btn btn-primary">비밀번호 변경</button>
                                 </form>
 
                                 </div>

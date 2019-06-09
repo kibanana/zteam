@@ -5,9 +5,22 @@ include "auth.php";
 include "dbconn.php";
 include "setting.php";
 
-mysqli_query($conn,"delete from member where id='".$_SESSION['userid']."'"); 
+mysqli_query($conn,"DELETE FROM member WHERE id='".$_SESSION['userid']."'"); 
 
-echo "<script>alert('회원탈퇴가 완료되었습니다.'); history.back();</script>";
+$secession_date = date("Y-m-d");
+mysqli_query($conn,"INSERT INTO secession (secession_id, secession_name, secession_date) VALUES('$userid', '$username', '$secession_date')"); 
+
+echo 
+"<script>
+    alert('$username 님의 탈퇴가 완료되었습니다.');
+</script>";
+
+session_destroy();
+
+echo 
+"<script>
+    history.back();
+</script>";
 
 mysqli_close($conn);
 ?>
