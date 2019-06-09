@@ -7,90 +7,51 @@ include "setting.php";
 ?>
 
 <?php     
-if($kind=="develop"){
-    $v_sql = mysqli_query($conn, "SELECT * FROM contest_develop where num = $num");
-} else if($kind=="design"){
-    $v_sql = mysqli_query($conn, "SELECT * FROM contest_design where num = $num");
-} else if($kind=="etc"){
-    $v_sql = mysqli_query($conn, "SELECT * FROM contest_etc where num = $num");
-} else if($kind=="idea"){
-    $v_sql = mysqli_query($conn, "SELECT * FROM contest_idea where num = $num");
-}
+    if($kind=="develop"){
+        $v_sql = mysqli_query($conn, "SELECT * FROM contest_develop where num = $num");
+    } else if($kind=="design"){
+        $v_sql = mysqli_query($conn, "SELECT * FROM contest_design where num = $num");
+    } else if($kind=="etc"){
+        $v_sql = mysqli_query($conn, "SELECT * FROM contest_etc where num = $num");
+    } else if($kind=="idea"){
+        $v_sql = mysqli_query($conn, "SELECT * FROM contest_idea where num = $num");
+    }
 
-$row = mysqli_fetch_array($v_sql);
+    $row = mysqli_fetch_array($v_sql);
 
-$item_num = $row[num];
-$item_id = $row[id];
-$item_name = $row[name];
-$item_part = $row[part];
-$item_topic = str_replace(" ", "&nbsp;", $row[topic]);
-$item_title = $row[title];
+    $item_num = $row[num];
+    $item_id = $row[id];
+    $item_name = $row[name];
+    $item_part = $row[part];
+    $item_topic = str_replace(" ", "&nbsp;", $row[topic]);
+    $item_title = $row[title];
 
-$item_content = $row[content];
-$item_content_ori = $item_content;
+    $item_content = $row[content];
+    $item_content_ori = $item_content;
 
-$item_content = str_replace(" ", "&nbsp;", $item_content);
-$item_content = str_replace("\n", "<br>", $item_content);
+    $item_content = str_replace(" ", "&nbsp;", $item_content);
+    $item_content = str_replace("\n", "<br>", $item_content);
 
-$item_want_num = $row[want_num];
-$item_apply_num = $row[apply_num];
+    $item_want_num = $row[want_num];
+    $item_apply_num = $row[apply_num];
 
-$item_start_day = $row[start_day];
-$item_start_day = substr($item_start_day, 0, 10);
-$item_end_day = $row[end_day];
-$item_end_day = substr($item_end_day, 0, 10);
+    $item_start_day = $row[start_day];
+    $item_start_day = substr($item_start_day, 0, 10);
+    $item_end_day = $row[end_day];
+    $item_end_day = substr($item_end_day, 0, 10);
 
-$item_hit = $row[hit] + 1;
+    $item_hit = $row[hit] + 1;
 
-if($kind=="develop"){
-    $hit_sql = mysqli_query($conn, "update contest_develop set hit=$item_hit where num=$num");
-} else if($kind=="design"){
-    $hit_sql = mysqli_query($conn, "update contest_design set hit=$item_hit where num=$num");
-} else if($kind=="etc"){
-    $hit_sql = mysqli_query($conn, "update contest_etc set hit=$item_hit where num=$num");
-} else if($kind=="idea"){
-    $hit_sql = mysqli_query($conn, "update contest_idea set hit=$item_hit where num=$num");
-}
-?>
-
-<?php     
-if($kind=="develop"){
-    $v_sql = mysqli_query($conn, "SELECT * FROM contest_develop where num = $num");
-} else if($kind=="design"){
-    $v_sql = mysqli_query($conn, "SELECT * FROM contest_design where num = $num");
-} else if($kind=="etc"){
-    $v_sql = mysqli_query($conn, "SELECT * FROM contest_etc where num = $num");
-} else if($kind=="idea"){
-    $v_sql = mysqli_query($conn, "SELECT * FROM contest_idea where num = $num");
-}
-
-$row = mysqli_fetch_array($v_sql);
-$item_num = $row[num];
-$item_id = $row[id];
-$item_name = $row[name];
-$item_topic = str_replace(" ", "&nbsp;", $row[topic]);
-$item_title = $row[title];
-$item_content = $row[content];
-$item_content_ori = $item_content;
-$item_content = str_replace(" ", "&nbsp;", $item_content);
-$item_content = str_replace("\n", "<br>", $item_content);
-$item_want_num = $row[want_num];
-$item_apply_num = $row[apply_num];
-$item_start_day = $row[start_day];
-$item_start_day = substr($item_start_day, 0, 10);
-$item_end_day = $row[end_day];
-$item_end_day = substr($item_end_day, 0, 10);
-$item_hit = $row[hit] + 1;
-if($kind=="develop"){
-    $hit_sql = mysqli_query($conn, "update contest_develop set hit=$item_hit where num=$num");
-} else if($kind=="design"){
-    $hit_sql = mysqli_query($conn, "update contest_design set hit=$item_hit where num=$num");
-} else if($kind=="etc"){
-    $hit_sql = mysqli_query($conn, "update contest_etc set hit=$item_hit where num=$num");
-} else if($kind=="idea"){
-    $hit_sql = mysqli_query($conn, "update contest_idea set hit=$item_hit where num=$num");
-}
-?>
+    if($kind=="develop"){
+        $hit_sql = mysqli_query($conn, "UPDATE contest_develop SET hit=$item_hit WHERE num=$num");
+    } else if($kind=="design"){
+        $hit_sql = mysqli_query($conn, "UPDATE contest_design SET hit=$item_hit WHERE num=$num");
+    } else if($kind=="etc"){
+        $hit_sql = mysqli_query($conn, "UPDATE contest_etc SET hit=$item_hit WHERE num=$num");
+    } else if($kind=="idea"){
+        $hit_sql = mysqli_query($conn, "UPDATE contest_idea SET hit=$item_hit WHERE num=$num");
+    }
+    ?>
 
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -229,7 +190,7 @@ if($kind=="develop"){
             }
             .articlesub_t span.content {
                 color: black;
-                font-size: 17px;
+                font-size: 18px;
                 margin-top: 10px;
                 margin-bottom: 30px;
                 text-align: center;
@@ -260,6 +221,11 @@ if($kind=="develop"){
                 border-style: solid;
                 border-color: #eee;
                 border-width: 1.5px 0 0 0;
+            }
+
+            .nav_bottom {
+                margin-top: 30px;
+                font-size: 17px;
             }
         </style>
 
@@ -349,20 +315,22 @@ if($kind=="develop"){
                             <?php echo $item_content ?>
                         </span>
                         </div>
+
                     </div>
                     
-                    <div class="col-sm-2 col-sm-offset-1 col-xs-7 articlesub_t">
-                        <span class="title">Starter : </span>
-                        <span class="content" style="font-size: 15px; text-align: left;">
-                            <?php echo $item_id ?> (<?php echo $item_name ?>)
+                    <div class="col-sm-3 col-xs-7 articlesub_t">
+                        <span class="title" style="font-size: 18px; text-align: left; margin: 20px 0 40px 0;">
+                            <?php echo $item_id ?>
+                            <br>
+                            (<?php echo $item_name ?>)
                         </span>
 
-                        <span class="title">신청 : </span>
+                        <span class="title">신청 현황</span>
                         <span class="content">
                         <?php echo "$item_apply_num / $item_want_num" ?>
                         </span>
 
-                        <span class="title">신청 기간 : </span>
+                        <span class="title">신청 기간</span>
                         <span class="content" style="line-height: 0.9;">
                         <?php echo "$item_start_day <br> ~ <br> $item_end_day" ?>
                         </span>
@@ -378,48 +346,68 @@ if($kind=="develop"){
                         ?>
                         
                     </div>
+
+                    <div class="col-sm-9 nav_bottom">
+                        <?php
+                            // 단순히 한단계 위 아래로 움직여서는 안된다. 그 글이 삭제되고 두단계 건너뛴 곳에 신청기간이 멀쩡한 글이 있을 수도 있기 때문에!
+
+                            $min_num1 = (int) mysqli_query($conn, "SELECT MIN(num) FROM contest_develop"); //develop
+                            $max_num1 = (int) mysqli_query($conn, "SELECT MAX(num) FROM contest_develop");
+
+                            $min_num2 = (int) mysqli_query($conn, "SELECT MIN(num) FROM contest_design"); //design
+                            $max_num2 = (int) mysqli_query($conn, "SELECT MAX(num) FROM contest_design");
+
+                            $min_num3 = (int) mysqli_query($conn, "SELECT MIN(num) FROM contest_etc"); //etc
+                            $max_num3 = (int) mysqli_query($conn, "SELECT MAX(num) FROM contest_etc");
+
+                            $min_num4 = (int) mysqli_query($conn, "SELECT MIN(num) FROM contest_idea"); //idea
+                            $max_num4 = (int) mysqli_query($conn, "SELECT MAX(num) FROM contest_idea");
+
+                            if($kind=="develop"){
+                                $b_sql = "SELECT num, title FROM contest_develop WHERE num > $min_num1 AND num < $item_num AND end_day >= $timenow LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_develop WHERE num < $max_num1 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                            } else if($kind=="design"){
+                                $b_sql = "SELECT num, title FROM contest_design WHERE num > $min_num2 AND num < $item_num AND end_day >= $timenow LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_design WHERE num < $max_num2 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                            } else if($kind=="etc"){
+                                $b_sql = "SELECT num, title FROM contest_etc WHERE num > $min_num3 AND num < $item_num AND end_day >= $timenow LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_etc WHERE num < $max_num3 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                            } else if($kind=="idea"){
+                                $b_sql = "SELECT num, title FROM contest_idea WHERE num > $min_num4 AND  num < $item_num AND end_day >= $timenow LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_idea WHERE num < $max_num4 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                            }
+
+                            $b = mysqli_query($conn, $b_sql);
+                            $a = mysqli_query($conn, $a_sql);
+
+                            $b_row = mysqli_fetch_array($b);
+                            $a_row = mysqli_fetch_array($a);
+
+                            $b_result_num = mysqli_num_rows($b);
+                            $a_result_num = mysqli_num_rows($a);
+
+                            $b_num = $b_row[0];
+                            $a_num = $a_row[0];
+                            
+                            if($b_result_num){
+                                echo "<a href='contest_view.php?num=$b_num&page=$page&kind=$kind'>";
+                                echo "<span style='float: left;'><span>&laquo;</span> 이전 글</span>";
+                                echo "</a>";
+                            } else {
+                                echo "<span style='float: left; cursor: no-drop;'><span>&laquo;</span> 이전 글</span>";
+                            }
+
+                            if($a_result_num){
+                                echo "<a href='contest_view.php?num=$a_num&page=$page&kind=$kind'>";
+                                echo "<span style='float: right;'>다음 글 <span>&raquo;</span></span>";
+                                echo "</a>";
+                            } else {
+                                echo "<span style='float: right; cursor: no-drop;'>다음 글 <span>&raquo;</span></span>";
+                            }
+                        ?>
+                        </div>
+
                 </article>
-
-                <?php
-                    $num_m = $num - 1;
-                    $num_p = $num + 1;
-
-                    if($kind=="develop"){
-                        $b_sql = mysqli_query($conn, "SELECT * FROM contest_develop where num = $num_m");
-                    } else if($kind=="design"){
-                        $b_sql = mysqli_query($conn, "SELECT * FROM contest_design where num = $num_m");
-                    } else if($kind=="etc"){
-                        $b_sql = mysqli_query($conn, "SELECT * FROM contest_etc where num = $num_m");
-                    } else if($kind=="idea"){
-                        $b_sql = mysqli_query($conn, "SELECT * FROM contest_idea where num = $num_m");
-                    }
-                    if($kind=="develop"){
-                        $a_sql = mysqli_query($conn, "SELECT * FROM contest_develop where num = $num_p");
-                    } else if($kind=="design"){
-                        $a_sql = mysqli_query($conn, "SELECT * FROM contest_design where num = $num_p");
-                    } else if($kind=="etc"){
-                        $a_sql = mysqli_query($conn, "SELECT * FROM contest_etc where num = $num_p");
-                    } else if($kind=="idea"){
-                        $a_sql = mysqli_query($conn, "SELECT * FROM contest_idea where num = $num_p");
-                    }
-
-                    if(!is_bool($b_result)){
-                        $b_result_num = mysqli_num_rows($b_sql);
-                        if($b_result_num){
-                            echo "<a href='contest_view.php?num=$num_m&page=$page&kind=$kind' style='color: #efdc05; font-size: 14px; text-decoration: none; float: left;'>";
-                            echo "<span><span>&laquo;</span> 이전 글</span></a>";
-                        } 
-                    }
-                    if(!is_bool(a_result)){
-                        $a_result_num = mysqli_num_rows($a_sql);
-                        if($a_result_num){
-                            echo "<a href='contest_view.php?num=$num_p&page=$page&kind=$kind' style='color: #efdc05; font-size: 14px; text-decoration: none; float: right;'>";
-                            echo "<span>다음 글 <span>&raquo;</span></span></a>";
-                        } 
-                    }
-                ?>
-           </article>
-
         </div>
 
         </div> <!-- row -->

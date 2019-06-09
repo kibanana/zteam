@@ -9,11 +9,11 @@ include "setting.php";
 <?php     
 
     if($kind=="develop"){
-        $v_sql = "SELECT * FROM study_develop where num = $num";
+        $v_sql = "SELECT * FROM study_develop WHERE num = $num";
     } else if($kind=="design"){
-        $v_sql = "SELECT * FROM study_design where num = $num";
+        $v_sql = "SELECT * FROM study_design WHERE num = $num";
     } else if($kind=="etc"){
-        $v_sql = "SELECT * FROM study_etc where num = $num";
+        $v_sql = "SELECT * FROM study_etc WHERE num = $num";
     }
 
     $v_result = mysqli_query($conn, $v_sql);
@@ -43,11 +43,11 @@ include "setting.php";
     $item_hit = $row[hit] + 1;
     
     if($kind=="develop"){
-        $hit_sql = "update study_develop set hit=$item_hit where num=$num";
+        $hit_sql = "UPDATE study_develop SET hit=$item_hit WHERE num=$num";
     } else if($kind=="design"){
-        $hit_sql = "update study_design set hit=$item_hit where num=$num";
+        $hit_sql = "UPDATE study_design SET hit=$item_hit WHERE num=$num";
     } else if($kind=="etc"){
-        $hit_sql = "update study_etc set hit=$item_hit where num=$num";
+        $hit_sql = "UPDATE study_etc SET hit=$item_hit WHERE num=$num";
     }
     
     mysqli_query($hit_sql);
@@ -190,7 +190,7 @@ include "setting.php";
             }
             .articlesub_t span.content {
                 color: black;
-                font-size: 17px;
+                font-size: 18px;
                 margin-top: 10px;
                 margin-bottom: 30px;
                 text-align: center;
@@ -203,6 +203,11 @@ include "setting.php";
                 border-style: solid;
                 border-color: #eee;
                 border-width: 1.5px 0 0 0;
+            }
+
+            .nav_bottom {
+                margin-top: 30px;
+                font-size: 17px;
             }
         </style>
         
@@ -285,19 +290,20 @@ include "setting.php";
                         </span>
                         </div>
                     </div>
-                    
-                    <div class="col-sm-2 col-sm-offset-1 col-xs-7 articlesub_t">
-                        <span class="title">Starter : </span>
-                        <span class="content" style="font-size: 15px; text-align: left;">
-                            <?php echo $item_id ?> (<?php echo $item_name ?>)
+
+                    <div class="col-sm-3 col-xs-7 articlesub_t">
+                        <span class="title" style="font-size: 18px; text-align: left; margin: 20px 0 40px 0;">
+                            <?php echo $item_id ?>
+                            <br>
+                            (<?php echo $item_name ?>)
                         </span>
 
-                        <span class="title">신청 : </span>
+                        <span class="title">신청 현황</span>
                         <span class="content">
                         <?php echo "$item_apply_num / $item_want_num" ?>
                         </span>
 
-                        <span class="title">신청 기간 : </span>
+                        <span class="title">신청 기간</span>
                         <span class="content" style="line-height: 0.9;">
                         <?php echo "$item_start_day <br> ~ <br> $item_end_day" ?>
                         </span>
@@ -313,48 +319,62 @@ include "setting.php";
                         ?>
                         
                     </div>
-                </article>
 
+                    <div class="col-sm-9 nav_bottom">
                     <?php
-                        $num_m = $num - 1;
-                        $num_p = $num + 1;
+                        // 단순히 한단계 위 아래로 움직여서는 안된다. 그 글이 삭제되고 두단계 건너뛴 곳에 신청기간이 멀쩡한 글이 있을 수도 있기 때문에!
+
+                        $min_num1 = (int) mysqli_query($conn, "SELECT MIN(num) FROM study_develop"); //develop
+                        $max_num1 = (int) mysqli_query($conn, "SELECT MAX(num) FROM study_develop");
+
+                        $min_num2 = (int) mysqli_query($conn, "SELECT MIN(num) FROM study_design"); //design
+                        $max_num2 = (int) mysqli_query($conn, "SELECT MAX(num) FROM study_design");
+
+                        $min_num3 = (int) mysqli_query($conn, "SELECT MIN(num) FROM study_etc"); //etc
+                        $max_num3 = (int) mysqli_query($conn, "SELECT MAX(num) FROM study_etc");
 
                         if($kind=="develop"){
-                            $b_sql = "SELECT * FROM study_develop where num = $num_m";
+                            $b_sql = "SELECT num, title FROM study_develop WHERE num > $min_num1 AND num < $item_num AND end_day >= $timenow LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_develop WHERE num < $max_num1 AND num > $item_num AND end_day >= $timenow LIMIT 1";
                         } else if($kind=="design"){
-                            $b_sql = "SELECT * FROM study_design where num = $num_m";
+                            $b_sql = "SELECT num, title FROM study_design WHERE num > $min_num2 AND num < $item_num AND end_day >= $timenow LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_design WHERE num < $max_num2 AND num > $item_num AND end_day >= $timenow LIMIT 1";
                         } else if($kind=="etc"){
-                            $b_sql = "SELECT * FROM study_etc where num = $num_m";
-                        }
-                         
-                        if($kind=="develop"){
-                            $a_sql = "SELECT * FROM study_develop where num = $num_p";
-                        } else if($kind=="design"){
-                            $a_sql = "SELECT * FROM study_design where num = $num_p";
-                        } else if($kind=="etc"){
-                            $a_sql = "SELECT * FROM study_etc where num = $num_p";
+                            $b_sql = "SELECT num, title FROM study_etc WHERE num > $min_num3 AND num < $item_num AND end_day >= $timenow LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_etc WHERE num < $max_num3 AND num > $item_num AND end_day >= $timenow LIMIT 1";
                         }
 
-                        $b_result = mysqli_query($b_sql, $conn);
-                        if(!is_bool($b_result)){
-                            $b_result_num = mysqli_num_rows($b_result);
-                            if($b_result_num){
-                                echo "<a href='study_view.php?num=$num_m&page=$page&kind=$kind' style='color: #efdc05; font-size: 14px; text-decoration: none; float: left;'>";
-                                echo "<span><span>&laquo;</span> 이전 글</span></a>";
-                            } 
-                        }
+                        $b = mysqli_query($conn, $b_sql);
+                        $a = mysqli_query($conn, $a_sql);
 
-                        $a_result = mysqli_query($a_sql, $conn);
-                        if(!is_bool($a_result)){
-                            $a_result_num = mysqli_num_rows($a_result);
-                            if($a_result_num){
-                                echo "<a href='study_view.php?num=$num_p&page=$page&kind=$kind' style='color: #efdc05; font-size: 14px; text-decoration: none; float: right;'>";
-                                echo "<span>다음 글 <span>&raquo;</span></span></a>";
-                            } 
-                        }
+                        $b_result_num = mysqli_num_rows($b);
+                        $a_result_num = mysqli_num_rows($a);
                         
+                        $b = mysqli_fetch_row($b);
+                        $a = mysqli_fetch_row($a);
+
+                        $b_num = $b[0];
+                        $a_num = $a[0];
+
+                        if($b_result_num){
+                            echo "<a href='study_view.php?num=$b_num&page=$page&kind=$kind'>";
+                            echo "<span style='float: left;'><span>&laquo;</span> 이전 글</span>";
+                            echo "</a>";
+                        } else {
+                            echo "<span style='float: left; cursor: no-drop;'><span>&laquo;</span> 이전 글</span>";
+                        }
+
+                        if($a_result_num){
+                            echo "<a href='study_view.php?num=$a_num&page=$page&kind=$kind'>";
+                            echo "<span style='float: right;'>다음 글 <span>&raquo;</span></span>";
+                            echo "</a>";
+                        } else {
+                            echo "<span style='float: right; cursor: no-drop;'>다음 글 <span>&raquo;</span></span>";
+                        }
                     ?>
-           </article>
+                    </div>
+
+                </article>
         </div>
 
         </div> <!-- row -->

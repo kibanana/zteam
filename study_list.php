@@ -218,10 +218,13 @@ include "setting.php";
                     
                     if($item_apply_e < $timenow) {
                         if(abs($diff_date) < 10) { // 신청 마감일과 현재 날짜가 10일 이상 차이나면 아예 안보임
-                            echo "
-                            <div class='col-sm-6 m-top-10'>
+                            if($diff_date < 0) {
+                                $diff_date = $diff_date + abs($diff_date)*2;
+
+                                echo "
+                                <div class='col-sm-6 m-top-10'>
                                 <div class='not_list'>
-                                <span class='badge' style='padding-bottom: 5px; background: #efdc05; color: white; float:right'>D - $diff_date</span>
+                                <span class='badge' style='padding-bottom: 5px; background: #efdc05; color: white; float:right'>D - +$diff_date</span>
                                 <span>No.$item_num</span> <!-- 번호 -->
                                 <span>작성자 | $item_id ($item_name) <!-- 작성자 -->
                                 
@@ -236,6 +239,26 @@ include "setting.php";
                                     조회수 | $item_hit
                                 </span> <!-- 신청수, 조회수 -->
                                 ";
+                            } else {
+                                echo "
+                                <div class='col-sm-6 m-top-10'>
+                                    <div class='not_list'>
+                                    <span class='badge' style='padding-bottom: 5px; background: #efdc05; color: white; float:right'>D - $diff_date</span>
+                                    <span>No.$item_num</span> <!-- 번호 -->
+                                    <span>작성자 | $item_id ($item_name) <!-- 작성자 -->
+                                    
+                                    <span class='title' style='margin-top: 15px;'>[$item_topic] $item_title</span> <!-- 주제, 제목 -->
+                                    
+                                    <span class='content' style='margin-bottom: 23px;'>$item_content</span>
+                                    
+                                    <span>신청일 | $item_apply_s ~ $item_apply_e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <span style='float: left;'>
+                                        신청현황 | $item_a_num / $item_w_num 
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        조회수 | $item_hit
+                                    </span> <!-- 신청수, 조회수 -->
+                                    ";
+                            }
 
                                 if($userid==$item_id){ //신청기간 지난 게시물의 삭제 버튼
                                 ?>
@@ -287,7 +310,7 @@ include "setting.php";
             <div>
               <ul class="pagination pagination-lg">
                   	<?php 
-                  	if(page-5 >= 1) {
+                  	if($page-5 >= 1) {
                   	
                   	?>
                   	<li class="page-item">
@@ -322,7 +345,7 @@ include "setting.php";
                     ?>
                     
                     <?php 
-                  	if(page+5 <= $total_page) {
+                  	if($page+5 <= $total_page) {
                   	?>
                   	<li class="page-item">
                       <a class="page-link" href="study_list.php?page=<?php echo $page+5 ?>" style="background: rgb(247,247,247); color: #ff6863; border: 0;">&raquo;</a>
