@@ -1547,7 +1547,6 @@ nav {
 
   li.mypage_item {
     display: inline-block;
-    text-align: center;
     width: 100%;
     margin: 20px 5%;
     padding: 15% 10%;
@@ -1567,11 +1566,7 @@ nav {
   }
 
   li.mypage_subitem {
-    display: inline-block;
-    text-align: center;
-    width: 100%;
-    margin: 20px 5%;
-    padding: 15% 10%;
+    padding: 2% 10%;
     line-height: 1.5;
     background: #f0f0f0;
     border: 2px #eaeaea double;

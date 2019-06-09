@@ -99,7 +99,14 @@ $member = mysqli_fetch_array($sql);
                     item1.style.display="none";
                 }
             }
-    	</script>
+        </script>
+
+        <script>
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                e.target // newly activated tab
+                e.relatedTarget // previous active tab
+            })
+        </script>
     </head>
 
     <body data-spy="scroll" data-target=".navbar-collapse">
@@ -208,67 +215,88 @@ $member = mysqli_fetch_array($sql);
 
                         <div class="col-sm-12" id="con04_sub">
                         <li class="mypage_subitem">
-                                <div class="ab_head" style="display: block;">                                                                                                  
-                                    <div class="ab_head_icon">
-                                        <i class="icofont icofont-letter"></i>
-                                    </div>
-                                </div>
-                                <span class="title"><form method="post" action="member_del.php">
-                                    <input type="submit" value="회원 탈퇴" />
-                                </form></span><br>                                 
-                                <span class="content">
-                                    <form method="post" action="member_update.php">
-                <fieldset>
-                    <legend>정보 수정</legend>
-                        <table>
-                            <tr>
-                                <td>아이디</td>
-                                <td><input type="text" size="35" name="userid" value="<?php echo $_SESSION['userid'];?>" disabled></td>
-                            </tr>
-                            <tr>
-                                <td>이름</td>
-                                <td><input type="text" size="35" name="name" placeholder="이름" value="<?php echo $member['name']; ?>"></td>
-                            </tr>
-                            <tr>
-                                <td>학번</td>
-                                <td><input type="text" size="35" name="s_num" placeholder="학번" value="<?php echo $member['s_num']; ?>"></td>
-                            </tr>
-                            <tr>
-                                <td>흥미있는 기술 / 공부 주제</td>
-                                <td><input type="text" size="35" name="interest1" placeholder="흥미1" value="<?php echo $member['interest1']; ?>"></td>
-                                <td><input type="text" size="35" name="interest2" placeholder="흥미2" value="<?php echo $member['interest2']; ?>"></td>
-                                <td><input type="text" size="35" name="interest3" placeholder="흥미3" value="<?php echo $member['interest3']; ?>"></td>               
-                            </tr>
-                                <td>자기소개</td>
-                                <td><input type="text" size="35" name="profile" placeholder="자기소개" value="<?php echo $member['profile']; ?>"></td>
-                            </tr>
-                        </table>
-                    <input type="submit" value="정보변경" />
-            </fieldset>
-</form>
- <form action="change_pwd.php" method="post">
-                                <table>
-                            <tr>
+                        
+                        <span style="font-size: 22px; font-weight: 600; display: block; margin-bottom: 30px;">개인정보 관리</span>
 
-                                <td>기존 비밀번호</td>
-                                <td><input type="password" size="35" name="pw" placeholder="비밀번호" value="" ></td>
-                            </tr>
-                            <tr>
-                                <td>변경 비밀번호</td>
-                                <td><input type="password" size="35" name="pw1" placeholder="비밀번호" value=""></td>
-                            </tr>
-                            <tr>
-                                <td>변경 비밀번호 확인</td>
-                                <td><input type="password" size="35" name="pw2" placeholder="비밀번호" value=""></td>
-                            </tr>
-                        </table>
-                        <input type="submit" value="비밀번호 변경" />
-                            </form>
-</span>
-                            </li>
+                        <div role="tabpanel1">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist" style="font-size: 16px;">
+                                <li role="presentation" class="active"><a href="#sub1_1" aria-controls="sub1_1" role="tab" data-toggle="tab"><span style="color: #efdc05;">개인정보 변경</span></a></li>
+                                <li role="presentation"><a href="#sub1_2" aria-controls="sub1_2" role="tab" data-toggle="tab"><span style="color: #efdc05;">비밀번호 변경</span></a></li>
+                                <li role="presentation"><a href="#sub1_3" aria-controls="sub1_3" role="tab" data-toggle="tab"><span style="color: #efdc05;">회원 탈퇴</span></a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="sub1_1" style="padding-left: 20%; padding-right: 20%;">
+
+                                <form class="form_write" method="post" action="member_update.php" style="margin-top: 40px;">
+                                    <label>
+                                        아이디
+                                        <input type="text" name="userid" value="<?php echo $_SESSION['userid'];?>" disabled readonly>
+                                    </label>
+
+                                    <label>
+                                        이름
+                                        <input type="text" name="name" value="<?php echo $member['name']; ?>">
+                                    </label>
+                                    
+                                    <label>
+                                        학번
+                                        <input type="text" name="s_num" value="<?php echo $member['s_num']; ?>">
+                                    </label>
+                                    
+                                    <label>흥미있는 기술 / 공부주제</label>
+                                    <input type="text" name="interest1" placeholder="1" value="<?php echo $member['interest1']; ?>" style="display: inline-block; width: 30%;">
+                                    <input type="text" name="interest2" placeholder="2" value="<?php echo $member['interest2']; ?>" style="display: inline-block; width: 30%;">
+                                    <input type="text" name="interest3" placeholder="3" value="<?php echo $member['interest3']; ?>" style="display: inline-block; width: 30%;">
+                
+                                    <label>
+                                        자기소개
+                                        <textarea name="profile"><?php echo $member['profile']; ?></textarea>
+                                    </label>
+
+                                    <button type="button" class="form-control btn btn-primary">개인정보 변경</button>
+                                </form> 
+
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane fade" id="sub1_2" style="padding-left: 20%; padding-right: 20%;">
+
+                                <form class="form_write" method="post" action="change_pwd.php" style="margin-top: 40px;">
+                                    <label>
+                                    기존 비밀번호
+                                        <input type="password" ame="pw" placeholder="기존 비밀번호" value="" >
+                                    </label>
+
+                                    <label>
+                                    새로운 비밀번호
+                                        <input type="password" name="pw1" placeholder="새로운 비밀번호" value="">
+                                    </label>
+
+                                    <label>
+                                    새로운 비밀번호 확인
+                                        <input type="password" name="pw2" placeholder="새로운 비밀번호 확인" value="">
+                                    </label>
+
+                                    <button type="button" class="form-control btn btn-primary">비밀번호 변경</button>
+                                </form>
+
+                                </div>
+
+                                <div role="tabpanel" class="tab-pane fade" id="sub1_3" style="padding-left: 20%; padding-right: 20%;">
+
+                                <form class="form_write" method="post" action="member_del.php" style="margin-top: 40px;">
+                                    <input type="submit" class="form-control btn btn-primary" value="회원 탈퇴" />
+                                </form>
+
+                                </div>
+                            </div>
+
                         </div>
 
-
+                        </li>
                     </ul>
                 </div>
             </div>
