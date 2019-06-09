@@ -8,4 +8,6 @@ include "setting.php";
 mysqli_query($conn,"delete from member where id='".$_SESSION['userid']."'"); 
 
 echo "<script>alert('회원탈퇴가 완료되었습니다.'); history.back();</script>";
+
+mysqli_close($conn);
 ?>
