@@ -159,9 +159,9 @@
                                     <div class="separator_small"></div>
                                     <h6><em>가입자 수                     
                                     <?php
-                                    $result = mysqli_query($conn, "SHOW TABLES");
-                                    $row = mysqli_fetch_array($result);
-                                    echo $row[0];
+                                        // $result = mysqli_query($conn, "SHOW TABLES");
+                                        // $row = mysqli_fetch_array($result);
+                                        // echo $row[0];
                                     ?></em></h6>
                
 

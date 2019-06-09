@@ -1,16 +1,20 @@
-<?php
-$url = parse_url("mysql://bed84a9b65a9ed:2c0e42a1@eu-cdbr-west-02.cleardb.net/heroku_e311a9b2e0b19bd?reconnect=true");
+<?php 
 
-$server = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$db = substr($url["path"], 1);
+$hostname = "localhost";
+$username = "root";
+$password = "1234";
+$dbname = "zteam";
 
-$conn = new mysqli($server, $username, $password, $db);
+$conn = mysqli_connect($hostname, $username, $password, $dbname);
 
-if (!$conn) {
-    return die("Connection failed: " . mysqli_connect_error());
-};
+
+if(!$conn){
+	echo "MySQL 접속 에러 : ";
+	echo mysqli_connect_error();
+	exit();
+} else {
+}
+
 
 mysqli_set_charset($conn, 'utf8');
 ?>

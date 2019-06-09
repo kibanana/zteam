@@ -18,21 +18,21 @@ include "setting.php";
     <div class="container" style="user-select:none;">   
     
         <?php 
-        // $userid = $_SESSION['userid'];
-        // $userid = $_POST['userid'];
         if(isset($userid)) {
-            //$sql_badge_cal = mysqli_query($conn, "SELECT count(*) FROM note_recv WHERE recv_id='$userid' AND recv_chk=0");
-            //mysqli_error($conn);
+            $sql_badge_cal = mysqli_query($conn, "SELECT * FROM note_recv WHERE recv_id='$userid' AND recv_chk='0' ");
+            $sql_badge_cal = mysqli_num_rows($sql_badge_cal);
         ?>
         <!-- Start Atribute Navigation -->
         <div class="attr-nav">
             <ul>
                 <li class="dropdown">
                     <a href="note_recv.php">
-                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <i class="fa fa-envelope-o"></i>
                         <?php
                             if(isset($userid)){
-                                //echo "<span class="badge">$sql_badge_cal</span>";
+                            ?>
+                                <span class="badge"><?php echo $sql_badge_cal ?></span>
+                            <?php
                             }
                         ?>
                     </a>
