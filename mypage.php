@@ -218,17 +218,12 @@ $member = mysqli_fetch_array($sql);
                                 </form></span><br>                                 
                                 <span class="content">
                                     <form method="post" action="member_update.php">
-            <p><a href="index.php">홈으로</a></p>
                 <fieldset>
                     <legend>정보 수정</legend>
                         <table>
                             <tr>
                                 <td>아이디</td>
                                 <td><input type="text" size="35" name="userid" value="<?php echo $_SESSION['userid'];?>" disabled></td>
-                            </tr>
-                            <tr>
-                                <td>비밀번호</td>
-                                <td><input type="password" size="35" name="pwd" placeholder="비밀번호" value="<?php echo $member['pwd'];?>"></td>
                             </tr>
                             <tr>
                                 <td>이름</td>
@@ -250,7 +245,25 @@ $member = mysqli_fetch_array($sql);
                         </table>
                     <input type="submit" value="정보변경" />
             </fieldset>
-<form>
+</form>
+ <form action="change_pwd.php" method="post">
+                                <table>
+                            <tr>
+
+                                <td>기존 비밀번호</td>
+                                <td><input type="password" size="35" name="pw" placeholder="비밀번호" value="" ></td>
+                            </tr>
+                            <tr>
+                                <td>변경 비밀번호</td>
+                                <td><input type="password" size="35" name="pw1" placeholder="비밀번호" value=""></td>
+                            </tr>
+                            <tr>
+                                <td>변경 비밀번호 확인</td>
+                                <td><input type="password" size="35" name="pw2" placeholder="비밀번호" value=""></td>
+                            </tr>
+                        </table>
+                        <input type="submit" value="비밀번호 변경" />
+                            </form>
 </span>
                             </li>
                         </div>
