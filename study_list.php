@@ -104,9 +104,9 @@ include "setting.php";
                     <div class="main_featured m-top-100">
                     	<div class="collapse navbar-collapse" id="navbar-menu">
                             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                <li><a href="study_list.php?kind=develop" target="_self" style="color: #efdc05; font-size: 17px;">개발</a></li>                    
-                                <li><a href="study_list.php?kind=design" target="_self" style="color: #efdc05; font-size: 17px;">디자인</a></li>                         
-                                <li><a href="study_list.php?kind=etc" target="_self" style="color: #efdc05; font-size: 17px;">etc</a></li>                
+                                <li><a href="study_list.php?kind=develop&big=study" target="_self" style="color: #efdc05; font-size: 17px;">개발</a></li>                    
+                                <li><a href="study_list.php?kind=design&big=study" target="_self" style="color: #efdc05; font-size: 17px;">디자인</a></li>                         
+                                <li><a href="study_list.php?kind=etc&big=study" target="_self" style="color: #efdc05; font-size: 17px;">etc</a></li>                
                             </ul>
                         </div>
                     </div>
@@ -279,7 +279,7 @@ include "setting.php";
                         }
                 } else {
                     echo "
-                        <a href='study_view.php?num=$item_num&page=$page&kind=$kind' style='text-decoration: none;'>
+                        <a href='study_view.php?num=$item_num&page=$page&kind=$kind&big=study' style='text-decoration: none;'>
                             <div class='col-sm-6 m-top-10'>
                                 <div class='list'>
                                 <span class='badge' style='padding-bottom: 5px; background: #efdc05; color: white; float:right'>D - $diff_date</span>

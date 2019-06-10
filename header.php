@@ -60,8 +60,8 @@ include "setting.php";
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-menu">
             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                <li><a href="study_list.php?kind=develop" target="_self">스터디</a></li>                    
-                <li><a href="contest_list.php?kind=develop" target="_self">공모전</a></li>                    
+                <li><a href="study_list.php?kind=develop&big=study" target="_self">스터디</a></li>                    
+                <li><a href="contest_list.php?kind=develop&big=contest" target="_self">공모전</a></li>                    
                 <li><a href="mypage.php" target="_self">My Page</a></li>                   
                 
                 <?php 

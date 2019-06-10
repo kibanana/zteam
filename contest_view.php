@@ -505,56 +505,67 @@ include "setting.php";
                 </div> <!-- modal header -->
 
                 <div class="modal-body" style="padding: 50px;">
-                        <form name="frm_contest_apply" class="form_write" method="post" action="apply_contest_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind?>">
+                        <form name="frm_contest_apply" class="form_write" method="post" action="apply_insert_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind?>&big=<?php echo $big?>">
+                            
+                            <input type="hidden" name="num_recv" value="<?php echo $item_num ?>">
+                            <input type="hidden" name="id_apply" value="<?php echo $userid ?>">
+                            <input type="hidden" name="id_recv" value="<?php echo $item_id ?>">
+                            <input type="hidden" name="name_apply" value="<?php echo $username ?>">
+                            <input type="hidden" name="name_recv" value="<?php echo $item_name ?>">
+                            <input type="hidden" name="topic" value="<?php echo $item_topic ?>">
+                            <input type="hidden" name="title" value="<?php echo $item_title ?>">
+
                             <label>
                             Starter
-                            <input type="text" name="apply_starter" value="<?php echo "$item_id" ?> (<?php echo "$item_name"?>)" readonly>
+                            <input type="text" value="<?php echo "$item_id" ?> (<?php echo "$item_name"?>)" readonly disabled>
                             </label>
 
                             <label>
                             신청자
-                            <input type="text" name="apply_me" value="<?php echo "$userid" ?> (<?php echo "$username"?>)" readonly>
+                            <input type="text" value="<?php echo "$userid" ?> (<?php echo "$username"?>)" readonly disabled>
+                            </label>
+
+                            <label class="short" style="display: inline-block;">
+                        	신청종료일
+                            <input type="date" value="<?php echo $item_end_day ?>" readonly disabled>
                             </label>
                             
-                            <label class="short" style="display: inline-block;">
+                            <label class="short" style="display: inline-block; margin-left: 20px;">
                         	신청일
-                            <input type="date" name="apply_date" value="<?php $regist_day = date("Y-m-d"); echo $regist_day; ?>" readonly>
+                            <input type="date" name="day" value="<?php $regist_day = date("Y-m-d"); echo $regist_day ?>" readonly disabled>
                             </label>
                             
                             <label>
                         	신청글
-                        	<input type="text" name="apply_title" value="<?php echo "[$item_topic] $item_title" ?>" readonly>
+                        	<input type="text" value="<?php echo "[$item_topic] $item_title" ?>" readonly disabled>
                             </label>
-                            
-                            <span id="study_write_double_result" class="fail"></span>
-                            
-                            <div>
-                                <label>
-                                    맡을 파트
-                            	<input type="text" name="apply_part" maxlength="100">
-                                </label>
-                            </div>
 
                             <div>
                                 <label>
-                                    짧은 포트폴리오
-                            	<input type="text" name="apply_portfolio" maxlength="100">
+                                    희망 담당 파트
+                                <textarea name="part" placeholder="100자 이하로 입력해주세요" maxlength="300" class="signup_profile"></textarea>
                                 </label>
                             </div>
                             
                             <div>
                                 <label>
-                                    공모전 중 바라는 점 
-                                <textarea name="apply_content" class="signup_profile" maxlength="1500"></textarea>
+                                    짧은 포트폴리오
+                                <textarea name="portfolio" placeholder="300자 이하로 입력해주세요" maxlength="300" class="signup_profile"></textarea>
                                 </label>
-                                <span id="study_modify_content_result" class="fail"></span>
+                            </div>
+                            
+                            <div>
+                                <label>
+                                    스터디에 바라는 점 
+                                <textarea name="want" placeholder="500자 이하로 입력해주세요" maxlength="500" class="signup_profile" ></textarea>
+                                </label>
                             </div>
 
                 </div> <!-- modal body -->
 
                 <div class="modal-footer">
                     <div class="col-sm-3 col-sm-offset-9">
-                        <button type="button" onClick="study_modify_chk()" class="form-control btn btn-primary">신청하기</button>
+                        <input type="submit" value="신청하기" class="form-control btn btn-primary"></button>
                     </form>
                     </div>
                 </div> <!-- modal footer -->
