@@ -335,12 +335,34 @@ include "setting.php";
                         <?php echo "$item_start_day <br> ~ <br> $item_end_day" ?>
                         </span>
 
+
                         <?php
+                        if($kind=="develop"){
+                            $list_sql = mysqli_query($conn, "SELECT * FROM apply_contest_develop WHERE num_recv='$item_num' AND id_apply='$userid'");
+                        } else if($kind=="design"){
+                            $list_sql = mysqli_query($conn, "SELECT * FROM apply_contest_design WHERE num_recv='$item_num' AND id_apply='$userid'");
+                        } else if($kind=="etc"){
+                            $list_sql = mysqli_query($conn, "SELECT * FROM apply_contest_etc WHERE num_recv='$item_num' AND id_apply='$userid'");
+                        }  else if($kind=="idea"){
+                            $list_sql = mysqli_query($conn, "SELECT * FROM apply_contest_idea WHERE num_recv='$item_num' AND id_apply='$userid'");
+                        }
+                        $list_row = mysqli_fetch_array($list_sql);
+
                         if($userid!=$item_id){
+                            if($list_row){
                             ?>
                             <div class="col-sm-12 col-xs-12">
-                                <button class='btn btn_wise btn-change' data-toggle="modal" data-target="#modal_contest_apply">신청</button>
+                                <button class='btn btn-already' data-toggle="modal" data-target="#modal_delete_apply">이미 신청 완료되었습니다 :)</button>
                             </div>
+                            <?php
+                            } else {
+                            ?>
+                            <div class="col-sm-12 col-xs-12">
+                                <button class='btn btn-change' data-toggle="modal" data-target="#modal_study_apply">신청하기</button>
+                            </div>
+                            <?php
+                            }
+                            ?>
                         <?php
                         }
                         ?>

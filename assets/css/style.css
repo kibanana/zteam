@@ -365,13 +365,18 @@ Button
     padding: 0.8rem 2rem;
 }
 
-.btn_wise {
-    width: 100%;
-}
-
 .btn:hover{
     color:#fff;
     border:1px solid;
+}
+
+.btn-already{
+    color: #000;
+    background: white;
+}
+.btn-already:hover{
+    color: #000;
+    background: white;
 }
 
 .btn-default{
