@@ -19,23 +19,23 @@ if (!a) {
 
    if($big=="study"){
         if($kind=="develop"){
-            $apply_sql = "DELETE FROM `apply_study_develop` WHERE num=$num AND id_apply=$userid";
+            $apply_sql = "DELETE FROM `apply_study_develop` WHERE num_recv=$num AND id_apply='$userid'";
         } else if($kind=="design"){
-            $apply_sql = "DELETE FROM `apply_study_design` WHERE num=$num AND id_apply=$userid";
+            $apply_sql = "DELETE FROM `apply_study_design` WHERE num_recv=$num AND id_apply='$userid'";
         } else if($kind=="etc"){
-            $apply_sql = "DELETE FROM `apply_study_etc` WHERE num=$num AND id_apply=$userid";
+            $apply_sql = "DELETE FROM `apply_study_etc` WHERE num_recv=$num AND id_apply='$userid'";
         }  
    } 
 
    if($big=="contest"){
         if($kind=="develop"){
-            $apply_sql = "DELETE FROM `apply_contest_develop` WHERE num=$num AND id_apply=$userid";
+            $apply_sql = "DELETE FROM `apply_contest_develop` WHERE num_recv=$num AND id_apply='$userid'";
         } else if($kind=="design"){
-            $apply_sql = "DELETE FROM `apply_contest_design` WHERE num=$num AND id_apply=$userid";
+            $apply_sql = "DELETE FROM `apply_contest_design` WHERE num_recv=$num AND id_apply='$userid'";
         } else if($kind=="etc"){
-            $apply_sql = "DELETE FROM `apply_contest_etc` WHERE num=$num AND id_apply=$userid";
+            $apply_sql = "DELETE FROM `apply_contest_etc` WHERE num_recv=$num AND id_apply='$userid'";
         } else if($kind=="idea"){
-            $apply_sql = "DELETE FROM `apply_contest_idea` WHERE num=$num AND id_apply=$userid";
+            $apply_sql = "DELETE FROM `apply_contest_idea` WHERE num_recv=$num AND id_apply='$userid'";
         }
    }
 
