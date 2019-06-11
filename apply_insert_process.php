@@ -8,8 +8,7 @@ include "setting.php";
 
 <?php
     $regist_day = date("Y-m-d");
-    $end_day = date("Y-m-d", $end_day);
-
+    
    if($big=="study"){
         if($kind=="develop"){
             $apply_sql = "INSERT INTO `apply_study_develop`(`num_recv`, `id_apply`, `id_recv`, `name_apply`, `name_recv`, `topic`, `title`, `apply_day`, `portfolio`, `want`, `apply_chk`) "; 

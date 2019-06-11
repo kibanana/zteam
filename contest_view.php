@@ -352,7 +352,7 @@ include "setting.php";
                             if($list_row){
                             ?>
                             <div class="col-sm-12 col-xs-12">
-                                <button class='btn btn-already' data-toggle="modal" data-target="#modal_delete_apply">이미 신청 완료되었습니다 :)</button>
+                            <a href="apply_delete_process.php?num=<?=$item_num?>&page=<?=$page?>&kind=<?=$kind?>&big=<?=$big?>"><button class='btn btn-already'>이미 신청 완료되었습니다 :)</button></a>
                             </div>
                             <?php
                             } else {

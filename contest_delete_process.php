@@ -7,7 +7,8 @@ include "setting.php";
 ?>
 
 <script>
-if (!confirm("정말 삭제하시겠습니까?")) {
+let a = confirm("정말 삭제하시겠습니까?")
+if (!a) {
     histroy.go(-1);
     return ;
 }
