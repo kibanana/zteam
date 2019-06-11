@@ -6,8 +6,8 @@ include "dbconn.php";
 include "setting.php";
 ?>
 
-<script>
-let a = confirm("정말 삭제하시겠습니까?")
+<script type="text/javascript">
+var a = confirm( 'Lorem ipsum dolor' );
 if (!a) {
     histroy.go(-1);
     return ;
@@ -33,6 +33,12 @@ $list_sql = "UPDATE member SET list_num='$list_num' WHERE id='$userid'";
 mysqli_query($conn, $list_sql);
 
 mysqli_close($conn);
+
+echo "
+<script>
+    window.alert('스터디 게시글이 삭제되었습니다!');
+</script>
+"; 
 
 echo "
     <script>

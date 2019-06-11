@@ -6,8 +6,8 @@ include "dbconn.php";
 include "setting.php";
 ?>
 
-<script>
-let a = confirm("정말 삭제하시겠습니까?")
+<script type="text/javascript">
+var a = confirm( 'Lorem ipsum dolor' );
 if (!a) {
     histroy.go(-1);
     return ;
@@ -40,6 +40,12 @@ if (!a) {
    }
 
    mysqli_query($conn, $apply_sql);
+
+   echo "
+   <script>
+        window.alert('신청이 취소되었습니다!');
+    </script>
+    "; 
 
    if($big=="study") {
         echo "

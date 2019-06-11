@@ -6,14 +6,6 @@ include "dbconn.php";
 include "setting.php";
 ?>
 
-<script>
-let a = confirm("정말 삭제하시겠습니까?")
-if (!a) {
-    histroy.go(-1);
-    return ;
-}
-</script>
-
 <?php
 if($kind=="develop"){
     $sql_delete = mysqli_query($conn, "DELETE FROM contest_develop WHERE num=$num");
@@ -33,6 +25,12 @@ $list_num = $list_num - 1;
 $list_sql = mysqli_query($conn, "UPDATE member SET list_num='$list_num' WHERE id='$userid'");
 
 mysqli_close($conn);
+
+echo "
+<script>
+    window.alert('공모전 게시글이 삭제되었습니다!');
+</script>
+"; 
 
 echo "
 <script>
