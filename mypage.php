@@ -179,42 +179,17 @@ $member = mysqli_fetch_array($sql);
 
         <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         
-        <script>
+        <script type="text/javascript">
 
-        function chk_value() {
-            let v = this.value;
-            if(v==0) { // not checked
-                v = 1; // value 값 변경
-                this.value = v;
-                this.setAttribute("checked");
-            } else { // checked
-                v = 0; // value 값 변경
-                this.value = v;
-                this.removeAttribute("checked");
-            }
+        function chk_value(id, value) {
+            let target = document.getElementById(id);
+            let v = 1-value;
+            target.setAttribute("value", v);
+            target.setAttribute("checked");
         }
-
-        function chk_checked() {
-            let chk1 = document.getElementById("chk1");
-            let chk2 = document.getElementById("chk2");
-            let chk3 = document.getElementById("chk3");
-
-<<<<<<< HEAD
-            var a_set = document.frm_alarm;
-
-            chk1.setAttribute("checked");
-            chk2.setAttribute("checked");
-            chk3.setAttribute("checked");
-
-            a_set.submit();
-        }
-
 
         function member_chk(){
-            var p_set = document.frm_change;
-=======
             var c_set = document.frm_change;
->>>>>>> 36783affda5783a0c5b944d44440ff63b0997748
             
             var name_result = document.getElementById("name_result");
             var num_result = document.getElementById("s_num_result");
@@ -247,7 +222,7 @@ $member = mysqli_fetch_array($sql);
             }
         }
 
-function pwd_chk(){
+        function pwd_chk(){
 
             var pwd_set = document.frm_pwd;
             
@@ -266,64 +241,68 @@ function pwd_chk(){
                 pwd_set.submit();
             }
         }
+    </script>
 
-            window.onload=startNone;
+    <script type="text/javascript">
 
-            function startNone() {
-                let start_item1 = document.getElementById('con01_sub');
-                let start_item2 = document.getElementById('con02_sub');
-                let start_item3 = document.getElementById('con03_sub');
-                let start_item4 = document.getElementById('con04_sub');
+        window.onload=startNone;
 
-                start_item1.style.display="none";
-                start_item2.style.display="none";
-                start_item3.style.display="none";
-                start_item4.style.display="none";
+        function startNone() {
+            let start_item1 = document.getElementById('con01_sub');
+            let start_item2 = document.getElementById('con02_sub');
+            let start_item3 = document.getElementById('con03_sub');
+            let start_item4 = document.getElementById('con04_sub');
+
+            start_item1.style.display="none";
+            start_item2.style.display="none";
+            start_item3.style.display="none";
+            start_item4.style.display="none";
+        }
+        
+        function item_chk1() {
+            let item1 = document.getElementById('con01_sub');
+            if(item1.style.display=="none"){
+                item1.style.display="block";
+            } else {
+                item1.style.display="none";
             }
-            
-            function item_chk1() {
-                let item1 = document.getElementById('con01_sub');
-                if(item1.style.display=="none"){
-                    item1.style.display="block";
-                } else {
-                    item1.style.display="none";
-                }
-            }
+        }
 
-            function item_chk2() {
-                let item2 = document.getElementById('con02_sub');
-                if(item2.style.display=="none"){
-                    item2.style.display="block";
-                } else {
-                    item2.style.display="none";
-                }
+        function item_chk2() {
+            let item2 = document.getElementById('con02_sub');
+            if(item2.style.display=="none"){
+                item2.style.display="block";
+            } else {
+                item2.style.display="none";
             }
+        }
 
-            function item_chk3() {
-                let item1 = document.getElementById('con03_sub');
-                if(item1.style.display=="none"){
-                    item1.style.display="block";
-                } else {
-                    item1.style.display="none";
-                }
+        function item_chk3() {
+            let item1 = document.getElementById('con03_sub');
+            if(item1.style.display=="none"){
+                item1.style.display="block";
+            } else {
+                item1.style.display="none";
             }
+        }
 
-            function item_chk4() {
-                let item1 = document.getElementById('con04_sub');
-                if(item1.style.display=="none"){
-                    item1.style.display="block";
-                } else {
-                    item1.style.display="none";
-                }
+        function item_chk4() {
+            let item1 = document.getElementById('con04_sub');
+            if(item1.style.display=="none"){
+                item1.style.display="block";
+            } else {
+                item1.style.display="none";
             }
-        </script>
+        }
+    </script>
 
-        <script>
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                e.target // newly activated tab
-                e.relatedTarget // previous active tab
-            })
-        </script>
+    <script>
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            e.target // newly activated tab
+            e.relatedTarget // previous active tab
+        })
+    </script>
+
     </head>
 
     <body data-spy="scroll" data-target=".navbar-collapse">
@@ -404,9 +383,9 @@ function pwd_chk(){
                                         <label class="switch">
 
                                         <?php if($alarm1 == '0') { ?>
-                                            <input type="checkbox" id="chk1" name="chk1" value="0" onClick="chk_value()"> 
+                                            <input type="checkbox" id="chk1" name="chk1" value="0" onClick="chk_value(this.id, this.value)"> 
                                         <?php } else { ?>
-                                            <input type="checkbox" id="chk1" name="chk1" value="1" checked onClick="chk_value()"> 
+                                            <input type="checkbox" id="chk1" name="chk1" value="1" checked onClick="chk_value(this.id, this.value)"> 
                                         <?php } ?>
 
                                         <span class="slider round"></span>
@@ -418,9 +397,9 @@ function pwd_chk(){
                                         <label class="switch">
 
                                         <?php if($alarm2 == '0') { ?>
-                                            <input type="checkbox" id="chk2" name="chk2" value="0" onClick="chk_value()"> 
+                                            <input type="checkbox" id="chk2" name="chk2" value="0" onClick="chk_value(this.id, this.value)"> 
                                         <?php } else { ?>
-                                            <input type="checkbox" id="chk2" name="chk2" value="1" checked onClick="chk_value()"> 
+                                            <input type="checkbox" id="chk2" name="chk2" value="1" checked onClick="chk_value(this.id, this.value)"> 
                                         <?php } ?>
 
                                         <span class="slider round"></span>
@@ -432,16 +411,16 @@ function pwd_chk(){
                                         <label class="switch">
 
                                         <?php if($alarm3 == '0') { ?>
-                                            <input type="checkbox" id="chk3" name="chk3" value="0" onClick="chk_value()"> 
+                                            <input type="checkbox" id="chk3" name="chk3" value="0" onClick="chk_value(this.id, this.value)"> 
                                         <?php } else { ?>
-                                            <input type="checkbox" id="chk3" name="chk3" value="1" checked onClick="chk_value()"> 
+                                            <input type="checkbox" id="chk3" name="chk3" value="1" checked onClick="chk_value(this.id, this.value)"> 
                                         <?php } ?>
 
                                         <span class="slider round"></span>
                                         </label>
                                     </div>
 
-                                    <button type="button" class="form-control btn btn-primary" onClick="chk_checked()">변경 사항 저장</button>
+                                    <button type="submit" class="form-control btn btn-primary">변경 사항 저장</button>
                                 </form>
                             </li>
                         </div>
