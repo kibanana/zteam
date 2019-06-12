@@ -86,6 +86,70 @@ $member = mysqli_fetch_array($sql);
             .tab-wrap article:target div { 
                 display: block; 
             }
+
+
+            .tab-wrap2 * { 
+                margin: 0px; 
+                padding: 0px; 
+            }
+            .tab-wrap2 { 
+                position: relative; 
+                padding-top: 30px; 
+            }
+            .tab-wrap2 li { 
+                z-index: 3; 
+                position: absolute; 
+                top: 0px; 
+                width: 100px; 
+                height: 30px; 
+                text-indent: -9999%; 
+            }
+            .tab-wrap2 li:nth-of-type(1) { 
+                left: 0px; 
+            }
+            .tab-wrap2 li:nth-of-type(2) { 
+                left: 100px; 
+            }
+            .tab-wrap2 li:nth-of-type(3) { 
+                left: 200px; 
+            }
+            .tab-wrap2 li a { 
+                display: block; 
+                width: 100%; 
+                height: 100%; 
+            }
+            .tab-wrap2 article h1 { 
+                position: absolute; 
+                top: 0px; 
+                width: 100px; 
+                height: 30px; 
+                line-height: 30px; 
+                box-sizing: border-box;  
+                text-align: center; 
+                font-size: 12px; 
+            }
+            .tab-wrap2 article div { 
+                border: 1px solid #ddd; 
+                padding: 30px; 
+            }
+            .tab-wrap2 article:target h1 { 
+                background-color: white; 
+            }
+            .tab-wrap2 article:nth-of-type(1) h1 { 
+                left: 0px; 
+            }
+            .tab-wrap2 article:nth-of-type(2) h1 { 
+                left: 100px; 
+            }
+            .tab-wrap2 article:nth-of-type(3) h1 { 
+                left: 200px; 
+            }
+            .tab-wrap2 article div { 
+                display: none; 
+            }
+            .tab-wrap2 article:target div { 
+                display: block; 
+            }
         </style>
 
         <link rel="stylesheet" href="assets/css/slick.css">
@@ -135,6 +199,7 @@ $member = mysqli_fetch_array($sql);
             let chk2 = document.getElementById("chk2");
             let chk3 = document.getElementById("chk3");
 
+<<<<<<< HEAD
             var a_set = document.frm_alarm;
 
             chk1.setAttribute("checked");
@@ -147,36 +212,58 @@ $member = mysqli_fetch_array($sql);
 
         function member_chk(){
             var p_set = document.frm_change;
+=======
+            var c_set = document.frm_change;
+>>>>>>> 36783affda5783a0c5b944d44440ff63b0997748
             
             var name_result = document.getElementById("name_result");
             var num_result = document.getElementById("s_num_result");
             var inters_result = document.getElementById("interest_result");
             var profile_result = document.getElementById("profile_result");  
 
-            alert(name_result.value);
-            if(p_set.name.value=="") {
+            if(c_set.name.value=="") {
                 name_result.innerHTML = "이름을 입력해주세요";
-                p_set.name.focus();
-            } else if(p_set.s_num.value=="" || !(isNumber(p_set.s_num.value))) {
+                c_set.name.focus();
+            } else if(c_set.s_num.value=="" || !(isNumber(c_set.s_num.value))) {
                 name_result.innerHTML = "";
                 num_result.innerHTML = "학번을 입력해주세요";
-                p_set.s_num.focus();
-            } else if(p_set.interest1.value=="") {
+                c_set.s_num.focus();
+            } else if(c_set.interest1.value=="") {
                 num_result.innerHTML = "";
                 inters_result.innerHTML = "흥미 주제들을 입력해주세요";
-                p_set.signup_interest1.focus();
-            } else if(p_set.interest2.value=="") {
+                c_set.interest1.focus();
+            } else if(c_set.interest2.value=="") {
                 inters_result.innerHTML = "흥미 주제들을 입력해주세요";
-                p_set.interest2.focus();
-            } else if(p_set.interest3.value=="") {
+                c_set.interest2.focus();
+            } else if(c_set.interest3.value=="") {
                 inters_result.innerHTML = "흥미 주제들을 입력해주세요";
-                p_set.interest3.focus();
-            } else if(p_set.profile.value=="") {
+                c_set.interest3.focus();
+            } else if(c_set.profile.value=="") {
                 inters_result.innerHTML = "";
                 profile_result.innerHTML = "자기소개를 입력해주세요";
-                p_set.profile.focus();
+                c_set.profile.focus();
             } else {
-                p_set.submit();
+                c_set.submit();
+            }
+        }
+
+function pwd_chk(){
+
+            var pwd_set = document.frm_pwd;
+            
+            var pw_result = document.getElementById("pw_result");
+            var pwd_result = document.getElementById("pw1_result");
+            var pwdck_result = document.getElementById("pw2_result");
+
+            if(pwd_set.pw.value=="") {
+                pw_result.innerHTML = "기존 비밀번호를 입력하세요!";
+                pwd_set.pw.focus();
+            } else if(!(pwd_set.pw1.value==pwd_set.pw2.value)) {
+                pw_result.innerHTML = "";
+                pwdck_result.innerHTML = "비밀번호와 확인 문자가 일치하지 않습니다";
+                pwd_set.pw2.focus();
+            } else {
+                pwd_set.submit();
             }
         }
 
@@ -373,6 +460,19 @@ $member = mysqli_fetch_array($sql);
                     $scale3 = 10;
                     $total_record3 = mysqli_num_rows($result_list3); //전체 글 수
 
+                    $result_list4 = mysqli_query($conn, "SELECT * FROM contest_develop WHERE id='$userid' ORDER BY num DESC");       
+                    $scale4 = 10;
+                    $total_record4 = mysqli_num_rows($result_list4); //전체 글 수
+
+                    $result_list5 = mysqli_query($conn, "SELECT * FROM contest_design WHERE id='$userid' ORDER BY num DESC");       
+                    $scale5 = 10;
+                    $total_record5 = mysqli_num_rows($result_list5); //전체 글 수
+
+                    $result_list6 = mysqli_query($conn, "SELECT * FROM contest_etc WHERE id='$userid' ORDER BY num DESC");       
+                    $scale6 = 10;
+                    $total_record6 = mysqli_num_rows($result_list6); //전체 글 수
+
+
                     //study_develop
                       if($total_record % $scale==0)
                       $total_page = $total_record/$scale;
@@ -402,6 +502,36 @@ $member = mysqli_fetch_array($sql);
                       if(!$page3) $page3 = 1;
 
                       $start3 = ($page3-1) * $scale3;
+
+                      //contest_develop
+                      if($total_record4 % $scale4==0)
+                      $total_page4 = $total_record4/$scale4;
+                      else
+                      $total_page4 = floor($total_record4/$scale4)+1;
+                      
+                      if(!$page4) $page4 = 1;
+
+                      $start4 = ($page4-1) * $scale4;
+
+                    //contest_design
+                      if($total_record5 % $scale5==0)
+                      $total_page5 = $total_record5/$scale5;
+                      else
+                      $total_page5 = floor($total_record5/$scale5)+1;
+                      
+                      if(!$page5) $page5 = 1;
+
+                      $start5 = ($page5-1) * $scale5;
+
+                      //contest_etc
+                      if($total_record6 % $scale6==0)
+                      $total_page6 = $total_record6/$scale6;
+                      else
+                      $total_page6 = floor($total_record6/$scale6)+1;
+                      
+                      if(!$page6) $page6 = 1;
+
+                      $start6 = ($page6-1) * $scale6;
                   ?>
 
                         <div class="col-sm-6" id="con03" style="cursor: pointer;" onClick="item_chk3()">
@@ -425,8 +555,8 @@ $member = mysqli_fetch_array($sql);
 
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist" style="font-size: 16px;">
-                                <li role="presentation" class="active"><a href="#write1" aria-controls="write1" role="tab" data-toggle="tab"><span style="color: #efdc05;">스터디</span></a></li>
-                                <li role="presentation"><a href="#write2" aria-controls="write2" role="tab" data-toggle="tab"><span style="color: #efdc05;">공모전</span></a></li>
+                                <li role="presentation" class="active"><a href="#study" aria-controls="study" role="tab" data-toggle="tab"><span style="color: #efdc05;">스터디</span></a></li>
+                                <li role="presentation"><a href="#contest" aria-controls="contest" role="tab" data-toggle="tab"><span style="color: #efdc05;">공모전</span></a></li>
                             </ul>
                             <div role="tabpanel" class="tab-pane fade in active" id="study" style="padding-left: 20%; padding-right: 20%;">
                             <div class="tab-wrap">
@@ -538,6 +668,119 @@ $member = mysqli_fetch_array($sql);
                                 </div>
                             </div>
                             </div>
+
+                            <div role="tabpanel" class="tab-pane fade in active" id="contest" style="padding-left: 20%; padding-right: 20%;">
+                            <div class="tab-wrap2">
+                                <ul>
+                                    <li><a href="#tab4">개발</a></li>
+                                    <li><a href="#tab5">디자인</a></li>
+                                    <li><a href="#tab6">기타</a></li>
+                                </ul>
+
+                                <div>
+                                    <article id="tab4">
+                                        <h1>개발</h1>
+                                        <div class="col-sm-12 m-top-50">
+                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                      <input type="hidden" name="gb">
+                                    <thead>
+                                      <tr>
+                                        <th width="15%">주제</th>
+                                        <th width="15%">제목</th>
+                                        <th width="70%">내용</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                      for($i4 = $start4; $i4 < $start4+$scale4 && $i4 < $total_record4; $i4++){
+                                        mysqli_data_seek($result_list4, $i4); //가져올 레코드로 위치(포인터) 이동
+                                        $contest_develop = mysqli_fetch_array($result_list4); //하나의 레코드 가져오기
+                                        $c_dev_topic = $contest_develop['topic'];
+                                        $c_dev_title = $contest_develop['title'];
+                                        $c_dev_content = $contest_develop['content'];
+                                    ?>
+                                    <tr
+                                      <td><?php echo $c_dev_topic ?></td>
+                                      <td><?php echo $c_dev_title ?></td>
+                                      <td><?php echo $c_dev_content ?>
+                                    </tr>
+                                    
+                                    <?php
+                                        } //for문
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </article>
+
+                                    <article id="tab5">
+                                        <h1>디자인</h1>
+                                        <div class="col-sm-12 m-top-50">
+                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                    <thead>
+                                      <tr>
+                                        <th width="15%">주제</th>
+                                        <th width="15%">제목</th>
+                                        <th width="70%">내용</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                      for($i5 = $start5; $i5 < $start5+$scale5 && $i5 < $total_record5; $i5++){
+                                        mysqli_data_seek($result_list5, $i5); //가져올 레코드로 위치(포인터) 이동
+                                        $contest_design = mysqli_fetch_array($result_list5); //하나의 레코드 가져오기
+                                        $c_des_topic = $contest_design['topic'];
+                                        $c_des_title = $contest_design['title'];
+                                        $c_des_content = $contest_design['content'];
+                                    ?>
+                                    <tr>
+                                      <td><?php echo $c_des_topic ?></td>
+                                      <td><?php echo $c_des_title ?></td>
+                                      <td><?php echo $c_des_content ?>
+                                    </tr>
+                                    
+                                    <?php
+                                        } //for문
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                    </div>                                    
+                                </article>
+                                    <article id="tab6">
+                                        <h1>기타</h1>
+                                    <div class="col-sm-12 m-top-50">
+                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                    <thead>
+                                      <tr>
+                                        <th width="15%">주제</th>
+                                        <th width="15%">제목</th>
+                                        <th width="70%">내용</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                        for($i6 = $start6; $i6 < $start6+$scale6 && $i6 < $total_record6; $i6++){
+                                        mysqli_data_seek($result_list6, $i6); //가져올 레코드로 위치(포인터) 이동
+                                        $contest_etc = mysqli_fetch_array($result_list6); //하나의 레코드 가져오기
+                                        $c_etc_topic = $contest_etc['topic'];
+                                        $c_etc_title = $contest_etc['title'];
+                                        $c_etc_content = $contest_etc['content'];
+                                    ?>
+                                    <tr>
+                                      <td><?php echo $c_etc_topic ?></td>
+                                      <td><?php echo $c_etc_title ?></td>
+                                      <td><?php echo $c_etc_content ?>
+                                    </tr>
+                                    <?php
+                                        } //for문
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </article>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                             </li>
                         </div>
@@ -612,23 +855,23 @@ $member = mysqli_fetch_array($sql);
 
                                 <div role="tabpanel" class="tab-pane fade" id="sub1_2" style="padding-left: 20%; padding-right: 20%;">
 
-                                <form class="form_write" method="post" action="change_pwd.php" style="margin-top: 40px;">
+                                <form class="form_write" method="post" action="change_pwd.php" name= "frm_pwd" style="margin-top: 40px;">
                                     <label>
                                     기존 비밀번호
                                         <input type="password" name="pw" placeholder="기존 비밀번호" value="" >
                                     </label>
-
+                                    <span id="pw_result" class="fail"></span>
                                     <label>
                                     새로운 비밀번호
                                         <input type="password" name="pw1" placeholder="새로운 비밀번호" value="">
                                     </label>
-
+                                    <span id="pw1_result" class="fail"></span>
                                     <label>
                                     새로운 비밀번호 확인
                                         <input type="password" name="pw2" placeholder="새로운 비밀번호 확인" value="">
                                     </label>
-
-                                    <button type="submit" class="form-control btn btn-primary">비밀번호 변경</button>
+                                    <span id="pw2_result" class="fail"></span>
+                                    <button type="button" onClick="pwd_chk()" class="form-control btn btn-primary">비밀번호 변경</button>
                                 </form>
 
                                 </div>
