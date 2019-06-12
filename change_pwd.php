@@ -12,9 +12,6 @@ $pw2 = $_POST['pw2'];
 $sql = mysqli_query($conn, "select * from member where id='$userid'");
 $member = mysqli_fetch_array($sql);
 
-echo $pw;
-echo $pw1;
-
 if($pw = $member['pwd']){
 	if($pw1 = $pw2){
 	if(!(preg_match("/(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,15}$/", $pw1))) {
@@ -27,13 +24,15 @@ if($pw = $member['pwd']){
     }
 }
 }
-    	mysqli_query($conn,"update member set pwd='".$pw1."' where id='".$_SESSION['userid']."'");
-    	echo "
-        <script>
-        alert('비밀번호 변경이 완료 되었습니다!');
-        location.href='mypage.php'
-        </script>
-        ";
+
+mysqli_query($conn,"update member set pwd='".$pw1."' where id='".$_SESSION['userid']."'");
+
+echo "
+<script>
+    alert('비밀번호가 변경되었습니다!');
+    location.href='mypage.php'
+</script>
+";
 
     mysqli_close($conn);
 

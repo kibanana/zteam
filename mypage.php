@@ -153,7 +153,7 @@ $member = mysqli_fetch_array($sql);
 
 			  <?php include "header.php"; ?>
 
-            <div class="container m-top-100">
+            <div class="container m-top-100" style="padding-bottom: 100px;">
                 <div class="separator_auto"></div>
                   <div class="col-sm-12">
                       <div class="page_title text-center">
@@ -447,9 +447,8 @@ $member = mysqli_fetch_array($sql);
                                 <form class="form_write" method="post" action="member_update.php" name="frm_change" style="margin-top: 40px;">
                                     <label>
                                         아이디
-                                        <input type="text" name="userid" value="<?php echo $_SESSION['userid'];?>" disabled readonly>
+                                        <input type="text" name="userid" value="<?php echo $userid ?>" disabled readonly>
                                     </label>
-
 
                                     <label>
                                         이름
@@ -457,7 +456,6 @@ $member = mysqli_fetch_array($sql);
                                     </label>
                                     <span id="name_result" class="fail"></span>
 
-                                    
                                     <label>
                                         학번
                                         <input type="text" name="s_num" value="<?php echo $member['s_num']; ?>">
@@ -469,13 +467,15 @@ $member = mysqli_fetch_array($sql);
                                     <input type="text" name="interest1" placeholder="1" value="<?php echo $member['interest1']; ?>" style="display: inline-block; width: 30%;">
                                     <input type="text" name="interest2" placeholder="2" value="<?php echo $member['interest2']; ?>" style="display: inline-block; width: 30%;">
                                     <input type="text" name="interest3" placeholder="3" value="<?php echo $member['interest3']; ?>" style="display: inline-block; width: 30%;">
-                                </label>
+                                    </label>
                                         <span id="interest_result" class="fail"></span>
+                                        
                                     <label>
                                         자기소개
                                         <textarea name="profile"><?php echo $member['profile']; ?></textarea>
                                     </label>
                                         <span id="profile_result" class="fail"></span>
+
                                     <button type="button" class="form-control btn btn-primary" onClick="member_chk()">개인정보 변경</button>
                                 </form> 
 
@@ -486,7 +486,7 @@ $member = mysqli_fetch_array($sql);
                                 <form class="form_write" method="post" action="change_pwd.php" style="margin-top: 40px;">
                                     <label>
                                     기존 비밀번호
-                                        <input type="password" ame="pw" placeholder="기존 비밀번호" value="" >
+                                        <input type="password" name="pw" placeholder="기존 비밀번호" value="" >
                                     </label>
 
                                     <label>

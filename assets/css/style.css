@@ -1562,16 +1562,18 @@ nav {
     overflow: hidden;
     transition: transform 0.7s;
     border-top: 15px solid #efdc05;
+    text-align: center;
   }
 
   @media (max-width: 576px) {
     li.mypage_item {
         padding: 7% 10%;
+        text-align: center;
       }
   }
 
   li.mypage_subitem {
-    padding: 2% 10%;
+    padding: 5% 10%;
     line-height: 1.5;
     background: #f0f0f0;
     border: 2px #eaeaea double;
@@ -1579,6 +1581,7 @@ nav {
     overflow: hidden;
     transition: transform 0.7s;
     border: 3px solid #efdc05;
+    text-align: center;
   }
 
 .mypage_item span.title {
