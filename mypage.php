@@ -24,6 +24,71 @@ $member = mysqli_fetch_array($sql);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href=""> <!-- 파비콘 추가 -->
 
+        <style type="text/css">
+            .tab-wrap * { 
+                margin: 0px; 
+                padding: 0px; 
+            }
+            .tab-wrap { 
+                position: relative; 
+                padding-top: 30px; 
+            }
+            .tab-wrap li { 
+                z-index: 3; 
+                position: absolute; 
+                top: 0px; 
+                width: 100px; 
+                height: 30px; 
+                text-indent: -9999%; 
+            }
+            .tab-wrap li:nth-of-type(1) { 
+                left: 0px; 
+            }
+            .tab-wrap li:nth-of-type(2) { 
+                left: 100px; 
+            }
+            .tab-wrap li:nth-of-type(3) { 
+                left: 200px; 
+            }
+            .tab-wrap li a { 
+                display: block; 
+                width: 100%; 
+                height: 100%; 
+            }
+            .tab-wrap article h1 { 
+                position: absolute; 
+                top: 0px; 
+                width: 100px; 
+                height: 30px; 
+                line-height: 30px; 
+                box-sizing: border-box;  
+                text-align: center; 
+                font-size: 12px; 
+            }
+            .tab-wrap article div { 
+                border: 1px solid #ddd; 
+                padding: 30px; 
+            }
+            .tab-wrap article:target h1 { 
+                background-color: white; 
+            }
+            .tab-wrap article:nth-of-type(1) h1 { 
+                left: 0px; 
+            }
+            .tab-wrap article:nth-of-type(2) h1 { 
+                left: 100px; 
+            }
+            .tab-wrap article:nth-of-type(3) h1 { 
+                left: 200px; 
+            }
+            .tab-wrap article div { 
+                display: none; 
+            }
+            .tab-wrap article:target div { 
+                display: block; 
+            }
+        </style>
+
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slick-theme.css">
         <link rel="stylesheet" href="assets/css/animate.css">
@@ -248,7 +313,49 @@ $member = mysqli_fetch_array($sql);
                         </div>
                             </li>
                         </div>
+                <?php
+                    $result_list = mysqli_query($conn, "SELECT * FROM study_develop WHERE id='$userid' ORDER BY num DESC");       
+                    $scale = 10;
+                    $total_record = mysqli_num_rows($result_list); //전체 글 수
 
+                    $result_list2 = mysqli_query($conn, "SELECT * FROM study_design WHERE id='$userid' ORDER BY num DESC");       
+                    $scale2 = 10;
+                    $total_record2 = mysqli_num_rows($result_list2); //전체 글 수
+
+                    $result_list3 = mysqli_query($conn, "SELECT * FROM study_etc WHERE id='$userid' ORDER BY num DESC");       
+                    $scale3 = 10;
+                    $total_record3 = mysqli_num_rows($result_list3); //전체 글 수
+
+                    //study_develop
+                      if($total_record % $scale==0)
+                      $total_page = $total_record/$scale;
+                      else
+                      $total_page = floor($total_record/$scale)+1;
+                      
+                      if(!$page) $page = 1;
+
+                      $start = ($page-1) * $scale;
+
+                    //study_design
+                      if($total_record2 % $scale2==0)
+                      $total_page2 = $total_record2/$scale2;
+                      else
+                      $total_page2 = floor($total_record2/$scale2)+1;
+                      
+                      if(!$page2) $page2 = 1;
+
+                      $start2 = ($page2-1) * $scale2;
+
+                      //study_etc
+                      if($total_record3 % $scale3==0)
+                      $total_page3 = $total_record3/$scale3;
+                      else
+                      $total_page3 = floor($total_record3/$scale3)+1;
+                      
+                      if(!$page3) $page3 = 1;
+
+                      $start3 = ($page3-1) * $scale3;
+                  ?>
 
                         <div class="col-sm-6" id="con03" style="cursor: pointer;" onClick="item_chk3()">
                             <li class="mypage_item">
@@ -274,141 +381,116 @@ $member = mysqli_fetch_array($sql);
                                 <li role="presentation" class="active"><a href="#write1" aria-controls="write1" role="tab" data-toggle="tab"><span style="color: #efdc05;">스터디</span></a></li>
                                 <li role="presentation"><a href="#write2" aria-controls="write2" role="tab" data-toggle="tab"><span style="color: #efdc05;">공모전</span></a></li>
                             </ul>
-                            <div role="tabpanel" class="tab-pane fade in active" id="write1" style="padding-left: 20%; padding-right: 20%;">
-                                <form class="form_study" method="post" action="" style="margin-top: 40px;">
-                            <?php
+                            <div role="tabpanel" class="tab-pane fade in active" id="study" style="padding-left: 20%; padding-right: 20%;">
+                            <div class="tab-wrap">
+                                <ul>
+                                    <li><a href="#tab1">개발</a></li>
+                                    <li><a href="#tab2">디자인</a></li>
+                                    <li><a href="#tab3">기타</a></li>
+                                </ul>
 
-                      $result_list = mysqli_query($conn, "SELECT * FROM study_design WHERE id='$userid' ORDER BY id DESC");
-                      $result_list2 = mysqli_query($conn, "SELECT * FROM study_develop WHERE id='$userid' ORDER BY id DESC");
-                      $result_list3 = mysqli_query($conn, "SELECT * FROM study_etc WHERE id='$userid' ORDER BY id DESC");
+                                <div>
+                                    <article id="tab1">
+                                        <h1>개발</h1>
+                                    <div class="col-sm-12 m-top-50">
+                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                    <thead>
+                                      <tr>
+                                        <th width="15%">주제</th>
+                                        <th width="15%">제목</th>
+                                        <th width="70%">내용</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                      for($i = $start; $i < $start+$scale && $i < $total_record; $i++){
+                                        mysqli_data_seek($result_list, $i); //가져올 레코드로 위치(포인터) 이동
+                                        $study_develop = mysqli_fetch_array($result_list); //하나의 레코드 가져오기
+                                        $s_dev_topic = $study_develop['topic'];
+                                        $s_dev_title = $study_develop['title'];
+                                        $s_dev_content = $study_develop['content'];
+                                    ?>
+                                    <tr>
+                                      <td><?php echo $s_dev_topic ?></td>
+                                      <td><?php echo $s_dev_title ?></td>
+                                      <td><?php echo $s_dev_content ?>
+                                    </tr>
+                                    <?php
+                                        } //for문
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </article>
 
-                      $scale = 10;
-                      $total_record = mysqli_num_rows($result_list)+mysqli_num_rows($result_list2)+mysqli_num_rows($result_list3); //전체 글 수
-                      
-                      if($total_record % $scale==0)
-                      $total_page = $total_record/$scale;
-                      else
-                      $total_page = floor($total_record/$scale)+1;
-                      
-                      if(!$page) $page = 1;
-                      //페이지 번호($page)가 0일 때 페이지 번호를 1로 초기화
-                      
-                      //표시할 페이지($page)에 따라 $start 계산 => 각각의 페이지의 시작번호
-                      $start = ($page-1) * $scale;
-                  ?>
-                <div class="col-sm-12 m-top-50">
-                <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;">
-                <input type="hidden" name="gb">
-                <thead>
-                  <tr>
-                    <th width="15%">주제</th>
-                    <th width="15%">제목</th>
-                    <th width="70%">소개</th>
-                  </tr>
-                </thead>
-                <tbody>
-                <?php 
-                  for($i = $start; $i < $start+$scale && $i < $total_record; $i++){
-                    
-                    mysqli_data_seek($result_list, $i); //가져올 레코드로 위치(포인터) 이동
-                    $recv_row = mysqli_fetch_array($result_list); //하나의 레코드 가져오기
-                    mysqli_data_seek($result_list2, $i); //가져올 레코드로 위치(포인터) 이동
-                    $recv_row2 = mysqli_fetch_array($result_list2); //하나의 레코드 가져오기
-                    mysqli_data_seek($result_list3, $i); //가져올 레코드로 위치(포인터) 이동
-                    $recv_row3 = mysqli_fetch_array($result_list3); //하나의 레코드 가져오기
-
-                    //$study_topic = $recv_row['topic'];
-                    $study_topic = $recv_row2['topic'];
-                    //$study_topic = $recv_row3['topic'];
-                    //$study_title = $recv_row['title'];
-                    $study_title = $recv_row2['title'];
-                    //$study_title = $recv_row3['title'];
-                    //$study_content = $recv_row['content'];
-                    $study_content = $recv_row2['content'];
-                    //$study_content = $recv_row3['content'];
-                ?>
-
-                <tr>
-                  <td><?php echo $study_topic ?></td>
-                  <td><?php echo $study_title ?></td>
-                  <td><?php echo $study_content ?></td>
-                </tr>
-
-                <?php
-                    } //for문
-                ?>
-                </tbody>
-                </table>
-                </div>
-            </form>
-            </div>
-                <div role="tabpanel" class="tab-pane fade in active" id="write2" style="padding-left: 20%; padding-right: 20%;">
-                    <form class="form_contest" method="post" action="member_update.php" style="margin-top: 40px;">
-                <?php
-
-                  $result_list4 = mysqli_query($conn, "SELECT * FROM contest_design WHERE id='$userid' ORDER BY id DESC");
-                  $result_list5 = mysqli_query($conn, "SELECT * FROM contest_develop WHERE id='$userid' ORDER BY id DESC");
-                  $result_list6 = mysqli_query($conn, "SELECT * FROM contest_etc WHERE id='$userid' ORDER BY id DESC");
-
-                  $scale2 = 10;
-                  $total_record2 = mysqli_num_rows($result_list4)+mysqli_num_rows($result_list5)+mysqli_num_rows($result_list6); //전체 글 수
-                  
-                  if($total_record2 % $scale==0)
-                  $total_page = $total_record2/$scale;
-                  else
-                  $total_page = floor($total_record2/$scale)+1;
-                  
-                  if(!$page) $page = 1;
-                  //페이지 번호($page)가 0일 때 페이지 번호를 1로 초기화
-                  
-                  //표시할 페이지($page)에 따라 $start 계산 => 각각의 페이지의 시작번호
-                  $start = ($page-1) * $scale;
-              ?>
-            <div class="col-sm-12 m-top-50">
-            <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;">
-            <input type="hidden" name="gb">
-            <thead>
-              <tr>
-                <th width="15%">주제</th>
-                <th width="15%">제목</th>
-                <th width="70%">소개</th>
-              </tr>
-            </thead>
-            <tbody>
-            <?php 
-              for($i = $start; $i < $start+$scale && $i < $total_record2; $i++){
-                
-                mysqli_data_seek($result_list4, $i); //가져올 레코드로 위치(포인터) 이동
-                $recv_row4 = mysqli_fetch_array($result_list4); //하나의 레코드 가져오기
-                mysqli_data_seek($result_list5, $i); //가져올 레코드로 위치(포인터) 이동
-                $recv_row5 = mysqli_fetch_array($result_list5); //하나의 레코드 가져오기
-                mysqli_data_seek($result_list6, $i); //가져올 레코드로 위치(포인터) 이동
-                $recv_row6 = mysqli_fetch_array($result_list6); //하나의 레코드 가져오기
-
-                //$contest_topic = $recv_row4['topic'];
-                $contest_topic = $recv_row5['topic'];
-                //$contest_topic = $recv_row6['topic'];
-                //$contest_title = $recv_row4['title'];
-                $contest_title = $recv_row5['title'];
-                //$contest_title = $recv_row6['title'];
-                //$contest_content = $recv_row4['content'];
-                $contest_content = $recv_row5['content'];
-                //$contest_content = $recv_row36['content'];
-            ?>
-
-            <tr>
-              <td><?php echo $contest_topic ?></td>
-              <td><?php echo $contest_title ?></td>
-              <td><?php echo $contest_content ?></td>
-            </tr>
-
-            <?php
-                } //for문
-            ?>
-            </tbody>
-            </table>
-            </div>
-        </form>
+                                    <article id="tab2">
+                                        <h1>디자인</h1>
+                                    <div class="col-sm-12 m-top-50">
+                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                    <thead>
+                                      <tr>
+                                        <th width="15%">주제</th>
+                                        <th width="15%">제목</th>
+                                        <th width="70%">내용</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                      for($i2 = $start2; $i2 < $start2+$scale2 && $i2 < $total_record2; $i2++){
+                                        mysqli_data_seek($result_list2, $i2); //가져올 레코드로 위치(포인터) 이동
+                                        $study_design = mysqli_fetch_array($result_list2); //하나의 레코드 가져오기
+                                        $s_des_topic = $study_design['topic'];
+                                        $s_des_title = $study_design['title'];
+                                        $s_des_content = $study_design['content'];
+                                    ?>
+                                    <tr>
+                                      <td><?php echo $s_des_topic ?></td>
+                                      <td><?php echo $s_des_title ?></td>
+                                      <td><?php echo $s_des_content ?>
+                                    </tr>
+                                    <?php
+                                        } //for문
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                    </div>                                    
+                                </article>
+                                    <article id="tab3">
+                                        <h1>기타</h1>
+                                    <div class="col-sm-12 m-top-50">
+                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                      <input type="hidden" name="gb">
+                                    <thead>
+                                      <tr>
+                                        <th width="15%">주제</th>
+                                        <th width="15%">제목</th>
+                                        <th width="70%">내용</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                      for($i3 = $start3; $i3 < $start3+$scale3 && $i3 < $total_record3; $i3++){
+                                        mysqli_data_seek($result_list3, $i3); //가져올 레코드로 위치(포인터) 이동
+                                        $study_etc = mysqli_fetch_array($result_list3); //하나의 레코드 가져오기
+                                        $s_etc_topic = $study_etc['topic'];
+                                        $s_etc_title = $study_etc['title'];
+                                        $s_etc_content = $study_etc['content'];
+                                    ?>
+                                    <tr>
+                                      <td><?php echo $s_etc_topic ?></td>
+                                      <td><?php echo $s_etc_title ?></td>
+                                      <td><?php echo $s_etc_content ?>
+                                    </tr>
+                                    <?php
+                                        } //for문
+                                    ?>
+                                    </tbody>
+                                    </table>
+                                    </div>
+                                    </article>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                             </li>
                         </div>
