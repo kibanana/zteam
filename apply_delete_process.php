@@ -4,15 +4,13 @@ session_start();
 include "auth.php";
 include "dbconn.php";
 include "setting.php";
+
+// echo $big;
+// echo $kind;
+// echo $num;
+// exit;
 ?>
 
-<script type="text/javascript">
-var a = confirm( 'Lorem ipsum dolor' );
-if (!a) {
-    histroy.go(-1);
-    return ;
-}
-</script>
 
 <?php
     $regist_day = date("Y-m-d");

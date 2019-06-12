@@ -210,6 +210,18 @@ include "setting.php";
                 font-size: 17px;
             }
         </style>
+
+        <script>
+            function confirm_a_d() {
+                let a_set = document.frm_a_d;
+
+                if(confirm("정말 삭제하시겠습니까?")) {
+                    a_set.submit();
+                } else {
+
+                }
+            }
+        </script>
         
     </head>
 
@@ -322,7 +334,9 @@ include "setting.php";
                             if($list_row){
                             ?>
                             <div class="col-sm-12 col-xs-12">
-                                <a href="apply_delete_process.php?num=<?=$item_num?>&page=<?=$page?>&kind=<?=$kind?>&big=<?=$big?>"><button class='btn btn-already'>이미 신청 완료되었습니다 :)</button></a>
+                                <form name="frm_a_d" action="apply_delete_process.php?num=<?php echo $item_num ?>&page=<?php echo $page ?>&kind=<?php echo $kind ?>&big=<?php echo $big ?>" method="post">
+                                    <button type="button" onClick="confirm_a_d()" class='btn btn-already'>이미 신청 완료되었습니다 :)</button>
+                                </form>
                             </div>
                             <?php
                             } else {
