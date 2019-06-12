@@ -5,11 +5,10 @@ include "auth.php";
 include "dbconn.php";
 include "setting.php";
 
-$sql = mysqli_query($conn, "select * from member where id='$userid'");
+$sql = mysqli_query($conn, "SELECT * FROM member WHERE id='$userid'");
 $member = mysqli_fetch_array($sql);
-
-
 ?>
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
@@ -115,10 +114,38 @@ $member = mysqli_fetch_array($sql);
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 
         <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        
         <script>
 
-        function member_chk(){
+        function chk_value() {
+            let v = this.value;
+            if(v==0) { // not checked
+                v = 1; // value 값 변경
+                this.value = v;
+                this.setAttribute("checked");
+            } else { // checked
+                v = 0; // value 값 변경
+                this.value = v;
+                this.removeAttribute("checked");
+            }
+        }
 
+        function chk_checked() {
+            let chk1 = document.getElementById("chk1");
+            let chk2 = document.getElementById("chk2");
+            let chk3 = document.getElementById("chk3");
+
+            var a_set = document.frm_alarm;
+
+            chk1.setAttribute("checked");
+            chk2.setAttribute("checked");
+            chk3.setAttribute("checked");
+
+            a_set.submit();
+        }
+
+
+        function member_chk(){
             var p_set = document.frm_change;
             
             var name_result = document.getElementById("name_result");
@@ -272,47 +299,67 @@ $member = mysqli_fetch_array($sql);
                             });
                         </script>
                         <div class="col-sm-12" id="con02_sub">
-                        <li class="mypage_subitem">
+                            <li class="mypage_subitem">
                                 <div class="ab_head" style="display: block;">                                                                                                
                                 </div>
-                                <span style="font-size: 22px; font-weight: 600; display: block; margin-bottom: 30px;">알림 관리</span>
+                                <span style="font-size: 2em; font-weight: 600; display: block; margin-bottom: 30px;">알림 관리</span>
+                                <?php 
+                                    $result_alarm = mysqli_query($conn, "SELECT noti_ap, noti_recvap, noti_vol FROM member WHERE id='$userid'");
+                                    $row_alarm = mysqli_fetch_array($result_alarm);
+                                    $alarm1 = $row_alarm[0];
+                                    $alarm2 = $row_alarm[1];
+                                    $alarm3 = $row_alarm[2];
+                                ?>
 
-                                <div role="tabpanel1">
+                                <form name="frm_alarm" class="form_write" method="post" action="alarm.php" style="margin-top: 40px; text-align: left;">
+                                    <div class="alarm">
+                                        <span class="text_alarm">신청하기 관련 알람</span>
+                                        <label class="switch">
 
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist" style="font-size: 16px;">
-                                <li role="presentation" class="active"><a href="#sub1_1" aria-controls="sub1_1" role="tab" data-toggle="tab"><span style="color: #efdc05;">알림 설정 변경</span></a></li>
-                            </ul>
+                                        <?php if($alarm1 == '0') { ?>
+                                            <input type="checkbox" id="chk1" name="chk1" value="0" onClick="chk_value()"> 
+                                        <?php } else { ?>
+                                            <input type="checkbox" id="chk1" name="chk1" value="1" checked onClick="chk_value()"> 
+                                        <?php } ?>
 
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade in active" id="sub1_1" style="padding-left: 20%; padding-right: 20%;">
+                                        <span class="slider round"></span>
+                                        </label>
+                                    </div>
 
-                                <form class="form_write" method="post" action="alarm.php" style="margin-top: 40px;">
-                                    <p>내가 신청한 공모전 & 스터디 알람 받기</p>
-                                    <label class="switch">
-                                      <input type="checkbox" id="chk1" name="chk1" value="1"> 
-                                      <span class="slider round"></span>
-                                    </label>
+                                    <div class="alarm">
+                                        <span class="text_alarm">신청받기 관련 알람</span>
+                                        <label class="switch">
 
-                                    <p>자신이 올린 게시글에 신청한 사람 알람 받기</p>
-                                    <label class="switch">
-                                      <input type="checkbox" id="chk2" name="chk2" value="1"> 
-                                      <span class="slider round"></span>
-                                    </label>
+                                        <?php if($alarm2 == '0') { ?>
+                                            <input type="checkbox" id="chk2" name="chk2" value="0" onClick="chk_value()"> 
+                                        <?php } else { ?>
+                                            <input type="checkbox" id="chk2" name="chk2" value="1" checked onClick="chk_value()"> 
+                                        <?php } ?>
 
-                                    <p>정원 초과가 되었을 때 알람 받기</p>
-                                    <label class="switch">
-                                      <input type="checkbox" id="chk3" name="chk3" value="1"> 
-                                      <span class="slider round"></span>
-                                    </label>
+                                        <span class="slider round"></span>
+                                        </label>
+                                    </div>
 
-                                <button type="submit" class="form-control btn btn-primary">변경 사항 저장</button>
+                                    <div class="alarm">
+                                        <span class="text_alarm">신청이 받아들여졌을 때의 알람</span>
+                                        <label class="switch">
+
+                                        <?php if($alarm3 == '0') { ?>
+                                            <input type="checkbox" id="chk3" name="chk3" value="0" onClick="chk_value()"> 
+                                        <?php } else { ?>
+                                            <input type="checkbox" id="chk3" name="chk3" value="1" checked onClick="chk_value()"> 
+                                        <?php } ?>
+
+                                        <span class="slider round"></span>
+                                        </label>
+                                    </div>
+
+                                    <button type="button" class="form-control btn btn-primary" onClick="chk_checked()">변경 사항 저장</button>
                                 </form>
-                            </div>
-                        </div>
                             </li>
                         </div>
+
+                        
                 <?php
                     $result_list = mysqli_query($conn, "SELECT * FROM study_develop WHERE id='$userid' ORDER BY num DESC");       
                     $scale = 10;
@@ -373,7 +420,7 @@ $member = mysqli_fetch_array($sql);
                         <li class="mypage_subitem">
                                 <div class="ab_head" style="display: block;">
                                 </div>
-                               <span style="font-size: 22px; font-weight: 600; display: block; margin-bottom: 30px;">작성글 관리</span>
+                               <span style="font-size: 2em; font-weight: 600; display: block; margin-bottom: 30px;">작성글 관리</span>
                                 <div role="tabpanel1">
 
                             <!-- Nav tabs -->
@@ -511,7 +558,7 @@ $member = mysqli_fetch_array($sql);
                         <div class="col-sm-12" id="con04_sub">
                         <li class="mypage_subitem">
                         
-                        <span style="font-size: 22px; font-weight: 600; display: block; margin-bottom: 30px;">개인정보 관리</span>
+                        <span style="font-size: 2em; font-weight: 600; display: block; margin-bottom: 30px;">개인정보 관리</span>
 
                         <div role="tabpanel1">
 

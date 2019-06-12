@@ -1574,6 +1574,7 @@ nav {
 
   li.mypage_subitem {
     padding: 5% 10%;
+    margin-bottom: 70px;
     line-height: 1.5;
     background: #f0f0f0;
     border: 2px #eaeaea double;
@@ -1582,6 +1583,18 @@ nav {
     transition: transform 0.7s;
     border: 3px solid #efdc05;
     text-align: center;
+  }
+
+ div.alarm {
+    margin-bottom: 35px;
+  }
+
+  .text_alarm {
+    display: block;
+    color: #8B8B8B;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 2px;
   }
 
 .mypage_item span.title {
