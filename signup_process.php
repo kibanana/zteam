@@ -55,7 +55,16 @@ include "setting.php";
     </script>
     ";
     echo exit;
-    } else {echo "
+    } else {
+    $add_result = mysqli_query($conn, "SELECT c_member FROM counting");
+    $add_row = mysqli_fetch_array($add_result);
+    $add_num = $add_row[0];
+    $add_num = $add_num + 1;
+
+    $add_sql = "UPDATE counting SET c_member='$add_num'";
+    mysqli_query($conn, $add_sql);    
+        
+    echo "
     <script>
     location.href='signin.php'
     </script>

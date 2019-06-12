@@ -221,6 +221,16 @@ include "setting.php";
 
                 }
             }
+
+            function confirm_s_d() {
+                let s_set = document.frm_s_d;
+
+                if(confirm("정말 삭제하시겠습니까?")) {
+                    s_set.submit();
+                } else {
+
+                }
+            }
         </script>
         
     </head>
@@ -257,9 +267,9 @@ include "setting.php";
                         </div>
                         <div class="col-sm-2 col-xs-3">
                             <div class="buttons">
-                            <a href="study_delete_process.php?num=<?=$item_num?>&page=<?=$page?>&kind=<?=$kind?>">
-                            <button onClick='not_alert()' class='btn btn-change'>삭제</button>
-                            </a>
+                                <form name="frm_s_d" action="study_delete_process.php?num=<?=$item_num?>&page=<?=$page?>&kind=<?=$kind?>" method="post">
+                                    <button type="button" onClick="confirm_s_d()" class='btn btn-change'>삭제</button>
+                                </form>
                             </div>
                         </div>
                         <?php

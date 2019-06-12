@@ -4,6 +4,8 @@ session_start();
 include "auth.php";
 include "dbconn.php";
 include "setting.php";
+
+$big = 'contest';
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -393,7 +395,7 @@ include "setting.php";
         </div> <!-- modal header -->
 
         <div class="modal-body" style="padding: 50px;">
-                <form name="frm_contest_write" class="form_write" method="post" action="contest_insert_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind ?>">
+                <form name="frm_contest_write" class="form_write" method="post" action="contest_insert_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind ?>&big=<?php echo $big ?>">
                     <label>
                         작성자
                     <input type="text" class="form-control" name="write_author" value="<?php echo "$userid" ?> (<?php echo "$username"?>)" readonly>

@@ -146,6 +146,10 @@
 
             <hr>
 
+            <?php 
+                $c_result = mysqli_query($conn, "SELECT * FROM counting");
+                $c_row = mysqli_fetch_array($c_result);
+            ?>
             <!--Skill Sections-->
             <section id="skill" class="skill roomy-100">
                 
@@ -159,66 +163,30 @@
                                         $index_sql1 =  mysqli_query($conn, "SELECT * FROM member");
                                         $index_sql1_num = mysqli_num_rows($index_sql1);
                                     ?>
-                                    <h4 class="statistic-counter"><?php echo $index_sql1_num ?></h4>
+                                    <h4 class="statistic-counter"><?php echo $c_row[0] ?></h4>
                                     <div class="separator_small"></div>
-                                    <h6><em>가입자 수</em></h6>
+                                    <h6><em>누적 가입자수</em></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-6" style="margin-bottom: 50px;">
                                 <div class="skill_bottom_item">
-                                    <?php
-                                        $index_sql2 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_develop"));
-                                        $index_sql3 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_design"));
-                                        $index_sql4 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_etc"));
-
-                                        $index_sql5 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_develop"));
-                                        $index_sql6 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_design"));
-                                        $index_sql7 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_etc"));
-                                        $index_sql8 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_idea"));
-
-                                        $index_sum_list = $index_sql2 + $index_sql3 + $index_sql4 + $index_sql5 + $index_sql6 + $index_sql7 + $index_sql8;
-                                    ?>
-                                    <h4 class="statistic-counter"><?php echo $index_sum_list ?></h4>
+                                    <h4 class="statistic-counter"><?php echo $c_row[1] ?></h4>
                                     <div class="separator_small"></div>
-                                    <h6><em>총 모집글</em></h6>
+                                    <h6><em>누적 모집글</em></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-6">
                                 <div class="skill_bottom_item">
-                                    <?php
-                                        $index_sql9 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_study_develop"));
-                                        $index_sql10 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_study_design"));
-                                        $index_sql11 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_study_etc"));
-
-                                        $index_sql12 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_contest_develop"));
-                                        $index_sql13 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_contest_design"));
-                                        $index_sql14 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_contest_etc"));
-                                        $index_sql15 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM apply_contest_idea"));
-
-                                        $index_sum_apply = $index_sql9 + $index_sql10 + $index_sql11 + $index_sql12 + $index_sql13 + $index_sql14 + $index_sql15;
-                                    ?>
-                                    <h4 class="statistic-counter"><?php echo $index_sum_apply ?></h4>
+                                    <h4 class="statistic-counter"><?php echo $c_row[2] ?></h4>
                                     <div class="separator_small"></div>
-                                    <h6><em>총 신청수</em></h6>
+                                    <h6><em>누적 신청</em></h6>
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-6">
                                 <div class="skill_bottom_item">
-                                    <?php
-                                        $index_sql16 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_develop WHERE apply_num >= want_num"));
-                                        $index_sql17 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_design WHERE apply_num >= want_num"));
-                                        $index_sql18 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM study_etc WHERE apply_num >= want_num"));
-
-                                        $index_sql19 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_develop WHERE apply_num >= want_num"));
-                                        $index_sql20 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_design WHERE apply_num >= want_num"));
-                                        $index_sql21 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_etc WHERE apply_num >= want_num"));
-                                        $index_sql22 =  mysqli_num_rows(mysqli_query($conn, "SELECT * FROM contest_idea WHERE apply_num >= want_num"));
-
-                                        $index_sum_complete = $index_sql16 + $index_sql17 + $index_sql18 + $index_sql19 + $index_sql20 + $index_sql21 + $index_sql22;
-                                    ?>
-                                    <h4 class="statistic-counter"><?php echo $index_sum_complete ?></h4>
+                                    <h4 class="statistic-counter"><?php echo $c_row[3] ?></h4>
                                     <div class="separator_small"></div>
-                                    <h6><em>모임 수</em></h6>
+                                    <h6><em>누적 모임</em></h6>
                                 </div>
                             </div>
                         </div>
@@ -239,87 +207,138 @@
                                     <h2>RECENT BOARD</h2>
                                 	<div class="separator_auto"></div>
                                     <p>
-                                    	현재 진행중인 스터디 모집 중 가장 최근의 것을 알려드립니다!
+                                    	현재 진행중인 팀 모집 중 가장 최근의 것을 알려드립니다!
                                     </p>
                                 </div>
                             </div>
+                            <?php
+                                $c_result = mysqli_query($conn, "SELECT * FROM recent");
+                                $line = mysqli_num_rows($c_result);
 
-                            <?php 
-                            // 일곱개의 테이블에서 각각 하나씩만 가져오고 그 중 최근의 것 세 개
-                            
+                                for ($i = 1; $i <= $line; $i++) {
+                                    mysqli_data_seek($c_result, 1); //가져올 레코드로 위치(포인터) 이동
+                                    $row_list = mysqli_fetch_array($c_result); //하나의 레코드 가져오기
+                                    
+                                    $big = $row_list['big'];
+                                    $kind = $row_list['kind'];
+                                    $l_num = $row_list['list_num'];
+
+                                    if($big=="study"){
+                                        if($kind=="develop"){
+                                            $s_sql = "SELECT * FROM study_develop WHERE num=$l_num";
+                                        } else if($kind=="design"){
+                                            $s_sql = "SELECT * FROM study_design WHERE num=$l_num";
+                                        } else if($kind=="etc"){
+                                            $s_sql = "SELECT * FROM study_etc WHERE num=$l_num";
+                                        }
+                                    } 
+                                
+                                    if($big=="contest"){
+                                            if($kind=="develop"){
+                                                $s_sql = "SELECT * FROM study_develop WHERE num=$l_num";
+                                            } else if($kind=="design"){
+                                                $s_sql = "SELECT * FROM study_design WHERE num=$l_num";
+                                            } else if($kind=="etc"){
+                                                $s_sql = "SELECT * FROM study_etc WHERE num=$l_num";
+                                            } else if($kind=="idea"){
+                                                $s_sql = "SELECT * FROM study_idea WHERE num=$l_num";
+                                            }
+                                        }
+
+                                    $result = mysqli_query($conn, $s_sql);
+                                    $row = mysqli_fetch_array($result);
 
                             ?>
-                            
+
                             <div class="col-md-4 col-sm-12">
+                                <div class="pricing_item sm-m-top-30">
+                                    <div class="pricing_top_border"></div>
+                                    <div class="pricing_head p-top-20 p-bottom-100 text-center">
+                                        <h5 class="text-uppercase">TOP <?php echo $i ?>&nbsp;&nbsp;<i class="icofont icofont-crown" style="color: #efdc05;"></i></h5>
+                                    </div>
+                                    <div class="pricing_price_border text-center">
+                                        <div class="pricing_price">
+                                            <p class="view_content text-white">
+                                                [<?php echo $row['topic'] ?>]
+                                                <br>
+                                                <?php echo $row['title'] ?>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="pricing_body bg-white p-bottom-40" style="padding-top: 60px">
+                                        <ul>
+                                            <li><i class="fa fa-eye text-primary"></i> 조회수 : <?php echo $row['hit'] ?></li>
+                                            <li><i class="fa fa-check text-primary"></i> 신청 : <?php echo $row['apply_num'] ?> / <?php echo $row['want_num'] ?></li>
+                                        </ul>
+                                        <div class="pricing_btn text-center m-top-40">
+                                            <a href="study_view.php?num=<?php echo $l_num ?>&kind=<?php echo $kind ?>&big=<?php echo $big ?>" class="btn btn-primary">글 읽어보기</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- End off col-md-4 -->
+                                    <?php } 
+                    
+                    if($line<2) {
+                    ?>
+                        <div class="col-md-4 col-sm-12">
                                 <div class="pricing_item sm-m-top-30">
                                     <div class="pricing_head p-top-20 p-bottom-100 text-center">
                                         <h5 class="text-uppercase">TOP 2</h5>
                                     </div>
                                     <div class="pricing_price_border text-center">
                                         <div class="pricing_price">
-                                            <p class="view_content text-white">Develop</p>
+                                            <p class="view_content text-white">
+                                            -
+                                            </p>
                                         </div>
                                     </div>
 
                                     <div class="pricing_body bg-white p-bottom-40" style="padding-top: 60px">
                                         <ul>
-                                            <li><i class="fa fa-eye text-primary"></i> 조회수 : 59</li>
-                                            <li><i class="fa fa-check text-primary"></i> 신청 : 5 / 3</li>
+                                            <li><i class="fa fa-eye text-primary"></i> 조회수 : -</li>
+                                            <li><i class="fa fa-check text-primary"></i> 신청 : - / -</li>
                                         </ul>
                                         <div class="pricing_btn text-center m-top-40">
-                                            <a href="" class="btn btn-primary">글 읽어보기</a>
+                                            <a class="btn btn-primary">글 읽어보기</a>
                                         </div>
                                     </div>
                                 </div>
                             </div><!-- End off col-md-4 -->
-                            
-                            
-                            <div class="col-md-4 col-sm-12">
-                                <div class="pricing_item sm-m-top-30">
-                                    <div class="pricing_top_border"></div>
-                                    <div class="pricing_head p-top-20 p-bottom-100 text-center">
-                                        <h5 class="text-uppercase">TOP 1&nbsp;&nbsp;<i class="icofont icofont-crown" style="color: #efdc05;"></i></h5>
-                                    </div>
-                                    <div class="pricing_price_border text-center">
-                                        <div class="pricing_price">
-                                            <p class="view_content text-white">Design</p>
-                                        </div>
-                                    </div>
+                    <?php
+                    }
 
-                                    <div class="pricing_body bg-white p-bottom-40" style="padding-top: 60px">
-                                        <ul>
-                                            <li><i class="fa fa-eye text-primary"></i> 조회수 : 59</li>
-                                            <li><i class="fa fa-check text-primary"></i> 신청 : 5 / 3</li>
-                                        </ul>
-                                        <div class="pricing_btn text-center m-top-40">
-                                            <a href="" class="btn btn-primary">글 읽어보기</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- End off col-md-4 -->
-                            <div class="col-md-4 col-sm-12">
+                    if($line<3) {
+                    ?>
+                        <div class="col-md-4 col-sm-12">
                                 <div class="pricing_item sm-m-top-30">
                                     <div class="pricing_head p-top-20 p-bottom-100 text-center">
                                         <h5 class="text-uppercase">TOP 3</h5>
                                     </div>
                                     <div class="pricing_price_border text-center">
                                         <div class="pricing_price">
-                                            <p class="view_content text-white">etc</p>
+                                            <p class="view_content text-white">
+                                            -
+                                            </p>
                                         </div>
                                     </div>
 
                                     <div class="pricing_body bg-white p-bottom-40" style="padding-top: 60px">
                                         <ul>
-                                            <li><i class="fa fa-eye text-primary"></i> 조회수 : 59</li>
-                                            <li><i class="fa fa-check text-primary"></i> 신청 : 5 / 3</li>
+                                            <li><i class="fa fa-eye text-primary"></i> 조회수 : -</li>
+                                            <li><i class="fa fa-check text-primary"></i> 신청 : - / -</li>
                                         </ul>
                                         <div class="pricing_btn text-center m-top-40">
-                                            <a href="" class="btn btn-primary">글 읽어보기</a>
+                                            <a class="btn btn-primary">글 읽어보기</a>
                                         </div>
                                     </div>
                                 </div>
                             </div><!-- End off col-md-4 -->
-
+                    <?php
+                    }
+                    ?>
+                                        
+                        
                         </div>
                     </div><!--End off row-->
                 </div><!--End off container -->

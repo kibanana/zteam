@@ -64,13 +64,37 @@ if($mode=="modify") {
     $insert_sql .= "VALUES('$userid', '$username', '$write_topic', '$write_title', '$write_content', '$write_want_num', 0, '$regist_day', '$write_end_day', 0)";
     mysqli_query($conn, $insert_sql);
     
-    $list_sql = mysqli_query($conn, "SELECT * FROM member WHERE id='$userid'");
+    $list_result = mysqli_query($conn, "SELECT * FROM member WHERE id='$userid'");
     $list_row = mysqli_fetch_array($list_result);
     $list_num = $list_row[list_num];
     $list_num = $list_num + 1;
     
     $list_sql = "UPDATE member SET list_num='$list_num' WHERE id='$userid'";
     mysqli_query($conn, $list_sql);
+
+
+    $add_result = mysqli_query($conn, "SELECT c_list FROM counting");
+    $add_row = mysqli_fetch_array($add_result);
+    $add_num = $add_row[0];
+    $add_num = $add_num + 1;
+
+    $add_sql = "UPDATE counting SET c_list='$add_num'";
+    mysqli_query($conn, $add_sql);
+
+    
+    // recent table에 insert
+    $recent_insert_result = mysqli_query($conn, "INSERT INTO `recent`(`big`, `kind`, `list_num`) VALUES ('$big', '$kind', '$num+1')");
+    
+    // recent table 레코드 개수 - 3개 아래면 삭제하지 않기 위함
+    $result_num = mysqli_query($conn, "SELECT * FROM recent");
+    $num = mysqli_num_rows($result_num);
+
+    if($num > 3) { // 3개 이상이면 가장 오래된 거 하나는 삭제
+        $recent_min_num_result =  mysqli_query($conn, "SELECT MIN(num) FROM recent");
+        $min = $recent_min_num_result[0];
+        $recent_insert_result = mysqli_query($conn, "DELETE FROM `recent` WHERE num=$min");
+    }
+
 }
 
 mysqli_close($conn);

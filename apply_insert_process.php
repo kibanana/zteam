@@ -39,6 +39,16 @@ include "setting.php";
 
    mysqli_query($conn, $apply_sql);
 
+
+    $add_result = mysqli_query($conn, "SELECT c_apply FROM counting");
+    $add_row = mysqli_fetch_array($add_result);
+    $add_num = $add_row[0];
+    $add_num = $add_num + 1;
+
+    $add_sql = "UPDATE counting SET c_apply='$add_num'";
+    mysqli_query($conn, $add_sql);   
+
+    
    if($big=="study") {
         echo "
         <script>

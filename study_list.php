@@ -4,6 +4,8 @@ session_start();
 include "auth.php";
 include "dbconn.php";
 include "setting.php";
+
+$big = 'study';
 ?>
 <!doctype html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
@@ -383,7 +385,7 @@ include "setting.php";
             <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div> <!-- modal header -->
 		
-		<form name="frm_study_write" class="form_write" method="post" action="study_insert_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind ?>">
+		<form name="frm_study_write" class="form_write" method="post" action="study_insert_process.php?num=<?php echo $num ?>&page=<?php echo $page ?>&kind=<?php echo $kind ?>&big=<?php echo $big ?>">
                 
         <div class="modal-body" style="padding: 50px;">
                     <label>

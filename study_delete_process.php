@@ -6,14 +6,6 @@ include "dbconn.php";
 include "setting.php";
 ?>
 
-<script type="text/javascript">
-var a = confirm( 'Lorem ipsum dolor' );
-if (!a) {
-    histroy.go(-1);
-    return ;
-}
-</script>
-
 <?php
 if($kind=="develop"){
     $sql_delete = "DELETE FROM study_develop WHERE num=$num";
