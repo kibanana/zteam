@@ -254,14 +254,20 @@
                                 <div class="pricing_item sm-m-top-30">
                                     <div class="pricing_top_border"></div>
                                     <div class="pricing_head p-top-20 p-bottom-100 text-center">
-                                        <h5 class="text-uppercase">TOP <?php echo $i ?>&nbsp;&nbsp;<i class="icofont icofont-crown" style="color: #efdc05;"></i></h5>
+                                        <h5 class="text-uppercase">TOP <?php echo $i ?>&nbsp;&nbsp;
+                                        <?php if($i==1) { ?>
+                                        <i class="icofont icofont-crown" style="color: #efdc05;"></i>
+                                        <?php } ?>
+                                        </h5>
                                     </div>
                                     <div class="pricing_price_border text-center">
                                         <div class="pricing_price">
                                             <p class="view_content text-white">
                                                 [<?php echo $row['topic'] ?>]
                                                 <br>
-                                                <?php echo $row['title'] ?>
+                                                <span style="color: white; font-size:0.829em;">
+                                                    <?php echo $row['title'] ?>
+                                                </span>
                                             </p>
                                         </div>
                                     </div>

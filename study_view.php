@@ -231,6 +231,10 @@ include "setting.php";
 
                 }
             }
+
+            function not_d(){
+                alert("이미 신청자가 있는 글이기에 삭제가 불가능합니다!");
+            }
         </script>
         
     </head>
@@ -258,6 +262,7 @@ include "setting.php";
                         
                         <?php 
                         if($userid==$item_id){
+                            
                         ?>
                         
                         <div class="col-sm-2 col-xs-3 col-xs-offset-1">
@@ -265,6 +270,28 @@ include "setting.php";
                                 <button class='btn btn-change' data-toggle="modal" data-target="#modal_study_modify">수정</button>
                             </div>
                         </div>
+
+                        <?php
+                        if($kind=="develop"){
+                            $d_sql = "SELECT * FROM apply_study_develop WHERE num_recv = $num";
+                        } else if($kind=="design"){
+                            $d_sql = "SELECT * FROM apply_study_design WHERE num_recv = $num";
+                        } else if($kind=="etc"){
+                            $d_sql = "SELECT * FROM apply_study_etc WHERE num_recv = $num";
+                        } 
+                        $d_result = mysqli_query($conn, $d_sql);
+                        $d = mysqli_num_rows($d_result);
+                        
+                        if($d) {
+                        ?>
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="buttons">
+                                <button type="button" onClick="not_d()" class='btn btn-change'>삭제</button>
+                            </div>
+                        </div>
+                        <?php 
+                        } else {
+                        ?>
                         <div class="col-sm-2 col-xs-3">
                             <div class="buttons">
                                 <form name="frm_s_d" action="study_delete_process.php?num=<?=$item_num?>&page=<?=$page?>&kind=<?=$kind?>" method="post">
@@ -272,6 +299,11 @@ include "setting.php";
                                 </form>
                             </div>
                         </div>
+                        <?php 
+                        }
+                        ?>
+
+
                         <?php
                         } 
                         ?>
