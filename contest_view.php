@@ -51,6 +51,8 @@ include "setting.php";
     } else if($kind=="idea"){
         $hit_sql = mysqli_query($conn, "UPDATE contest_idea SET hit=$item_hit WHERE num=$num");
     }
+
+    mysqli_query($conn, $hit_sql);
     ?>
 
 <!doctype html>
@@ -429,31 +431,18 @@ include "setting.php";
                     <div class="col-sm-9 nav_bottom">
                         <?php
                             // 단순히 한단계 위 아래로 움직여서는 안된다. 그 글이 삭제되고 두단계 건너뛴 곳에 신청기간이 멀쩡한 글이 있을 수도 있기 때문에!
-
-                            $min_num1 = (int) mysqli_query($conn, "SELECT MIN(num) FROM contest_develop"); //develop
-                            $max_num1 = (int) mysqli_query($conn, "SELECT MAX(num) FROM contest_develop");
-
-                            $min_num2 = (int) mysqli_query($conn, "SELECT MIN(num) FROM contest_design"); //design
-                            $max_num2 = (int) mysqli_query($conn, "SELECT MAX(num) FROM contest_design");
-
-                            $min_num3 = (int) mysqli_query($conn, "SELECT MIN(num) FROM contest_etc"); //etc
-                            $max_num3 = (int) mysqli_query($conn, "SELECT MAX(num) FROM contest_etc");
-
-                            $min_num4 = (int) mysqli_query($conn, "SELECT MIN(num) FROM contest_idea"); //idea
-                            $max_num4 = (int) mysqli_query($conn, "SELECT MAX(num) FROM contest_idea");
-
                             if($kind=="develop"){
-                                $b_sql = "SELECT num, title FROM contest_develop WHERE num > $min_num1 AND num < $item_num AND end_day >= $timenow LIMIT 1";
-                                $a_sql = "SELECT num, title FROM contest_develop WHERE num < $max_num1 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                                $b_sql = "SELECT num, title FROM contest_develop WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_develop WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
                             } else if($kind=="design"){
-                                $b_sql = "SELECT num, title FROM contest_design WHERE num > $min_num2 AND num < $item_num AND end_day >= $timenow LIMIT 1";
-                                $a_sql = "SELECT num, title FROM contest_design WHERE num < $max_num2 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                                $b_sql = "SELECT num, title FROM contest_design WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_design WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
                             } else if($kind=="etc"){
-                                $b_sql = "SELECT num, title FROM contest_etc WHERE num > $min_num3 AND num < $item_num AND end_day >= $timenow LIMIT 1";
-                                $a_sql = "SELECT num, title FROM contest_etc WHERE num < $max_num3 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                                $b_sql = "SELECT num, title FROM contest_etc WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_etc WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
                             } else if($kind=="idea"){
-                                $b_sql = "SELECT num, title FROM contest_idea WHERE num > $min_num4 AND  num < $item_num AND end_day >= $timenow LIMIT 1";
-                                $a_sql = "SELECT num, title FROM contest_idea WHERE num < $max_num4 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                                $b_sql = "SELECT num, title FROM contest_idea WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_idea WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
                             }
 
                             $b = mysqli_query($conn, $b_sql);

@@ -40,17 +40,17 @@ include "setting.php";
     $item_end_day = substr($item_end_day, 0, 10);
     
     
-    $item_hit = $row[hit] + 1;
+    $item_hit = $row['hit'] + 1;
     
     if($kind=="develop"){
-        $hit_sql = "UPDATE study_develop SET hit=$item_hit WHERE num=$num";
+        $hit_sql = "UPDATE study_develop SET hit='$item_hit' WHERE num='$num'";
     } else if($kind=="design"){
-        $hit_sql = "UPDATE study_design SET hit=$item_hit WHERE num=$num";
+        $hit_sql = "UPDATE study_design SET hit='$item_hit' WHERE num='$num'";
     } else if($kind=="etc"){
-        $hit_sql = "UPDATE study_etc SET hit=$item_hit WHERE num=$num";
+        $hit_sql = "UPDATE study_etc SET hit='$item_hit' WHERE num='$num'";
     }
     
-    mysqli_query($hit_sql);
+    mysqli_query($conn, $hit_sql);
     
     ?>
 
@@ -399,24 +399,15 @@ include "setting.php";
                     <?php
                         // 단순히 한단계 위 아래로 움직여서는 안된다. 그 글이 삭제되고 두단계 건너뛴 곳에 신청기간이 멀쩡한 글이 있을 수도 있기 때문에!
 
-                        $min_num1 = (int) mysqli_query($conn, "SELECT MIN(num) FROM study_develop"); //develop
-                        $max_num1 = (int) mysqli_query($conn, "SELECT MAX(num) FROM study_develop");
-
-                        $min_num2 = (int) mysqli_query($conn, "SELECT MIN(num) FROM study_design"); //design
-                        $max_num2 = (int) mysqli_query($conn, "SELECT MAX(num) FROM study_design");
-
-                        $min_num3 = (int) mysqli_query($conn, "SELECT MIN(num) FROM study_etc"); //etc
-                        $max_num3 = (int) mysqli_query($conn, "SELECT MAX(num) FROM study_etc");
-
                         if($kind=="develop"){
-                            $b_sql = "SELECT num, title FROM study_develop WHERE num > $min_num1 AND num < $item_num AND end_day >= $timenow LIMIT 1";
-                            $a_sql = "SELECT num, title FROM study_develop WHERE num < $max_num1 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                            $b_sql = "SELECT num, title FROM study_develop WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_develop WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
                         } else if($kind=="design"){
-                            $b_sql = "SELECT num, title FROM study_design WHERE num > $min_num2 AND num < $item_num AND end_day >= $timenow LIMIT 1";
-                            $a_sql = "SELECT num, title FROM study_design WHERE num < $max_num2 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                            $b_sql = "SELECT num, title FROM study_design WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_design WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
                         } else if($kind=="etc"){
-                            $b_sql = "SELECT num, title FROM study_etc WHERE num > $min_num3 AND num < $item_num AND end_day >= $timenow LIMIT 1";
-                            $a_sql = "SELECT num, title FROM study_etc WHERE num < $max_num3 AND num > $item_num AND end_day >= $timenow LIMIT 1";
+                            $b_sql = "SELECT num, title FROM study_etc WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_etc WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
                         }
 
                         $b = mysqli_query($conn, $b_sql);
@@ -431,7 +422,7 @@ include "setting.php";
                         $b_num = $b[0];
                         $a_num = $a[0];
 
-                        if($b_result_num){
+                        if($b_result_num > 0){
                             echo "<a href='study_view.php?num=$b_num&page=$page&kind=$kind'>";
                             echo "<span style='float: left;'><span>&laquo;</span> 이전 글</span>";
                             echo "</a>";
@@ -439,10 +430,10 @@ include "setting.php";
                             echo "<span style='float: left; cursor: no-drop;'><span>&laquo;</span> 이전 글</span>";
                         }
 
-                        if($a_result_num){
+                        if($a_result_num > 0){
                             echo "<a href='study_view.php?num=$a_num&page=$page&kind=$kind'>";
                             echo "<span style='float: right;'>다음 글 <span>&raquo;</span></span>";
-                            echo "</a>";
+                            echo "</a >";
                         } else {
                             echo "<span style='float: right; cursor: no-drop;'>다음 글 <span>&raquo;</span></span>";
                         }
