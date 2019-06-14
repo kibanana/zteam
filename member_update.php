@@ -5,7 +5,8 @@ include "auth.php";
 include "dbconn.php";
 include "setting.php";
 
-mysqli_query($conn,"UPDATE member SET name=$name, s_num=$s_num, interest1=$interest1, interest2=$interest2, interest3=$interest3, profile=$profile WHERE id=$userid");
+mysqli_query($conn,"UPDATE member SET name='$name', s_num='$s_num', interest1='$interest1', interest2='$interest2', interest3='$interest3', profile='$profile' WHERE id='$userid'");
+
 
 echo 
 "
@@ -14,6 +15,5 @@ echo
     history.back();
 </script>
 ";
-
 mysqli_close($conn);
 ?>

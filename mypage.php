@@ -187,6 +187,13 @@ $member = mysqli_fetch_array($sql);
             target.setAttribute("value", v);
             target.setAttribute("checked");
         }
+        
+        function isNumber(s) {
+            s += ''; // 문자열로 변환
+            s = s.replace(/^\s*|\s*$/g, ''); // 좌우 공백 제거
+            if (s == '' || isNaN(s)) return false;
+            return true;
+        }
 
         function member_chk(){
             var c_set = document.frm_change;
@@ -303,6 +310,32 @@ $member = mysqli_fetch_array($sql);
         })
     </script>
 
+    <script>
+        function list_delete(){
+            var form = document.formm;
+            //alert(form);
+            var b = 0;
+            //alert(form.elements);
+            for(i=0; i<form.elements.length;i++){
+              if(form.elements[i].name=="mnum[]"){
+                if(form.elements[i].checked == true){
+                  b++;
+                } 
+              }
+            }
+            
+            if (!confirm("정말 삭제하시겠습니까?")) {
+              return;
+            }
+
+            if(b==0){
+              alert("하나 이상의 쪽지를 선택해주세요!");
+              return;
+            }
+            form.gb.value="1";
+            form.submit();
+          }
+    </script>
     </head>
 
     <body data-spy="scroll" data-target=".navbar-collapse">
@@ -337,11 +370,8 @@ $member = mysqli_fetch_array($sql);
                         <div class="col-sm-12" id="con01_sub">
                         <li class="mypage_subitem">
                                 <div class="ab_head" style="display: block;">                                                                                                  
-                                    <div class="ab_head_icon">
-                                        <i class="icofont icofont-letter"></i>
-                                    </div>
                                 </div>
-                                <span class="title">신청 관리</span>
+                                <span style="font-size: 2em; font-weight: 600; display: block; margin-bottom: 30px;">신청 관리</span>
                                 <span class="content">내가 한 신청, 받은 신청 관리</span>
                             </li>
                         </div>
@@ -537,6 +567,7 @@ $member = mysqli_fetch_array($sql);
                                 <li role="presentation" class="active"><a href="#study" aria-controls="study" role="tab" data-toggle="tab"><span style="color: #efdc05;">스터디</span></a></li>
                                 <li role="presentation"><a href="#contest" aria-controls="contest" role="tab" data-toggle="tab"><span style="color: #efdc05;">공모전</span></a></li>
                             </ul>
+                            <form action="list_delete()" method="post" name="formm">
                             <div role="tabpanel" class="tab-pane fade in active" id="study" style="padding-left: 20%; padding-right: 20%;">
                             <div class="tab-wrap">
                                 <ul>
@@ -549,12 +580,14 @@ $member = mysqli_fetch_array($sql);
                                     <article id="tab1">
                                         <h1>개발</h1>
                                     <div class="col-sm-12 m-top-50">
-                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;">
+                                     <input type="hidden" name="gb"> 
                                     <thead>
                                       <tr>
-                                        <th width="15%">주제</th>
-                                        <th width="15%">제목</th>
-                                        <th width="70%">내용</th>
+                                        <th width="5%"></th>
+                                        <th width="20%">주제</th>
+                                        <th width="20%">제목</th>
+                                        <th width="55%">내용</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -567,9 +600,10 @@ $member = mysqli_fetch_array($sql);
                                         $s_dev_content = $study_develop['content'];
                                     ?>
                                     <tr>
+                                        <td><input type="checkbox" name="mnum[]" value="<?= $recv_row['idx']?>" >
                                       <td><?php echo $s_dev_topic ?></td>
                                       <td><?php echo $s_dev_title ?></td>
-                                      <td><?php echo $s_dev_content ?>
+                                      <td><?php echo $s_dev_content ?></td>
                                     </tr>
                                     <?php
                                         } //for문
@@ -582,12 +616,15 @@ $member = mysqli_fetch_array($sql);
                                     <article id="tab2">
                                         <h1>디자인</h1>
                                     <div class="col-sm-12 m-top-50">
-                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                    <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;">
+                                     <input type="hidden" name="gb2"> 
                                     <thead>
                                       <tr>
-                                        <th width="15%">주제</th>
-                                        <th width="15%">제목</th>
-                                        <th width="70%">내용</th>
+                                        <th width="5%"></th>
+                                        <th width="20%">주제</th>
+                                        <th width="20%">제목</th>
+                                        <th width="55%">내용</th>
+
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -600,9 +637,10 @@ $member = mysqli_fetch_array($sql);
                                         $s_des_content = $study_design['content'];
                                     ?>
                                     <tr>
+                                        <td><input type="checkbox" name="mnum2[]" value="<?= $recv_row['idx']?>" >
                                       <td><?php echo $s_des_topic ?></td>
                                       <td><?php echo $s_des_title ?></td>
-                                      <td><?php echo $s_des_content ?>
+                                      <td><?php echo $s_des_content ?></td>
                                     </tr>
                                     <?php
                                         } //for문
@@ -615,12 +653,14 @@ $member = mysqli_fetch_array($sql);
                                         <h1>기타</h1>
                                     <div class="col-sm-12 m-top-50">
                                     <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
-                                      <input type="hidden" name="gb">
+                                      <input type="hidden" name="gb3">
                                     <thead>
                                       <tr>
-                                        <th width="15%">주제</th>
-                                        <th width="15%">제목</th>
-                                        <th width="70%">내용</th>
+                                        <th width="5%"></th>
+                                        <th width="20%">주제</th>
+                                        <th width="20%">제목</th>
+                                        <th width="55%">내용</th>
+
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -633,13 +673,16 @@ $member = mysqli_fetch_array($sql);
                                         $s_etc_content = $study_etc['content'];
                                     ?>
                                     <tr>
+                                        <td><input type="checkbox" name="mnum3[]" value="<?= $recv_row['idx']?>" >
                                       <td><?php echo $s_etc_topic ?></td>
                                       <td><?php echo $s_etc_title ?></td>
-                                      <td><?php echo $s_etc_content ?>
+                                      <td><?php echo $s_etc_content ?></td>
                                     </tr>
+                                    <button type="button" onClick="list_delete()" class="form-control btn btn-primary">선택 삭제</button>
                                     <?php
                                         } //for문
                                     ?>
+
                                     </tbody>
                                     </table>
                                     </div>
@@ -661,12 +704,13 @@ $member = mysqli_fetch_array($sql);
                                         <h1>개발</h1>
                                         <div class="col-sm-12 m-top-50">
                                     <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
-                                      <input type="hidden" name="gb">
+                                      <input type="hidden" name="gb4">
                                     <thead>
                                       <tr>
-                                        <th width="15%">주제</th>
-                                        <th width="15%">제목</th>
-                                        <th width="70%">내용</th>
+                                        <th width="5%"></th>
+                                        <th width="20%">주제</th>
+                                        <th width="20%">제목</th>
+                                        <th width="55%">내용</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -678,10 +722,11 @@ $member = mysqli_fetch_array($sql);
                                         $c_dev_title = $contest_develop['title'];
                                         $c_dev_content = $contest_develop['content'];
                                     ?>
-                                    <tr
+                                    <tr>
+                                        <td><input type="checkbox" name="mnum4[]" value="<?= $recv_row['idx']?>" >
                                       <td><?php echo $c_dev_topic ?></td>
                                       <td><?php echo $c_dev_title ?></td>
-                                      <td><?php echo $c_dev_content ?>
+                                      <td><?php echo $c_dev_content ?></td>
                                     </tr>
                                     
                                     <?php
@@ -696,11 +741,13 @@ $member = mysqli_fetch_array($sql);
                                         <h1>디자인</h1>
                                         <div class="col-sm-12 m-top-50">
                                     <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                         <input type="hidden" name="gb5">
                                     <thead>
                                       <tr>
-                                        <th width="15%">주제</th>
-                                        <th width="15%">제목</th>
-                                        <th width="70%">내용</th>
+                                        <th width="5%"></th>
+                                        <th width="20%">주제</th>
+                                        <th width="20%">제목</th>
+                                        <th width="55%">내용</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -713,9 +760,10 @@ $member = mysqli_fetch_array($sql);
                                         $c_des_content = $contest_design['content'];
                                     ?>
                                     <tr>
+                                        <td><input type="checkbox" name="mnum5[]" value="<?= $recv_row['idx']?>" >
                                       <td><?php echo $c_des_topic ?></td>
                                       <td><?php echo $c_des_title ?></td>
-                                      <td><?php echo $c_des_content ?>
+                                      <td><?php echo $c_des_content ?></td>
                                     </tr>
                                     
                                     <?php
@@ -729,11 +777,13 @@ $member = mysqli_fetch_array($sql);
                                         <h1>기타</h1>
                                     <div class="col-sm-12 m-top-50">
                                     <table class="table table-bordered table-hover" style="width: 100%; font-size: 13px;"> 
+                                         <input type="hidden" name="gb6">
                                     <thead>
                                       <tr>
-                                        <th width="15%">주제</th>
-                                        <th width="15%">제목</th>
-                                        <th width="70%">내용</th>
+                                        <th width="5%"></th>
+                                        <th width="20%">주제</th>
+                                        <th width="20%">제목</th>
+                                        <th width="55%">내용</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -746,13 +796,16 @@ $member = mysqli_fetch_array($sql);
                                         $c_etc_content = $contest_etc['content'];
                                     ?>
                                     <tr>
+                                        <td><input type="checkbox" name="mnum6[]" value="<?= $recv_row['idx']?>" >
                                       <td><?php echo $c_etc_topic ?></td>
                                       <td><?php echo $c_etc_title ?></td>
-                                      <td><?php echo $c_etc_content ?>
+                                      <td><?php echo $c_etc_content ?></td>
                                     </tr>
+                                    <button type="button" onClick="list_delete()" class="form-control btn btn-primary">선택 삭제</button>   
                                     <?php
                                         } //for문
                                     ?>
+                                    
                                     </tbody>
                                     </table>
                                     </div>
@@ -760,6 +813,7 @@ $member = mysqli_fetch_array($sql);
                                 </div>
                             </div>
                             </div>
+                        </form>
                         </div>
                             </li>
                         </div>
