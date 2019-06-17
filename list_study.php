@@ -119,7 +119,7 @@ $member = mysqli_fetch_array($sql);
             }
 
             if(b==0){
-              alert("하나 이상의 쪽지를 선택해주세요!");
+              alert("하나 이상의 게시글을 선택해주세요!");
               return;
             }
             f1.gb.value="1";
@@ -144,7 +144,7 @@ $member = mysqli_fetch_array($sql);
             }
 
             if(b2==0){
-              alert("하나 이상의 쪽지를 선택해주세요!");
+              alert("하나 이상의 게시글을 선택해주세요!");
               return;
             }
             f2.gb2.value="1";
@@ -169,7 +169,7 @@ $member = mysqli_fetch_array($sql);
             }
 
             if(b3==0){
-              alert("하나 이상의 쪽지를 선택해주세요!");
+              alert("하나 이상의 게시글을 선택해주세요!");
               return;
             }
             f3.gb3.value="1";
@@ -192,17 +192,6 @@ $member = mysqli_fetch_array($sql);
                     $scale3 = 10;
                     $total_record3 = mysqli_num_rows($result_list3); //전체 글 수
 
-                    $result_list4 = mysqli_query($conn, "SELECT * FROM contest_develop WHERE id='$userid' ORDER BY num DESC");       
-                    $scale4 = 10;
-                    $total_record4 = mysqli_num_rows($result_list4); //전체 글 수
-
-                    $result_list5 = mysqli_query($conn, "SELECT * FROM contest_design WHERE id='$userid' ORDER BY num DESC");       
-                    $scale5 = 10;
-                    $total_record5 = mysqli_num_rows($result_list5); //전체 글 수
-
-                    $result_list6 = mysqli_query($conn, "SELECT * FROM contest_etc WHERE id='$userid' ORDER BY num DESC");       
-                    $scale6 = 10;
-                    $total_record6 = mysqli_num_rows($result_list6); //전체 글 수
 
 
                     //study_develop
@@ -234,36 +223,6 @@ $member = mysqli_fetch_array($sql);
                       if(!$page3) $page3 = 1;
 
                       $start3 = ($page3-1) * $scale3;
-
-                      //contest_develop
-                      if($total_record4 % $scale4==0)
-                      $total_page4 = $total_record4/$scale4;
-                      else
-                      $total_page4 = floor($total_record4/$scale4)+1;
-                      
-                      if(!$page4) $page4 = 1;
-
-                      $start4 = ($page4-1) * $scale4;
-
-                    //contest_design
-                      if($total_record5 % $scale5==0)
-                      $total_page5 = $total_record5/$scale5;
-                      else
-                      $total_page5 = floor($total_record5/$scale5)+1;
-                      
-                      if(!$page5) $page5 = 1;
-
-                      $start5 = ($page5-1) * $scale5;
-
-                      //contest_etc
-                      if($total_record6 % $scale6==0)
-                      $total_page6 = $total_record6/$scale6;
-                      else
-                      $total_page6 = floor($total_record6/$scale6)+1;
-                      
-                      if(!$page6) $page6 = 1;
-
-                      $start6 = ($page6-1) * $scale6;
                   ?>
 
 <div>

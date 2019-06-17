@@ -120,7 +120,7 @@ $member = mysqli_fetch_array($sql);
             }
 
             if(b==0){
-              alert("하나 이상의 쪽지를 선택해주세요!");
+              alert("하나 이상의 게시글을 선택해주세요!");
               return;
             }
             f4.gb4.value="1";
@@ -145,7 +145,7 @@ $member = mysqli_fetch_array($sql);
             }
 
             if(b2==0){
-              alert("하나 이상의 쪽지를 선택해주세요!");
+              alert("하나 이상의 게시글을 선택해주세요!");
               return;
             }
             f5.gb5.value="1";
@@ -170,7 +170,7 @@ $member = mysqli_fetch_array($sql);
             }
 
             if(b3==0){
-              alert("하나 이상의 쪽지를 선택해주세요!");
+              alert("하나 이상의 게시글을 선택해주세요!");
               return;
             }
             f6.gb6.value="1";
@@ -195,7 +195,7 @@ $member = mysqli_fetch_array($sql);
             }
 
             if(b4==0){
-              alert("하나 이상의 쪽지를 선택해주세요!");
+              alert("하나 이상의 게시글을 선택해주세요!");
               return;
             }
             f7.gb7.value="1";
