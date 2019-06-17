@@ -19,18 +19,24 @@ include "setting.php";
         if($kind=="develop"){
             $apply_sql = "DELETE FROM `apply_study_develop` WHERE num_recv=$num AND id_apply='$userid'";
 
-            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'") - 1;
-            $apply_delete_sql = "UPDATE study_develop SET apply_num='$result_apply_num' WHERE num='$num'";
+            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'");
+            $row = mysqli_fetch_array($result_apply_num);
+            $a_num = $row[0] - 1;
+            $apply_delete_sql = "UPDATE study_develop SET apply_num='$a_num' WHERE num='$num'";
         } else if($kind=="design"){
             $apply_sql = "DELETE FROM `apply_study_design` WHERE num_recv=$num AND id_apply='$userid'";
 
-            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'") - 1;
-            $apply_delete_sql = "UPDATE study_design SET apply_num='$result_apply_num' WHERE num='$num'";
+            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'");
+            $row = mysqli_fetch_array($result_apply_num);
+            $a_num = $row[0] - 1;
+            $apply_delete_sql = "UPDATE study_design SET apply_num='$a_num' WHERE num='$num'";
         } else if($kind=="etc"){
             $apply_sql = "DELETE FROM `apply_study_etc` WHERE num_recv=$num AND id_apply='$userid'";
             
-            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'") - 1;
-            $apply_delete_sql = "UPDATE study_etc SET apply_num='$result_apply_num' WHERE num='$num'";
+            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'");
+            $row = mysqli_fetch_array($result_apply_num);
+            $a_num = $row[0] - 1;
+            $apply_delete_sql = "UPDATE study_etc SET apply_num='$a_num' WHERE num='$num'";
         }  
    } 
 
@@ -38,23 +44,31 @@ include "setting.php";
         if($kind=="develop"){
             $apply_sql = "DELETE FROM `apply_contest_develop` WHERE num_recv=$num AND id_apply='$userid'";
             
-            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'") - 1;
-            $apply_delete_sql = "UPDATE contest_develop SET apply_num='$result_apply_num' WHERE num='$num'";
+            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'");
+            $row = mysqli_fetch_array($result_apply_num);
+            $a_num = $row[0] - 1;
+            $apply_delete_sql = "UPDATE contest_develop SET apply_num='$a_num' WHERE num='$num'";
         } else if($kind=="design"){
             $apply_sql = "DELETE FROM `apply_contest_design` WHERE num_recv=$num AND id_apply='$userid'";
             
-            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'") - 1;
-            $apply_delete_sql = "UPDATE contest_design SET apply_num='$result_apply_num' WHERE num='$num'";
+            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'");
+            $row = mysqli_fetch_array($result_apply_num);
+            $a_num = $row[0] - 1;
+            $apply_delete_sql = "UPDATE contest_design SET apply_num='$a_num' WHERE num='$num'";
         } else if($kind=="etc"){
             $apply_sql = "DELETE FROM `apply_contest_etc` WHERE num_recv=$num AND id_apply='$userid'";
             
-            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'") - 1;
-            $apply_delete_sql = "UPDATE contest_etc SET apply_num='$result_apply_num' WHERE num='$num'";
+            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'");
+            $row = mysqli_fetch_array($result_apply_num);
+            $a_num = $row[0] - 1;
+            $apply_delete_sql = "UPDATE contest_etc SET apply_num='$a_num' WHERE num='$num'";
         } else if($kind=="idea"){
             $apply_sql = "DELETE FROM `apply_contest_idea` WHERE num_recv=$num AND id_apply='$userid'";
             
-            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'") - 1;
-            $apply_delete_sql = "UPDATE contest_idea SET apply_num='$result_apply_num' WHERE num='$num'";
+            $result_apply_num = mysqli_query($conn, "SELECT apply_num FROM contest_idea WHERE num='$num'");
+            $row = mysqli_fetch_array($result_apply_num);
+            $a_num = $row[0] - 1;
+            $apply_delete_sql = "UPDATE contest_idea SET apply_num='$a_num' WHERE num='$num'";
         }
    }
 
