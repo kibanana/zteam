@@ -107,13 +107,15 @@ include "setting.php";
 
             <div class="container">
                 <div class="row">
-                  <div class="main_featured m-top-100">
-                    <div class="collapse navbar-collapse" id="navbar-menu">
-                      <ul class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
-                          <li><a href="note_recv.php" target="_self" style="color: #efdc05; font-size: 20px;">받은 쪽지함</a></li>                    
-                          <li><a href="note_send.php" target="_self" style="color: #efdc05; font-size: 20px;">보낸 쪽지함</a></li>       
+                  <div class="col-sm-8 col-sm-offset-2">
+                      <ul class="nav nav-pills nav-fill nav-justified m-top-100" style="margin-bottom: 50px;">
+                          <li class="nav-item">
+                              <a class="nav-link" href="note_recv.php" " target="_self" style="color: #efdc05; font-size: 1.1rem;">받은 쪽지함</a>           
+                          </li>
+                          <li class="nav-item">
+                              <a class="nav-link" href="note_send.php" target="_self" style="color: #efdc05; font-size: 1.1rem;">보낸 쪽지함</a>    
+                          </li>
                       </ul>
-                    </div>
                   </div>
 
                   <div class="separator_auto"></div>

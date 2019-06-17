@@ -97,17 +97,20 @@ $big = 'study';
 
             <div class="container">
                 <div class="row">
-                
-                    <div class="main_featured m-top-100">
-                    	<div class="collapse navbar-collapse" id="navbar-menu">
-                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                <li><a href="study_list.php?kind=develop&big=study" target="_self" style="color: #efdc05; font-size: 17px;">개발</a></li>                    
-                                <li><a href="study_list.php?kind=design&big=study" target="_self" style="color: #efdc05; font-size: 17px;">디자인</a></li>                         
-                                <li><a href="study_list.php?kind=etc&big=study" target="_self" style="color: #efdc05; font-size: 17px;">etc</a></li>                
-                            </ul>
-                        </div>
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <ul class="nav nav-pills nav-fill nav-justified m-top-100" style="margin-bottom: 50px;">
+                            <li class="nav-item">
+                                <a class="nav-link" href="study_list.php?kind=develop&big=study" target="_self" style="color: #efdc05; font-size: 1.1rem;">개발</a>           
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="study_list.php?kind=design&big=study" target="_self" style="color: #efdc05; font-size: 1.1rem;">디자인</a>    
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="study_list.php?kind=etc&big=study" target="_self" style="color: #efdc05; font-size: 1.1rem;">etc</a>              
+                            </li>
+                        </ul>
                     </div>
-                    
+                
                 <div class="separator_auto"></div>
                     
                 <div class="col-sm-12">
