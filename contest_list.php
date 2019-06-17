@@ -53,7 +53,6 @@ $big = 'contest';
     		var double_result = document.getElementById("contest_write_double_result");
     		var topic_result = document.getElementById("contest_write_topic_result");
     		var title_result = document.getElementById("contest_write_title_result");
-    		var content_result = document.getElementById("contest_write_content_result");
             var part_result = document.getElementById("contest_write_part_result");
 
     		if(p_set.write_want_num.value=="") {
@@ -70,10 +69,6 @@ $big = 'contest';
     		} else if(p_set.write_part.value=="") {
     			title_result.innerHTML = "";
     			part_result.innerHTML = "공모전 중 파트 분담에 대해 입력해주세요";
-    			p_set.write_content.focus();
-    		} else if(p_set.write_content.value=="") {
-    			part_result.innerHTML = "";
-    			content_result.innerHTML = "소개를 입력해주세요";
     			p_set.write_content.focus();
     		} else {
     			p_set.submit();
@@ -439,15 +434,19 @@ $big = 'contest';
                         <span id="contest_write_content_result" class="fail"></span>
                     </div>
                     
-                    <div class="textarea_counter">
-                        <label>
-                            공모전 소개 : 첨부한 링크 내 정보 이외의 설명을 자유롭게 적어주세요!
-                        <textarea id="content_textarea" name="write_content" class="signup_profile" maxlength="1500" onkeyup="content_lengCounter()"></textarea>
-                        
-                        <span id="ex_counter" class="counter">( <span id="content_counter" class="counter"></span> / 1500 )</span>
-                        </label>
-                        <span id="contest_write_content_result" class="fail"></span>
-                    </div>
+                    <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
+                    <label>
+                    공모전 소개 : 첨부한 링크 내 정보 이외의 설명을 자유롭게 적어주세요!
+                        <textarea name="write_content" id="editor">
+                        </textarea>
+                    </label>
+                    <script>
+                        ClassicEditor
+                            .create( document.querySelector( '#editor' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                    </script>
 
         </div> <!-- modal body -->
 

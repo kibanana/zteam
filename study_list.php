@@ -53,7 +53,6 @@ $big = 'study';
     		var double_result = document.getElementById("study_write_double_result");
     		var topic_result = document.getElementById("study_write_topic_result");
     		var title_result = document.getElementById("study_write_title_result");
-    		var content_result = document.getElementById("study_write_content_result");
 
     		if(p_set.write_want_num.value=="") {
     			double_result.innerHTML = "값을 입력해주세요";
@@ -66,10 +65,6 @@ $big = 'study';
     			topic_result.innerHTML = "";
     			title_result.innerHTML = "제목을 입력해주세요";
     			p_set.write_title.focus();
-    		} else if(p_set.write_content.value=="") {
-    			title_result.innerHTML = "";
-    			content_result.innerHTML = "소개를 입력해주세요";
-    			p_set.write_content.focus();
     		} else {
     			p_set.submit();
         	}
@@ -420,16 +415,20 @@ $big = 'study';
                         </label>
                         <span id="study_write_title_result" class="fail"></span>
                     </div>
-                    
-                    <div class="textarea_counter">
-                        <label>
-                            스터디 소개 : 기간, 진행방식, 스터디 주제 설명, 주의사항 등을 자유롭게 적어주세요!
-                        <textarea id="textarea" name="write_content" class="signup_profile" maxlength="1500" onkeyup="lengCounter()"></textarea>
-                        
-                        <span id="ex_counter" class="counter">( <span id="counter" class="counter"></span> / 1500 )</span>
-                        </label>
-                        <span id="study_write_content_result" class="fail"></span>
-                    </div>
+
+                    <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
+                    <label>
+                    스터디 소개 : 기간, 진행방식, 스터디 주제 설명, 주의사항 등을 자유롭게 적어주세요!
+                        <textarea name="write_content" id="editor">
+                        </textarea>
+                    </label>
+                    <script>
+                        ClassicEditor
+                            .create( document.querySelector( '#editor' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                    </script>
 
         </div> <!-- modal body -->
 
