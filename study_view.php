@@ -395,14 +395,14 @@ include "setting.php";
                         // 단순히 한단계 위 아래로 움직여서는 안된다. 그 글이 삭제되고 두단계 건너뛴 곳에 신청기간이 멀쩡한 글이 있을 수도 있기 때문에!
 
                         if($kind=="develop"){
-                            $b_sql = "SELECT num, title FROM study_develop WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
-                            $a_sql = "SELECT num, title FROM study_develop WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
+                            $b_sql = "SELECT num, title FROM study_develop WHERE num < $item_num AND end_day >= curdate( ) LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_develop WHERE num > $item_num AND end_day >= curdate( ) LIMIT 1";
                         } else if($kind=="design"){
-                            $b_sql = "SELECT num, title FROM study_design WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
-                            $a_sql = "SELECT num, title FROM study_design WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
+                            $b_sql = "SELECT num, title FROM study_design WHERE num < $item_num AND end_day >= curdate( ) LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_design WHERE num > $item_num AND end_day >= curdate( ) LIMIT 1";
                         } else if($kind=="etc"){
-                            $b_sql = "SELECT num, title FROM study_etc WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
-                            $a_sql = "SELECT num, title FROM study_etc WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
+                            $b_sql = "SELECT num, title FROM study_etc WHERE num < $item_num AND end_day >= curdate( ) LIMIT 1";
+                            $a_sql = "SELECT num, title FROM study_etc WHERE num > $item_num AND end_day >= curdate( ) LIMIT 1";
                         }
 
                         $b = mysqli_query($conn, $b_sql);

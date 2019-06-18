@@ -2,7 +2,7 @@
 
 $hostname = "localhost";
 $username = "root";
-$password = "1234";
+$password = "autoset";
 $dbname = "zteam";
 
 $conn = mysqli_connect($hostname, $username, $password, $dbname);
