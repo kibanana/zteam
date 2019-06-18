@@ -216,12 +216,18 @@
                                 $line = mysqli_num_rows($c_result);
 
                                 for ($i = 1; $i <= $line; $i++) {
-                                    mysqli_data_seek($c_result, 1); //가져올 레코드로 위치(포인터) 이동
+                                    mysqli_data_seek($c_result, $i); //가져올 레코드로 위치(포인터) 이동
                                     $row_list = mysqli_fetch_array($c_result); //하나의 레코드 가져오기
                                     
                                     $big = $row_list['big'];
                                     $kind = $row_list['kind'];
                                     $l_num = $row_list['list_num'];
+                                    
+                                    echo "
+                                        <script>
+                                        alert('$big $kind $l_num');
+                                        </script>
+                                    ";
 
                                     if($big=="study"){
                                         if($kind=="develop"){

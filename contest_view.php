@@ -427,17 +427,17 @@ include "setting.php";
                         <?php
                             // 단순히 한단계 위 아래로 움직여서는 안된다. 그 글이 삭제되고 두단계 건너뛴 곳에 신청기간이 멀쩡한 글이 있을 수도 있기 때문에!
                             if($kind=="develop"){
-                                $b_sql = "SELECT num, title FROM contest_develop WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
-                                $a_sql = "SELECT num, title FROM contest_develop WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
+                                $b_sql = "SELECT num, title FROM contest_develop WHERE num < $item_num AND end_day >= curdate( ) LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_develop WHERE num > $item_num AND end_day >= curdate( ) LIMIT 1";
                             } else if($kind=="design"){
-                                $b_sql = "SELECT num, title FROM contest_design WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
-                                $a_sql = "SELECT num, title FROM contest_design WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
+                                $b_sql = "SELECT num, title FROM contest_design WHERE num < $item_num AND end_day >= curdate( ) LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_design WHERE num > $item_num AND end_day >= curdate( ) LIMIT 1";
                             } else if($kind=="etc"){
-                                $b_sql = "SELECT num, title FROM contest_etc WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
-                                $a_sql = "SELECT num, title FROM contest_etc WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
+                                $b_sql = "SELECT num, title FROM contest_etc WHERE num < $item_num AND end_day >= curdate( ) LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_etc WHERE num > $item_num AND end_day >= curdate( ) LIMIT 1";
                             } else if($kind=="idea"){
-                                $b_sql = "SELECT num, title FROM contest_idea WHERE num < $item_num AND end_day >= $timenow LIMIT 1";
-                                $a_sql = "SELECT num, title FROM contest_idea WHERE num > $item_num AND end_day >= $timenow LIMIT 1";
+                                $b_sql = "SELECT num, title FROM contest_idea WHERE num < $item_num AND end_day >= curdate( ) LIMIT 1";
+                                $a_sql = "SELECT num, title FROM contest_idea WHERE num > $item_num AND end_day >= curdate( ) LIMIT 1";
                             }
 
                             $b = mysqli_query($conn, $b_sql);
@@ -454,7 +454,9 @@ include "setting.php";
                             
                             if($b_result_num){
                                 echo "<a href='contest_view.php?num=$b_num&page=$page&kind=$kind'>";
-                                echo "<span style='float: left;'><span>&laquo;</span> 이전 글</span>";
+                                echo "<span style='float: left;'><span>&laquo;</span> 이전 글
+                                <span style='color: gray'>$b_title</span> 
+                                </span>";
                                 echo "</a>";
                             } else {
                                 echo "<span style='float: left; cursor: no-drop;'><span>&laquo;</span> 이전 글</span>";
@@ -462,7 +464,9 @@ include "setting.php";
 
                             if($a_result_num){
                                 echo "<a href='contest_view.php?num=$a_num&page=$page&kind=$kind'>";
-                                echo "<span style='float: right;'>다음 글 <span>&raquo;</span></span>";
+                                echo "<span style='float: right;'>
+                                <span style='color: gray;'>$a_title</span> 
+                                다음 글 <span>&raquo;</span></span>";
                                 echo "</a>";
                             } else {
                                 echo "<span style='float: right; cursor: no-drop;'>다음 글 <span>&raquo;</span></span>";

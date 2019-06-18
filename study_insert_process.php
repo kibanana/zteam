@@ -55,10 +55,13 @@ if($mode=="modify") {
 } else {
     if($kind=="develop"){
         $insert_sql = "INSERT INTO study_develop (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $recent_num_sql = "SELECT num FROM study_develop ORDER BY num ASC LIMIT 1";
     } else if($kind=="design"){
         $insert_sql = "INSERT INTO study_design (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $recent_num_sql = "SELECT num FROM study_develop ORDER BY num ASC LIMIT 1";
     } else if($kind=="etc"){
         $insert_sql = "INSERT INTO study_etc (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $recent_num_sql = "SELECT num FROM study_develop ORDER BY num ASC LIMIT 1";
     }
     
     $insert_sql .= "VALUES('$userid', '$username', '$write_topic', '$write_title', '$write_content', '$write_want_num', 0, '$regist_day', '$write_end_day', 0)";
@@ -81,9 +84,10 @@ if($mode=="modify") {
     $add_sql = "UPDATE counting SET c_list='$add_num'";
     mysqli_query($conn, $add_sql);
 
-    
+    $recent_num_row = mysqli_query($conn, $recent_num_sql);
+    $recent_num_result = $recent_num_row[0];
     // recent table에 insert
-    $recent_insert_result = mysqli_query($conn, "INSERT INTO `recent`(`big`, `kind`, `list_num`) VALUES ('$big', '$kind', '$num+1')");
+    $recent_insert_result = mysqli_query($conn, "INSERT INTO `recent`(`big`, `kind`, `list_num`) VALUES ('$big', '$kind', '$recent_num_result+1')");
     
     // recent table 레코드 개수 - 3개 아래면 삭제하지 않기 위함
     $result_num = mysqli_query($conn, "SELECT * FROM recent");

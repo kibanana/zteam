@@ -417,9 +417,14 @@ include "setting.php";
                         $b_num = $b[0];
                         $a_num = $a[0];
 
+                        $b_title = $b[1];
+                        $a_title = $a[1];
+
                         if($b_result_num > 0){
                             echo "<a href='study_view.php?num=$b_num&page=$page&kind=$kind'>";
-                            echo "<span style='float: left;'><span>&laquo;</span> 이전 글</span>";
+                            echo "<span style='float: left;'><span>&laquo;</span> 이전 글 
+                            <span style='color: gray'>$b_title</span> 
+                            </span>";
                             echo "</a>";
                         } else {
                             echo "<span style='float: left; cursor: no-drop;'><span>&laquo;</span> 이전 글</span>";
@@ -427,7 +432,9 @@ include "setting.php";
 
                         if($a_result_num > 0){
                             echo "<a href='study_view.php?num=$a_num&page=$page&kind=$kind'>";
-                            echo "<span style='float: right;'>다음 글 <span>&raquo;</span></span>";
+                            echo "<span style='float: right;'>
+                             <span style='color: gray'>$a_title</span>
+                             다음 글 <span>&raquo;</span></span>";
                             echo "</a >";
                         } else {
                             echo "<span style='float: right; cursor: no-drop;'>다음 글 <span>&raquo;</span></span>";
