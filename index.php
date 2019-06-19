@@ -212,10 +212,10 @@
                                 </div>
                             </div>
                             <?php
-                                $c_result = mysqli_query($conn, "SELECT * FROM recent");
+                                $c_result = mysqli_query($conn, "SELECT * FROM recent ORDER BY num DESC");
                                 $line = mysqli_num_rows($c_result);
 
-                                for ($i = 1; $i <= $line; $i++) {
+                                for ($i = 0; $i < $line; $i++) { // 0부터 시작
                                     mysqli_data_seek($c_result, $i); //가져올 레코드로 위치(포인터) 이동
                                     $row_list = mysqli_fetch_array($c_result); //하나의 레코드 가져오기
                                     
@@ -260,8 +260,8 @@
                                 <div class="pricing_item sm-m-top-30">
                                     <div class="pricing_top_border"></div>
                                     <div class="pricing_head p-top-20 p-bottom-100 text-center">
-                                        <h5 class="text-uppercase">TOP <?php echo $i ?>&nbsp;&nbsp;
-                                        <?php if($i==1) { ?>
+                                        <h5 class="text-uppercase">TOP <?php echo ($i+1) ?>&nbsp;&nbsp;
+                                        <?php if(($i+1)==1) { ?>
                                         <i class="icofont icofont-crown" style="color: #efdc05;"></i>
                                         <?php } ?>
                                         </h5>
