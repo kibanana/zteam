@@ -101,12 +101,6 @@ if($mode=="modify") {
         $recent_insert_result = mysqli_query($conn, "DELETE FROM `recent` WHERE num=$recent_min_num_result");
     }
 
-    echo "
-        <script>
-            alert('$result_all_num');
-        </script>
-    ";
-
 }
 
 mysqli_close($conn);

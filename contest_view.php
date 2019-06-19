@@ -2,8 +2,32 @@
 header('Content-Type: text/html; charset=UTF-8');
 session_start();
 include "auth.php";
+include "auth_view.php";
 include "dbconn.php";
 include "setting.php";
+
+if($kind=="develop"){
+    $view_sql = "SELECT * FROM `contest_develop` WHERE num='$num' AND end_day >= curdate( )"; 
+} else if($kind=="design"){
+    $view_sql = "SELECT * FROM `contest_design` WHERE num='$num' AND end_day >= curdate( )"; 
+} else if($kind=="etc"){
+    $view_sql = "SELECT * FROM `contest_etc` WHERE num='$num' AND end_day >= curdate( )"; 
+} else if($kind=="idea"){
+    $view_sql = "SELECT * FROM `contest_idea` WHERE num='$num' AND  AND end_day >= curdate( )"; 
+}
+
+$result_view_auth = mysqli_query($conn, $view_sql);
+$line = mysqli_num_rows($result_view_auth);
+
+if(!$line) {
+    echo ("
+    <script>
+        window.alert('접근할 수 없는 글입니다!');
+        location.href = 'index.php';
+    </script>
+    ");
+    exit;
+}
 ?>
 
 <?php     
@@ -230,7 +254,7 @@ include "setting.php";
             function confirm_a_d() {
                 let a_set = document.frm_a_d;
 
-                if(confirm("정말 삭제하시겠습니까?")) {
+                if(confirm("신청을 취소하시겠습니까?")) {
                     a_set.submit();
                 } else {
 
@@ -416,8 +440,6 @@ include "setting.php";
                             </div>
                             <?php
                             }
-                            ?>
-                        <?php
                         }
                         ?>
                         

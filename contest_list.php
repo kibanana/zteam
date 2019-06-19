@@ -244,7 +244,7 @@ $big = 'contest';
                                 
                                 <span class='content' style='margin-bottom: 23px;'>$item_content</span>
                                 
-                                <span>신청일 | $item_apply_s ~ $item_apply_e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span>신청 기간 | $item_apply_s ~ $item_apply_e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                 <span style='float: left;'>
                                     신청현황 | $item_a_num / $item_w_num 
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -263,7 +263,7 @@ $big = 'contest';
 
                                     <span class='content'>$item_content</span>
                                     
-                                    <span>신청일 | $item_apply_s ~ $item_apply_e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <span>신청 기간 | $item_apply_s ~ $item_apply_e&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                                     <span style='float: left;'>
                                         신청현황 | $item_a_num / $item_w_num
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

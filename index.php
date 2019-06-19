@@ -222,12 +222,6 @@
                                     $big = $row_list['big'];
                                     $kind = $row_list['kind'];
                                     $l_num = $row_list['list_num'];
-                                    
-                                    echo "
-                                        <script>
-                                        alert('$big $kind $l_num');
-                                        </script>
-                                    ";
 
                                     if($big=="study"){
                                         if($kind=="develop"){
