@@ -204,7 +204,8 @@ $big = 'study';
                         
                         $item_apply_e = $row['end_day'];
                         $item_apply_e = substr($item_apply_e, 0, 10);
-    
+                        
+                        $item_content = strip_tags($item_content);
                         
                         $item_hit = $row['hit'];
 
