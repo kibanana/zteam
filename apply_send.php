@@ -183,6 +183,12 @@ $member = mysqli_fetch_array($sql);
         $s_title = $study['title'];
         $s_idrecv = $study['id_recv'];
         $s_apply_chk = $study['apply_chk'];
+
+        if($s_apply_chk=='0') {
+          $s_apply_chk='□';
+        }else{
+          $s_apply_chk = '■';
+        }
     ?>
     <tr>
       <td><?php echo $s_num ?></td>
@@ -191,6 +197,7 @@ $member = mysqli_fetch_array($sql);
       <td><?php echo $s_title ?></td>
       <td><?php echo $s_apply_chk ?></td>
     </tr>
+
 
     <?php
         } //for문
@@ -225,6 +232,12 @@ $member = mysqli_fetch_array($sql);
         $c_title = $contest['title'];
         $c_idrecv = $contest['id_recv'];
         $c_apply_chk = $contest['apply_chk'];
+
+        if($c_apply_chk=='0') {
+          $c_apply_chk='□';
+        }else{
+          $c_apply_chk = '■';
+        }
     ?>
     <tr>
       <td><?php echo $c_num ?></td>
