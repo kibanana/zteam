@@ -186,7 +186,12 @@ $member = mysqli_fetch_array($sql);
       <td><?php echo $s_port ?></td>
       <td><?php echo $s_want ?></td>
       <td><a href="apply_ok.php?num=<?=$s_num?>&kind=<?=$s_kind?>">확인</a></td>
+      <?php if($s_chk=='0'){ ?>
       <td><a href="apply_del.php?num=<?=$s_num?>&kind=<?=$s_kind?>$chk=<?=$s_chk?>">취소</a></td>
+    <?php } else { ?>
+      <td></td>
+    <?php } ?>
+
 
     </tr>
 
@@ -226,7 +231,7 @@ $member = mysqli_fetch_array($sql);
         $c_idapply = $contest['id_apply'];
         $c_port = $contest['portfolio'];
         $c_want = $contest['want'];
-        $c_chk = $study['apply_chk'];
+        $c_chk = $contest['apply_chk'];
     ?>
     <tr>
       <td><?php echo $c_num ?></td>
@@ -235,7 +240,11 @@ $member = mysqli_fetch_array($sql);
       <td><?php echo $c_port ?></td>
       <td><?php echo $c_want ?></td>
       <td><a href="apply_ok.php?num=<?=$c_num?>&kind=<?=$c_kind?>">확인</a></td>
-      <td><a href="apply_del.php?num=<?=$c_num?>&kind=<?=$c_kind?>$chk=<?=$s_chk?>">취소</a></td>
+      <?php if($c_chk=='0'){ ?>
+      <td><a href="apply_del.php?num=<?=$c_num?>&kind=<?=$c_kind?>$chk=<?=$c_chk?>">취소</a></td>
+    <?php } else { ?>
+      <td></td>
+    <?php } ?>
     </tr>
 
     <?php
