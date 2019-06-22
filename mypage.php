@@ -14,7 +14,7 @@ $member = mysqli_fetch_array($sql);
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    
+
     <!--Designerd by: http://bootstrapthemes.co-->
     <head>
         <meta charset="utf-8">
@@ -33,7 +33,7 @@ $member = mysqli_fetch_array($sql);
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        
+
         <link rel="stylesheet" href="assets/css/magnific-popup.css">
         <link rel="stylesheet" href="assets/css/bootsnav.css">
 
@@ -50,7 +50,7 @@ $member = mysqli_fetch_array($sql);
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 
         <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-        
+
         <script type="text/javascript">
 
         function chk_value(id, value) {
@@ -59,7 +59,7 @@ $member = mysqli_fetch_array($sql);
             target.setAttribute("value", v);
             target.setAttribute("checked");
         }
-        
+
         function isNumber(s) {
             s += ''; // 문자열로 변환
             s = s.replace(/^\s*|\s*$/g, ''); // 좌우 공백 제거
@@ -69,11 +69,11 @@ $member = mysqli_fetch_array($sql);
 
         function member_chk(){
             var c_set = document.frm_change;
-            
+
             var name_result = document.getElementById("name_result");
             var num_result = document.getElementById("s_num_result");
             var inters_result = document.getElementById("interest_result");
-            var profile_result = document.getElementById("profile_result");  
+            var profile_result = document.getElementById("profile_result");
 
             if(c_set.name.value=="") {
                 name_result.innerHTML = "이름을 입력해주세요";
@@ -104,7 +104,7 @@ $member = mysqli_fetch_array($sql);
         function pwd_chk(){
 
             var pwd_set = document.frm_pwd;
-            
+
             var pw_result = document.getElementById("pw_result");
             var pwd_result = document.getElementById("pw1_result");
             var pwdck_result = document.getElementById("pw2_result");
@@ -137,7 +137,7 @@ $member = mysqli_fetch_array($sql);
             start_item3.style.display="none";
             start_item4.style.display="none";
         }
-        
+
         function item_chk1() {
             let item1 = document.getElementById('con01_sub');
             if(item1.style.display=="none"){
@@ -184,7 +184,7 @@ $member = mysqli_fetch_array($sql);
     </head>
 
     <body data-spy="scroll" data-target=".navbar-collapse">
-    
+
         <div class="culmn">
 
 			  <?php include "header.php"; ?>
@@ -202,7 +202,7 @@ $member = mysqli_fetch_array($sql);
                     <ul class="mypage">
                         <div class="col-sm-6" id="con01" style="cursor: pointer;" onClick="item_chk1()">
                         <li class="mypage_item">
-                                <div class="ab_head" style="display: block;">                                                                                                  
+                                <div class="ab_head" style="display: block;">
                                     <div class="ab_head_icon">
                                         <i class="icofont icofont-letter"></i>
                                     </div>
@@ -214,10 +214,26 @@ $member = mysqli_fetch_array($sql);
 
                         <div class="col-sm-12" id="con01_sub">
                         <li class="mypage_subitem">
-                                <div class="ab_head" style="display: block;">                                                                                                  
+                                <div class="ab_head" style="display: block;">
                                 </div>
                                 <span style="font-size: 2em; font-weight: 600; display: block; margin-bottom: 30px;">신청 관리</span>
-                                <span class="content">내가 한 신청, 받은 신청 관리</span>
+
+                            <div role="tabpanel1">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist" style="font-size: 16px;">
+                                <li role="presentation" class="active" ><a href="#send_apply" aria-controls="send_apply" role="tab" data-toggle="tab"><span style="color: #efdc05;">내가 한 신청</span></a></li>
+                                <li role="presentation"><a href="#recv_apply" aria-controls="recv_apply" role="tab" data-toggle="tab"><span style="color: #efdc05;">내가 받은 신청</span></a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade in active" id="send_apply" >
+                                <?php include "apply_send.php" ?>
+                            </div>
+                                <div role="tabpanel" class="tab-pane fade in active" id="recv_apply">
+                                <?php include "apply_recv.php" ?>
+                            </div>
+                        </div>
+                        </div>
                             </li>
                         </div>
 
@@ -241,10 +257,10 @@ $member = mysqli_fetch_array($sql);
                         </script>
                         <div class="col-sm-12" id="con02_sub">
                             <li class="mypage_subitem">
-                                <div class="ab_head" style="display: block;">                                                                                                
+                                <div class="ab_head" style="display: block;">
                                 </div>
                                 <span style="font-size: 2em; font-weight: 600; display: block; margin-bottom: 30px;">알림 관리</span>
-                                <?php 
+                                <?php
                                     $result_alarm = mysqli_query($conn, "SELECT noti_ap, noti_recvap, noti_vol FROM member WHERE id='$userid'");
                                     $row_alarm = mysqli_fetch_array($result_alarm);
                                     $alarm1 = $row_alarm[0];
@@ -258,9 +274,9 @@ $member = mysqli_fetch_array($sql);
                                         <label class="switch">
 
                                         <?php if($alarm1 == '0') { ?>
-                                            <input type="checkbox" id="chk1" name="chk1" value="0" onClick="chk_value(this.id, this.value)"> 
+                                            <input type="checkbox" id="chk1" name="chk1" value="0" onClick="chk_value(this.id, this.value)">
                                         <?php } else { ?>
-                                            <input type="checkbox" id="chk1" name="chk1" value="1" checked onClick="chk_value(this.id, this.value)"> 
+                                            <input type="checkbox" id="chk1" name="chk1" value="1" checked onClick="chk_value(this.id, this.value)">
                                         <?php } ?>
 
                                         <span class="slider round"></span>
@@ -272,9 +288,9 @@ $member = mysqli_fetch_array($sql);
                                         <label class="switch">
 
                                         <?php if($alarm2 == '0') { ?>
-                                            <input type="checkbox" id="chk2" name="chk2" value="0" onClick="chk_value(this.id, this.value)"> 
+                                            <input type="checkbox" id="chk2" name="chk2" value="0" onClick="chk_value(this.id, this.value)">
                                         <?php } else { ?>
-                                            <input type="checkbox" id="chk2" name="chk2" value="1" checked onClick="chk_value(this.id, this.value)"> 
+                                            <input type="checkbox" id="chk2" name="chk2" value="1" checked onClick="chk_value(this.id, this.value)">
                                         <?php } ?>
 
                                         <span class="slider round"></span>
@@ -286,9 +302,9 @@ $member = mysqli_fetch_array($sql);
                                         <label class="switch">
 
                                         <?php if($alarm3 == '0') { ?>
-                                            <input type="checkbox" id="chk3" name="chk3" value="0" onClick="chk_value(this.id, this.value)"> 
+                                            <input type="checkbox" id="chk3" name="chk3" value="0" onClick="chk_value(this.id, this.value)">
                                         <?php } else { ?>
-                                            <input type="checkbox" id="chk3" name="chk3" value="1" checked onClick="chk_value(this.id, this.value)"> 
+                                            <input type="checkbox" id="chk3" name="chk3" value="1" checked onClick="chk_value(this.id, this.value)">
                                         <?php } ?>
 
                                         <span class="slider round"></span>
@@ -351,7 +367,7 @@ $member = mysqli_fetch_array($sql);
 
                         <div class="col-sm-12" id="con04_sub">
                         <li class="mypage_subitem">
-                        
+
                         <span style="font-size: 2em; font-weight: 600; display: block; margin-bottom: 30px;">개인정보 관리</span>
 
                         <div role="tabpanel1">
@@ -384,7 +400,7 @@ $member = mysqli_fetch_array($sql);
                                         <input type="text" name="s_num" value="<?php echo $member['s_num']; ?>">
                                     </label>
                                     <span id="s_num_result" class="fail"></span>
-                                    
+
                                     <label>
                                         <div>흥미있는 기술 / 공부주제</div>
                                     <input type="text" name="interest1" placeholder="1" value="<?php echo $member['interest1']; ?>" style="display: inline-block; width: 30%;">
@@ -392,7 +408,7 @@ $member = mysqli_fetch_array($sql);
                                     <input type="text" name="interest3" placeholder="3" value="<?php echo $member['interest3']; ?>" style="display: inline-block; width: 30%;">
                                     </label>
                                         <span id="interest_result" class="fail"></span>
-                                        
+
                                     <label>
                                         자기소개
                                         <textarea name="profile"><?php echo $member['profile']; ?></textarea>
@@ -400,7 +416,7 @@ $member = mysqli_fetch_array($sql);
                                         <span id="profile_result" class="fail"></span>
 
                                     <button type="button" class="form-control btn btn-primary" onClick="member_chk()">개인정보 변경</button>
-                                </form> 
+                                </form>
 
                                 </div>
 
@@ -443,13 +459,13 @@ $member = mysqli_fetch_array($sql);
                 </div>
             </div>
 
-        </div> <!-- culmn -->  
+        </div> <!-- culmn -->
 
-                          
+
 <!-- Insert Modal -->
 <div class="modal fade" id="modal_note_write" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-        
+
     <!-- Modal content-->
         <div class="modal-content">
 
@@ -471,12 +487,12 @@ $member = mysqli_fetch_array($sql);
                     </label>
 
                     <span id="note_write_double_result" class="fail"></span>
-                    
+
                     <div class="textarea_counter">
                         <label>
                             쪽지 내용
                         <textarea id="textarea" name="write_content" class="note_content" maxlength="70" onkeyup="lengCounter()"></textarea>
-                        
+
                         </label>
                         <span id="note_write_content_result" class="fail"></span>
                     </div>
