@@ -103,23 +103,24 @@ $member = mysqli_fetch_array($sql);
 
 <body>
 	<?php
-                    $result_list = mysqli_query($conn, "SELECT num, id_apply, title, portfolio, want from apply_study_design where id_recv='$userid'
+                    $result_list = mysqli_query($conn, "SELECT num, kind, id_apply, title, portfolio, want, apply_chk from apply_study_design where id_recv='$userid'
                                                         UNION
-                                                        SELECT num, id_apply, title, portfolio, want from apply_study_develop where id_recv='$userid'
+                                                        SELECT num, kind, id_apply, title, portfolio, want, apply_chk from apply_study_develop where id_recv='$userid'
                                                         UNION
-                                                        SELECT num, id_apply, title, portfolio, want from apply_study_etc where id_recv='$userid'");
+                                                        SELECT num, kind, id_apply, title, portfolio, want, apply_chk from apply_study_etc where id_recv='$userid'");
                     $scale = 10;
                     $total_record = mysqli_num_rows($result_list); //전체 글 수
 
-                    $result_list2 = mysqli_query($conn, "SELECT num, id_apply, title, portfolio, want from apply_contest_design where id_recv='$userid'
+                    $result_list2 = mysqli_query($conn, "SELECT num, kind, id_apply, title, portfolio, want, apply_chk from apply_contest_design where id_recv='$userid'
                                                         UNION
-                                                        SELECT num, id_apply, title, portfolio, want from apply_contest_develop where id_recv='$userid'
+                                                        SELECT num, kind, id_apply, title, portfolio, want, apply_chk from apply_contest_develop where id_recv='$userid'
                                                         UNION
-                                                        SELECT num, id_apply, title, portfolio, want from apply_contest_etc where id_recv='$userid'
+                                                        SELECT num, kind, id_apply, title, portfolio, want, apply_chk from apply_contest_etc where id_recv='$userid'
                                                         UNION
-                                                        SELECT num, id_apply, title, portfolio, want from apply_contest_idea where id_recv='$userid'");
+                                                        SELECT num, kind, id_apply, title, portfolio, want, apply_chk from apply_contest_idea where id_recv='$userid'");
                     $scale2 = 10;
                     $total_record2 = mysqli_num_rows($result_list2); //전체 글 수
+
 
                     //study_develop
                       if($total_record % $scale==0)
@@ -171,10 +172,12 @@ $member = mysqli_fetch_array($sql);
         $study = mysqli_fetch_array($result_list); //하나의 레코드 가져오기
 
         $s_num = $study['num'];
+        $s_kind = $study['kind'];
         $s_title = $study['title'];
         $s_idapply = $study['id_apply'];
         $s_port = $study['portfolio'];
         $s_want = $study['want'];
+        $s_chk = $study['apply_chk'];
     ?>
     <tr>
       <td><?php echo $s_num ?></td>
@@ -182,8 +185,8 @@ $member = mysqli_fetch_array($sql);
       <td><?php echo $s_title ?></td>
       <td><?php echo $s_port ?></td>
       <td><?php echo $s_want ?></td>
-      <td><a href="apply_ok.php?num=<?=$s_num?>">확인</a></td>
-      <td><a href="apply_del?.php"></td>
+      <td><a href="apply_ok.php?num=<?=$s_num?>&kind=<?=$s_kind?>">확인</a></td>
+      <td><a href="apply_del.php?num=<?=$s_num?>&kind=<?=$s_kind?>$chk=<?=$s_chk?>">취소</a></td>
 
     </tr>
 
@@ -218,10 +221,12 @@ $member = mysqli_fetch_array($sql);
         mysqli_data_seek($result_list2, $i2); //가져올 레코드로 위치(포인터) 이동
         $contest = mysqli_fetch_array($result_list2); //하나의 레코드 가져오기
         $c_num = $contest['num'];
+        $c_kind = $contest['kind'];
         $c_title = $contest['title'];
         $c_idapply = $contest['id_apply'];
         $c_port = $contest['portfolio'];
         $c_want = $contest['want'];
+        $c_chk = $study['apply_chk'];
     ?>
     <tr>
       <td><?php echo $c_num ?></td>
@@ -229,8 +234,8 @@ $member = mysqli_fetch_array($sql);
       <td><?php echo $c_title ?></td>
       <td><?php echo $c_port ?></td>
       <td><?php echo $c_want ?></td>
-      <td><input type="button" onClick="chk_ok()"></td>
-      <td><input type="button" onClick="chk_del()"></td>
+      <td><a href="apply_ok.php?num=<?=$c_num?>&kind=<?=$c_kind?>">확인</a></td>
+      <td><a href="apply_del.php?num=<?=$c_num?>&kind=<?=$c_kind?>$chk=<?=$s_chk?>">취소</a></td>
     </tr>
 
     <?php
