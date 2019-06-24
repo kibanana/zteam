@@ -47,7 +47,7 @@ include "setting.php";
     }
 
     //위의 if문에서 안걸리면 INSERT
-    $sql_signup = mysqli_query($conn, "INSERT INTO `member` (id, name, pwd, s_num, interest1, interest2, interest3, profile, list_num) VALUES('$signup_email', '$signup_name', '$signup_pwd', '$signup_num', '$signup_inter1', '$signup_inter2', '$signup_inter3', '$signup_profile', 0)");
+    $sql_signup = mysqli_query($conn, "INSERT INTO `member` (id, name, pwd, s_num, interest1, interest2, interest3, profile, list_num, noti_ap, noti_recvap, noti_vol) VALUES('$signup_email', '$signup_name', '$signup_pwd', '$signup_num', '$signup_inter1', '$signup_inter2', '$signup_inter3', '$signup_profile', 0, 0, 0, 0)");
     if(!$sql_signup){ echo "
     <script>
     alert('회원가입에 실패했습니다');
@@ -62,8 +62,8 @@ include "setting.php";
     $add_num = $add_num + 1;
 
     $add_sql = "UPDATE counting SET c_member='$add_num'";
-    mysqli_query($conn, $add_sql);    
-        
+    mysqli_query($conn, $add_sql);
+
     echo "
     <script>
     location.href='signin.php'
