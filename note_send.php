@@ -10,7 +10,7 @@ include "setting.php";
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    
+
     <!--Designerd by: http://bootstrapthemes.co-->
     <head>
         <meta charset="utf-8">
@@ -18,7 +18,9 @@ include "setting.php";
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href=""> <!-- 파비콘 추가 -->
-
+        <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+        
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slick-theme.css">
         <link rel="stylesheet" href="assets/css/animate.css">
@@ -28,7 +30,7 @@ include "setting.php";
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        
+
         <link rel="stylesheet" href="assets/css/magnific-popup.css">
         <link rel="stylesheet" href="assets/css/bootsnav.css">
 
@@ -46,7 +48,7 @@ include "setting.php";
         <script>
           function note_write_chk() {
             var p_set = document.frm_note_write;
-            
+
             var double_result = document.getElementById("note_write_double_result");
             var topic_result = document.getElementById("note_write_topic_result");
             var title_result = document.getElementById("note_write_title_result");
@@ -81,7 +83,7 @@ include "setting.php";
               if(form.elements[i].name=="mnum[]"){
                 if(form.elements[i].checked == true){
                   b++;
-                } 
+                }
               }
             }
 
@@ -100,7 +102,7 @@ include "setting.php";
     </head>
 
     <body data-spy="scroll" data-target=".navbar-collapse">
-    
+
         <div class="culmn">
 
 			  <?php include "header.php"; ?>
@@ -110,16 +112,16 @@ include "setting.php";
                   <div class="col-sm-8 col-sm-offset-2">
                       <ul class="nav nav-pills nav-fill nav-justified m-top-100" style="margin-bottom: 50px;">
                           <li class="nav-item">
-                              <a class="nav-link" href="note_recv.php" " target="_self" style="color: #efdc05; font-size: 1.1rem;">받은 쪽지함</a>           
+                              <a class="nav-link" href="note_recv.php" " target="_self" style="color: #efdc05; font-size: 1.1rem;">받은 쪽지함</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="note_send.php" target="_self" style="color: #efdc05; font-size: 1.1rem;">보낸 쪽지함</a>    
+                              <a class="nav-link" href="note_send.php" target="_self" style="color: #efdc05; font-size: 1.1rem;">보낸 쪽지함</a>
                           </li>
                       </ul>
                   </div>
 
                   <div class="separator_auto"></div>
-                    
+
                   <div class="col-sm-12">
 
                       <div class="page_title text-center">
@@ -131,7 +133,7 @@ include "setting.php";
                   <?php
                     //보낸 쪽지함 DB에서 가져오기(recv_note)
                     //recv_note의 send_id가 세션 userid가 같은 것만 가져오기
-                      
+
                     if( $range=="author"){
                       $result_list = mysqli_query($conn, "SELECT * FROM note_send WHERE send_id='$userid' ORDER BY send_id, idx DESC");
                     } else if($range=="content") {
@@ -141,21 +143,21 @@ include "setting.php";
                     }
 
                       $scale = 10;
-                      
+
                       $total_record = mysqli_num_rows($result_list); //전체 글 수
-                      
+
                       if($total_record % $scale==0)
                       $total_page = $total_record/$scale;
                       else
                       $total_page = floor($total_record/$scale)+1;
-                      
+
                       if(!$page) $page = 1;
                       //페이지 번호($page)가 0일 때 페이지 번호를 1로 초기화
-                      
+
                       //표시할 페이지($page)에 따라 $start 계산 => 각각의 페이지의 시작번호
                       $start = ($page-1) * $scale;
                   ?>
-                  
+
                   <div class="col-sm-12">
                     <div class="col-sm-3">
                         <form method="post" action="note_send.php?kind=<?php echo $kind; ?>">
@@ -166,7 +168,7 @@ include "setting.php";
                             </select>
                         </form>
                     </div>
-                    
+
                     <div class="col-sm-3">
                       <button type='button' class="home_btns form-control btn btn-primary" data-toggle="modal" data-target="#modal_note_write">쪽지 쓰기</button>
                     </div>
@@ -178,7 +180,7 @@ include "setting.php";
                       </button>
                       </a>
                     </div>
-                  </div>      
+                  </div>
                 <!-- study목록 각 하나의 article -->
                 <!--블럭 내에 보여 줄 데이터들 DB에서 가져온 값이 저장된 $row 변수에서 한 속성씩 빼냄-->
 
@@ -197,7 +199,7 @@ include "setting.php";
                   </tr>
                 </thead>
                 <tbody>
-                <?php 
+                <?php
                   for($i = $start; $i < $start+$scale && $i < $total_record; $i++){
                     $result_list2 = mysqli_query($conn, "SELECT * FROM note_recv WHERE send_id='$userid' ORDER BY idx, send_id DESC");
                     mysqli_data_seek($result_list, $i); //가져올 레코드로 위치(포인터) 이동
@@ -211,7 +213,7 @@ include "setting.php";
                     $note_recv_id = $recv_row['recv_id'];
                     $note_chk = $recv_row2['recv_chk'];
                     $note_date = $recv_row['send_date'];
-                    
+
                     $note_content = str_replace(" ", "&nbsp;", $note_content);
                     $note_content = str_replace("\n", "<br>", $note_content);
                     $note_date = substr($note_date, 0, 10);
@@ -221,7 +223,7 @@ include "setting.php";
                     }else{
                       $note_chk = '■';
                     }
-                    
+
                 ?>
 
                 <tr>
@@ -246,9 +248,9 @@ include "setting.php";
                   <nav aria-labesl="...">
                   <div>
                     <ul class="pagination pagination-lg">
-                          <?php 
+                          <?php
                           if(page-5 >= 1) {
-                          
+
                           ?>
                           <li class="page-item">
                             <a class="page-link" href="note_recv.php?page=<?php echo $page-5 ?>&kind=<?php echo $kind?>" style="background: rgb(247,247,247); color: #FF8489; border: 0;">&laquo;</a>
@@ -259,10 +261,10 @@ include "setting.php";
                           <li class="page-item disabled">
                             <a class="page-link" href="#" style="background: rgb(247,247,247); color: #efdc05; border: 0;">&laquo;</a>
                           </li>
-                          <?php 
+                          <?php
                           }
                           ?>
-                          
+
                           <?php
                           for($i=1; $i<=$total_page; $i++){
                               if($page == $i) {
@@ -270,18 +272,18 @@ include "setting.php";
                               <li class="page-item active">
                                     <a class="page-link" href="#" style="background: rgb(247,247,247); color: #efdc05; border: 0;"><?php echo $i ?></a>
                                   </li>
-                          <?php 
+                          <?php
                               } else {
                             ?>
                                 <li class="page-item disabled">
                                     <a class="page-link" href="note_recv.php?page=<?php echo $i ?>&kind=<?php echo $kind ?>" style="background: rgb(247,247,247); color: #efdc05; border: 0;"><?php echo $i ?></a>
                                   </li>
-                          <?php 
+                          <?php
                               }
                           }
                           ?>
-                          
-                          <?php 
+
+                          <?php
                           if(page+5 <= $total_page) {
                           ?>
                           <li class="page-item">
@@ -293,10 +295,10 @@ include "setting.php";
                           <li class="page-item disabled">
                             <a class="page-link" href="#" style="background: rgb(247,247,247); color: #efdc05; border: 0;">&raquo;</a>
                           </li>
-                          <?php 
+                          <?php
                           }
                           ?>
-                          
+
                             </ul>
                       </div>
                       </nav>
@@ -305,14 +307,14 @@ include "setting.php";
 	          </div> <!-- container -->
 
         	<?php include "footer.php"; ?>
-        </div> <!-- culmn -->  
+        </div> <!-- culmn -->
 
-           
-                          
+
+
 <!-- Insert Modal -->
 <div class="modal fade" id="modal_note_write" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-        
+
     <!-- Modal content-->
         <div class="modal-content">
 
@@ -334,12 +336,12 @@ include "setting.php";
                     </label>
 
                     <span id="note_write_double_result" class="fail"></span>
-                    
+
                     <div class="textarea_counter">
                         <label>
                             쪽지 내용
                         <textarea id="textarea" name="write_content" class="note_content" maxlength="70" onkeyup="lengCounter()"></textarea>
-                        
+
                         </label>
                         <span id="note_write_content_result" class="fail"></span>
                     </div>

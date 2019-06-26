@@ -1,4 +1,4 @@
-<?php 
+<?php
     header('Content-Type: text/html; charset=UTF-8');
     session_start();
     include "dbconn.php";
@@ -9,7 +9,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    
+
     <!--Designerd by: http://bootstrapthemes.co-->
     <head>
         <meta charset="utf-8">
@@ -17,7 +17,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href=""> <!-- 파비콘 추가 -->
-        
+
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slick-theme.css">
         <link rel="stylesheet" href="assets/css/animate.css">
@@ -27,11 +27,12 @@
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        
+
         <link rel="stylesheet" href="assets/css/magnific-popup.css">
         <link rel="stylesheet" href="assets/css/bootsnav.css">
 
-
+        <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
         <!--For Plugins external css-->
         <!--<link rel="stylesheet" href="assets/css/plugins.css" />-->
 
@@ -81,11 +82,11 @@
 
             <!--About Sections-->
             <section id="about" class="about roomy-100">
-                
+
                 <div class="container">
                     <div class="row">
                         <div class="about_bottom_content">
-                       
+
                         	<div class="col-md-4">
                                 <div class="about_bottom_item m-top-20">
                                 	<div class="ab_head">
@@ -93,17 +94,17 @@
                                         	<i class="icofont icofont-question"></i>
                                         </div>
                                     </div>
-                                    
+
                                     	<h5 class="m-top-30">즐팀이란?</h5>
-                                    
+
                                     <div class="separator_small"></div>
                                     <p class="view_content m-top-20">
                                     	입학한지 얼마 되지 않은 신입생 여러분들도 스터디나 공모전을 함께 할 팀을 부담없이 만들 수 있는 공간입니다. <br />
                                         즐팀의 가입자는 누구나 모집글을 작성하고 모집글에 신청 및 문의(쪽지)를 할 수 있습니다. </p>
                                 </div>
                             </div>
-                            
-                            
+
+
                             <div class="col-md-4" >
                                 <div class="about_bottom_item m-top-20">
                                     <div class="ab_head">
@@ -111,13 +112,13 @@
                                             <i class="icofont icofont-heart"></i>
                                         </div>
                                     </div>
-                                    
+
                                         <h5 class="m-top-30">즐팀만의 장점은?</h5>
-                                        
+
                                     <div class="separator_small"></div>
                                     <p class="view_content m-top-20">
                                         전공 관련 팀만을 만드는 것이 아니므로 과, 동아리 상관없이 교류할 수 있습니다. <br />
-                                        교육과정에 없는 전공 분야도 공부함으로써 전공에 대한 시야가 넓어지며 
+                                        교육과정에 없는 전공 분야도 공부함으로써 전공에 대한 시야가 넓어지며
                                         독학을 통해 스스로 성장하는 법을 익힐 수 있습니다.
                                     </p>
                                 </div>
@@ -129,9 +130,9 @@
                                             <i class="icofont icofont-gears"></i>
                                         </div>
                                     </div>
-                                    
+
                                         <h5 class="m-top-30">신청은 어떻게 하는 걸까요?</h5>
-                                        
+
                                     <div class="separator_small"></div>
                                     <p class="view_content m-top-20">
                                     	한 계정당 글 작성 수를 제한하고 신청 시 신청자의 정보를 포함하여  <br />
@@ -146,13 +147,13 @@
 
             <hr>
 
-            <?php 
+            <?php
                 $c_result = mysqli_query($conn, "SELECT * FROM counting");
                 $c_row = mysqli_fetch_array($c_result);
             ?>
             <!--Skill Sections-->
             <section id="skill" class="skill roomy-100">
-                
+
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
@@ -194,7 +195,7 @@
                     </div><!--End off row-->
                 </div><!--End off container -->
             </section> <!--End off Skill section -->
-            
+
             <hr style="margin-bottom: 0;">
 
             <!--Pricing Section-->
@@ -218,7 +219,7 @@
                                 for ($i = 0; $i < $line; $i++) { // 0부터 시작
                                     mysqli_data_seek($c_result, $i); //가져올 레코드로 위치(포인터) 이동
                                     $row_list = mysqli_fetch_array($c_result); //하나의 레코드 가져오기
-                                    
+
                                     $big = $row_list['big'];
                                     $kind = $row_list['kind'];
                                     $l_num = $row_list['list_num'];
@@ -231,8 +232,8 @@
                                         } else if($kind=="etc"){
                                             $s_sql = "SELECT * FROM study_etc WHERE num=$l_num";
                                         }
-                                    } 
-                                
+                                    }
+
                                     if($big=="contest"){
                                             if($kind=="develop"){
                                                 $s_sql = "SELECT * FROM study_develop WHERE num=$l_num";
@@ -283,8 +284,8 @@
                                     </div>
                                 </div>
                             </div><!-- End off col-md-4 -->
-                                    <?php } 
-                    
+                                    <?php }
+
                     if($line<2) {
                     ?>
                         <div class="col-md-4 col-sm-12">
@@ -343,14 +344,14 @@
                     <?php
                     }
                     ?>
-                                        
-                        
+
+
                         </div>
                     </div><!--End off row-->
                 </div><!--End off container -->
             </section> <!--End off Pricing section -->
-            
-            
+
+
             <?php include "footer.php"; ?>
 
         </div>

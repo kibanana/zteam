@@ -8,7 +8,7 @@ include "setting.php";
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    
+
     <!--Designerd by: http://bootstrapthemes.co-->
     <head>
         <meta charset="utf-8">
@@ -17,6 +17,8 @@ include "setting.php";
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/png" href=""> <!-- 파비콘 추가 -->
 
+        <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="assets/css/slick.css">
         <link rel="stylesheet" href="assets/css/slick-theme.css">
         <link rel="stylesheet" href="assets/css/animate.css">
@@ -26,7 +28,7 @@ include "setting.php";
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-        
+
         <link rel="stylesheet" href="assets/css/magnific-popup.css">
         <link rel="stylesheet" href="assets/css/bootsnav.css">
 
@@ -44,17 +46,17 @@ include "setting.php";
 
         <script>
     	window.onload = function() {
-        	
+
         var text_pwd = document.getElementById("text_pwd"); //넘겨받은 메일값
         var text_find_pwd = document.getElementById("text_find_pwd"); //메일이 정확한지 확인하는 정규표현식에 따른 결과를 보여주는 span
         var page_original = document.getElementById("original");
-        var page_new = document.getElementById("new");                                        
+        var page_new = document.getElementById("new");
 
         btn_find.onclick = function() {
            	page_original.style.display = "none";
            	page_new.style.display = "block";
            	text_find_pwd.innerHTML = "해당 이메일로 전송이 완료되었습니다!";
-            
+
             setTimeout(function() {
             sendTheEmail()
             }, 3000);
@@ -62,7 +64,7 @@ include "setting.php";
 
         function sendTheEmail() {
             var p_set = document.frm_email_write;
-            
+
             text_pwd = '[비밀번호 찾기 이메일]' + text_pwd;
 
             p_set.submit();
@@ -72,7 +74,7 @@ include "setting.php";
     </head>
 
     <body data-spy="scroll" data-target=".navbar-collapse">
-    
+
         <div class="culmn">
 
 			<?php include "header.php"; ?>
@@ -81,20 +83,20 @@ include "setting.php";
                 <div class="row">
 
                     <div class="col-sm-8 col-sm-offset-2" style="margin-top: 200px; margin-bottom: 150px;">
-                    
+
                         <div class="col-sm-12">
                         <div class="page_title text-center">
                             <h2>로그인</h2>
                             <div class="separator_auto"></div>
                         </div>
                         </div>
-                        
+
                         <div class="col-sm-10">
-                        
+
                         <form action="signin_process.php" method="post" class="form_write" name="frm_signin">
                         <label>
                         	이메일
-                            <?php 
+                            <?php
                                 if(isset($cookie_id)){
                                     echo "<input type='email' class='form-control' placeholder='학교 이메일을 입력해주세요' name='signin_email' value='$cookie_id'>";
                                 } else {
@@ -107,23 +109,23 @@ include "setting.php";
                         	비밀번호
                         <input type="password" class="form-control" placeholder="비밀번호를 입력해주세요" name="signin_pwd">
                         </label>
-                        
+
                         <div class="checks etrans" style="float: left;">
                           <input type="checkbox" id="email_save" value="yes" name="id_ck">
     					  <label for="email_save">이메일 저장</label>
                         </div>
-						
+
 						<div class="menu_signin" style="float: right;">
                             <span data-toggle="modal" data-target="#find_pwd_modal" style="cursor: pointer;">비밀번호 찾기</span>
-    						
+
     						<a href="signup.php"><span>회원가입</span></a>
                         </div>
-                        
+
                         <button type="submit" name="signin" class="form-control btn btn-primary">로그인</button>
-                        
+
         				<span id="singnin_find_result" class="fail"></span>
 
-                        <?php 
+                        <?php
                         if($fail) {
                             echo "<span id='signup_result' class='fail'>이메일 또는 비밀번호가 다릅니다</span>";
                         }
@@ -136,13 +138,13 @@ include "setting.php";
                 </div> <!-- row -->
 	        </div> <!-- container -->
         	<?php include "footer.php"; ?>
-        </div> <!-- culmn -->  
+        </div> <!-- culmn -->
 
-                          
+
 <!-- Insert Modal -->
 <div class="modal fade" id="find_pwd_modal" role="dialog">
     <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
-        
+
     <!-- Modal content-->
         <div class="modal-content">
 
