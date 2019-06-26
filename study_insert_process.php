@@ -55,31 +55,31 @@ if($mode=="modify") {
 
 } else {
     if($kind=="develop"){
-        $insert_sql = "INSERT INTO study_develop (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $insert_sql = "INSERT INTO study_develop (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit, team_chk) ";
         $recent_num_sql = "SELECT num FROM study_develop ORDER BY num DESC LIMIT 1";
     } else if($kind=="design"){
-        $insert_sql = "INSERT INTO study_design (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $insert_sql = "INSERT INTO study_design (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit, team_chk) ";
         $recent_num_sql = "SELECT num FROM study_develop ORDER BY num DESC LIMIT 1";
     } else if($kind=="etc"){
-        $insert_sql = "INSERT INTO study_etc (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $insert_sql = "INSERT INTO study_etc (id, name, topic, title, content, want_num, apply_num, start_day, end_day, hit, team_chk) ";
         $recent_num_sql = "SELECT num FROM study_develop ORDER BY num DESC LIMIT 1";
     }
-    
-    $insert_sql .= "VALUES('$userid', '$username', '$write_topic', '$write_title', '$write_content', '$write_want_num', 0, '$regist_day', '$write_end_day', 0)";
+
+    $insert_sql .= "VALUES('$userid', '$username', '$write_topic', '$write_title', '$write_content', '$write_want_num', 0, '$regist_day', '$write_end_day', 0, 0)";
     mysqli_query($conn, $insert_sql);
-    
+
     $list_result = mysqli_query($conn, "SELECT * FROM member WHERE id='$userid'");
     $list_row = mysqli_fetch_array($list_result);
     $list_num = $list_row['list_num'];
     $list_num = $list_num + 1;
-    
+
     $list_sql = "UPDATE member SET list_num='$list_num' WHERE id='$userid'";
     mysqli_query($conn, $list_sql);
 
     // counting 테이블에서 +1
     $add_result = mysqli_query($conn, "SELECT c_list FROM counting"); // 원래 값 알아냄
-    $add_row = mysqli_fetch_array($add_result); 
-    $add_num = $add_row[0]; 
+    $add_row = mysqli_fetch_array($add_result);
+    $add_num = $add_row[0];
     $add_num = $add_num + 1; // 원래 값에서 +1
 
     $add_sql = "UPDATE counting SET c_list='$add_num'"; // +1된 값 UPDATE
@@ -90,7 +90,7 @@ if($mode=="modify") {
     $recent_num_result = $recent_num_row[0];
     // recent table에 insert
     $recent_insert_result = mysqli_query($conn, "INSERT INTO `recent`(`big`, `kind`, `list_num`) VALUES ('$big', '$kind', '$recent_num_result')");
-    
+
     // recent table 레코드 개수 - 3개 아래면 삭제하지 않기 위함
     $result_all = mysqli_query($conn, "SELECT * FROM recent");
     $result_all_num = mysqli_num_rows($result_all);

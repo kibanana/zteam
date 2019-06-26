@@ -47,27 +47,27 @@ if($mode=="modify") {
 
 } else {
     if($kind=="develop"){
-        $insert_sql = "INSERT INTO contest_develop (id, name, topic, part, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $insert_sql = "INSERT INTO contest_develop (id, name, topic, part, title, content, want_num, apply_num, start_day, end_day, hit, team_chk) ";
         $recent_num_sql = "SELECT num FROM contest_develop ORDER BY num DESC LIMIT 1";
     } else if($kind=="design"){
-        $insert_sql = "INSERT INTO contest_design (id, name, topic, part, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $insert_sql = "INSERT INTO contest_design (id, name, topic, part, title, content, want_num, apply_num, start_day, end_day, hit, team_chk) ";
         $recent_num_sql = "SELECT num FROM contest_design ORDER BY num DESC LIMIT 1";
     } else if($kind=="etc"){
-        $insert_sql = "INSERT INTO contest_etc (id, name, topic, part, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $insert_sql = "INSERT INTO contest_etc (id, name, topic, part, title, content, want_num, apply_num, start_day, end_day, hit, team_chk) ";
         $recent_num_sql = "SELECT num FROM contest_etc ORDER BY num DESC LIMIT 1";
     } else if($kind=="idea"){
-        $insert_sql = "INSERT INTO contest_idea (id, name, topic, part, title, content, want_num, apply_num, start_day, end_day, hit) ";
+        $insert_sql = "INSERT INTO contest_idea (id, name, topic, part, title, content, want_num, apply_num, start_day, end_day, hit, team_chk) ";
         $recent_num_sql = "SELECT num FROM contest_idea ORDER BY num DESC LIMIT 1";
     }
 
-    $insert_sql .= "VALUES('$userid', '$username', '$write_topic', '$write_part', '$write_title', '$write_content', '$write_want_num', 0, '$regist_day', '$write_end_day', 0)";
+    $insert_sql .= "VALUES('$userid', '$username', '$write_topic', '$write_part', '$write_title', '$write_content', '$write_want_num', 0, '$regist_day', '$write_end_day', 0, 0)";
     mysqli_query($conn, $insert_sql);
-    
+
     $list_result = mysqli_query($conn, "SELECT * FROM member WHERE id='$userid'");
     $list_row = mysqli_fetch_array($list_result);
     $list_num = $list_row['list_num'];
     $list_num = $list_num + 1;
-    
+
     $list_sql = "UPDATE member SET list_num='$list_num' WHERE id='$userid'";
     mysqli_query($conn, $list_sql);
 
