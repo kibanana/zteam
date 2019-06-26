@@ -519,7 +519,7 @@ if(!$line) {
                             <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
                             <label>
                             스터디 소개 : 기간, 진행방식, 스터디 주제 설명, 주의사항 등을 자유롭게 적어주세요!
-                                <textarea name="write_content" id="editor"><?php echo $item_content ?></textarea>
+                                <textarea name="modify_content" id="editor"><?php echo $item_content ?></textarea>
                             </label>
                             <script>
                                 ClassicEditor
