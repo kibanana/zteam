@@ -560,7 +560,7 @@ if(!$line) {
                             <script src="https://cdn.ckeditor.com/ckeditor5/12.2.0/classic/ckeditor.js"></script>
                             <label>
                             공모전 소개 : 첨부한 링크 내 정보 이외의 설명을 자유롭게 적어주세요!
-                            <textarea name="write_content" id="editor"><?php echo $item_content ?></textarea>
+                            <textarea name="modify_content" id="editor"><?php echo $item_content ?></textarea>
                             </label>
                             <script>
                                 ClassicEditor
